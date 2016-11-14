@@ -23,6 +23,10 @@ public abstract class BaseFrame extends JFrame {
 	protected void setup() {
 		setSize(width,height);
 		setVisible(true);
+		// Exits the running process on window close
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// Centers the window on screen
+		setLocationRelativeTo(null);
 	}
 
 	protected abstract void create();
