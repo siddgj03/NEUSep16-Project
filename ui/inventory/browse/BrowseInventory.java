@@ -35,6 +35,9 @@ public class BrowseInventory extends BaseFrame {
 		TestPanel p = new TestPanel();
 		con.add(p);
 		con.add(title);
+		
+		SortUI sort = new SortUI();
+		con.add(sort);
 	}
 
 	@Override
@@ -42,7 +45,7 @@ public class BrowseInventory extends BaseFrame {
 
 	}
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		JFrame f = new BrowseInventory();
 	}
 }
@@ -68,29 +71,4 @@ class TestPanel extends JPanel {
 	}
 }
 
-/**
- * @author Ruby,Liao
- * SortUI in browse inventory page
- * FlowLayout to place title label and sort items horizontally
- * Pending addListeners
- */
-
-class SortUIPanel extends JPanel
-{
-	public SortUIPanel()
-	{
-		this.setLayout(new FlowLayout());
-		
-		String[] sortItems = {"Select Sort By","Price: High To Low","Price: Low To High",
-                "Year: High To Low","Year: Low To High","Make: A - Z","Maker: Z - A",
-                "Model: A - Z","Model: Z - A","Mileage: High To Low","Mileage: Low To High",
-                "HWY MPG: High To Low","HWY MPG: Low To High","Exterior Color: A - Z",
-                "Exterior Color: Z - A","Specials","Certified"};
-        JComboBox sortList = new JComboBox(sortItems);
-        JLabel sortLabel = new JLabel("Sort By:");
-		
-        add(sortLabel);
-		add(sortList);
-	}
-}
 
