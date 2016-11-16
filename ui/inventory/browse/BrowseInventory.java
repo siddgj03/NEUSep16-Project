@@ -1,11 +1,14 @@
 package ui.inventory.browse;
 
 import ui.BaseFrame;
-import week7.JPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author ken prayogo
+ * Main BrowseInventory UI rendering class
+ */
 public class BrowseInventory extends BaseFrame {
 	// Static values
 	private static final int scrWidth = 1020;
@@ -22,22 +25,22 @@ public class BrowseInventory extends BaseFrame {
 		title = new JLabel("Inventory");
 		title.setHorizontalAlignment(JLabel.CENTER);
 		title.setVerticalAlignment(JLabel.NORTH);
+		title.setFont(new Font(title.getFont().getName(), Font.BOLD, 20));
 
 	}
 
 	@Override
 	protected void add() {
 		Container con = this.getContentPane();
-		// ToDo: GridLayout might not do it.. Controls are taking up the whole height
-		GridLayout layout = new GridLayout(0,3);
+		GridLayout layout = new GridLayout(3,3,0,15);
 		con.setLayout(layout);
 
-		TestPanel p = new TestPanel();
-		con.add(p);
 		con.add(title);
 		
 		SortUI sort = new SortUI();
 		con.add(sort);
+
+		con.add(new TestPanel());
 	}
 
 	@Override
@@ -45,7 +48,7 @@ public class BrowseInventory extends BaseFrame {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String args[]) {
 		JFrame f = new BrowseInventory();
 	}
 }
@@ -69,6 +72,11 @@ class TestPanel extends JPanel {
 		add(box);
 		add(box2);
 	}
+
+	@Override
+	public Component add(Component comp) {
+		super.add(comp);
+		comp.setMaximumSize( comp.getPreferredSize() ); // Limits size from expanding
+		return comp;
+	}
 }
-
-

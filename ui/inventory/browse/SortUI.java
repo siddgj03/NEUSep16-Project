@@ -1,3 +1,7 @@
+package ui.inventory.browse;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author Ruby,Liao
@@ -8,7 +12,10 @@
 
 class SortUI extends JPanel
 {
-	private SortUIPanel()
+	private JComboBox sortList;
+	private JLabel sortLabel;
+
+	public SortUI()
 	{
 		this.setLayout(new FlowLayout());
 		String[] sortItems = {"Select Sort By","Price: High To Low","Price: Low To High",
@@ -16,8 +23,10 @@ class SortUI extends JPanel
                 "Model: A - Z","Model: Z - A","Mileage: High To Low","Mileage: Low To High",
                 "HWY MPG: High To Low","HWY MPG: Low To High","Exterior Color: A - Z",
                 "Exterior Color: Z - A","Specials","Certified"};
-		private JComboBox sortList = new JComboBox(sortItems);
-		private JLabel sortLabel = new JLabel("Sort By:");
+
+		sortList = new JComboBox<>(sortItems);
+		sortLabel = new JLabel("Sort By:");
+
 		add(sortLabel);
 		add(sortList);
 	}
