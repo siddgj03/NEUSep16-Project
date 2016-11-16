@@ -32,15 +32,28 @@ public class BrowseInventory extends BaseFrame {
 	@Override
 	protected void add() {
 		Container con = this.getContentPane();
-		GridLayout layout = new GridLayout(3,3,0,15);
-		con.setLayout(layout);
+		// First layout to separate header, controls and footer
+		GridLayout layoutMaster = new GridLayout(3,1,0,10);
 
-		con.add(title);
-		
+		// Main controls layout
+		FlowLayout layoutControls = new FlowLayout();
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(layoutControls);
+		con.setLayout(layoutMaster);
+
+		// Declare and Add Panels here
 		SortUI sort = new SortUI();
-		con.add(sort);
+		mainPanel.add(sort);
+		mainPanel.add(new TestPanel());
 
-		con.add(new TestPanel());
+		// Arrange vertical screen layout
+		con.add(title);
+		con.add(mainPanel);
+
+		JLabel footerNote = new JLabel("Footer goes here");
+		footerNote.setHorizontalAlignment(JLabel.CENTER);
+		footerNote.setVerticalAlignment(JLabel.CENTER);
+		con.add(footerNote);
 	}
 
 	@Override
@@ -61,7 +74,8 @@ public class BrowseInventory extends BaseFrame {
 class TestPanel extends JPanel {
 
 	public TestPanel() {
-		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		// Arrange in vertical order, with spacing of 10
+		super(new GridLayout(0, 1, 0, 10));
 
 		JComboBox box = new JComboBox();
 		JComboBox box2 = new JComboBox();
