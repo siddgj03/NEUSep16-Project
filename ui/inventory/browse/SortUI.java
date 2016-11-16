@@ -12,10 +12,7 @@ import java.awt.*;
 
 class SortUI extends JPanel
 {
-	private JComboBox sortList;
-	private JLabel sortLabel;
-
-	public SortUI()
+	SortUI()
 	{
 		this.setLayout(new FlowLayout());
 		String[] sortItems = {"Select Sort By","Price: High To Low","Price: Low To High",
@@ -24,8 +21,8 @@ class SortUI extends JPanel
                 "HWY MPG: High To Low","HWY MPG: Low To High","Exterior Color: A - Z",
                 "Exterior Color: Z - A","Specials","Certified"};
 
-		sortList = new JComboBox<>(sortItems);
-		sortLabel = new JLabel("Sort By:");
+		JComboBox sortList = new JComboBox<>(sortItems);
+		JLabel sortLabel = new JLabel("Sort By:");
 
 		add(sortLabel);
 		add(sortList);
