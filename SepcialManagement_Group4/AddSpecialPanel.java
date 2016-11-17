@@ -68,10 +68,12 @@ public class AddSpecialPanel extends JPanel {
         ComponetInitialize(new JLabel("Min Price："), 0, 5, 1, 1, false);
         carMinPriceInfo = new JTextField();
         ComponetInitialize(carMinPriceInfo, 1, 5, 1, 0, true);
+        carMinPriceInfo.addKeyListener(new InputValidNumberListener());
 
         ComponetInitialize(new JLabel("Max Price："), 2, 5, 1, 1, false);
         carMaxPriceInfo = new JTextField();
         ComponetInitialize(carMaxPriceInfo, 3, 5, 1, 0, true);
+        carMaxPriceInfo.addKeyListener(new InputValidNumberListener());
 
         addInforButton = new JButton();
         addInforButton.setText("Add");
@@ -111,7 +113,6 @@ public class AddSpecialPanel extends JPanel {
             trimInfo.setText("");
             carMinPriceInfo.setText("");
             carMaxPriceInfo.setText("");
-
         }
     }
 
@@ -123,7 +124,42 @@ public class AddSpecialPanel extends JPanel {
                 JOptionPane.showMessageDialog(AddSpecialPanel.this, "please add necessary information");
                 return;
             }
-
+            Special newSpecial = new Special();
+            newSpecial.setSpecialTitle(specialTitleInfo.getText());
+            try {
+                newSpecial.setSpecialStartDate(specialStartDateInfo.getText().trim());
+                System.out.println(specialStartDateInfo.getText());
+                if (discountValueInfo.getText() != null) {
+                    newSpecial.setDiscountValue(Double.parseDouble(discountValueInfo.getText()));
+                } else {
+                    newSpecial.setDicountPercentage(Double.parseDouble(dicountPercentageInfo.getText()));
+                }
+                newSpecial.setSpecialStartDate(specialStartDateInfo.getText());
+                if (specialEndDateInfo.getText() != null && specialEndDateInfo.getText().length() != 0) {
+                    newSpecial.setSpecialEndDate(specialEndDateInfo.getText().trim());
+                }
+                if (carYearInfo.getText() != null) {
+                    newSpecial.setCarYear(Integer.parseInt(carYearInfo.getText()));
+                }
+                if (carMakeInfo.getText() != null) {
+                    newSpecial.setCarMake(carMakeInfo.getText());
+                }
+                if (carModelInfo.getText() != null) {
+                    newSpecial.setCarModel(carModelInfo.getText());
+                }
+                if (trimInfo.getText() != null) {
+                    newSpecial.setCarModel(trimInfo.getText());
+                }
+                if (carMinPriceInfo.getText() != null) {
+                    newSpecial.setCarMinPrice(Double.parseDouble(carMinPriceInfo.getText()));
+                }
+                if (carMaxPriceInfo.getText() != null) {
+                    newSpecial.setCarMaxPrice(Double.parseDouble(carMaxPriceInfo.getText()));
+                }
+                Specials.addSpeical(newSpecial);
+            } catch (Exception ex) {
+                System.out.println("Invalid date input");
+            }
         }
     }
 
