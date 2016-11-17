@@ -4,6 +4,7 @@ import ui.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 /**
  * @author ken prayogo
@@ -15,6 +16,8 @@ public class BrowseInventory extends BaseFrame {
 	private static final int scrHeight = 720;
 	// Components
 	private JLabel title;
+	private ListPanel list;
+	private TestPanel buttonPane;
 
 	public BrowseInventory() {
 		super(scrWidth, scrHeight);
@@ -34,17 +37,22 @@ public class BrowseInventory extends BaseFrame {
 		Container con = this.getContentPane();
 		// First layout to separate header, controls and footer
 		GridLayout layoutMaster = new GridLayout(3,1,0,10);
+		con.setLayout(layoutMaster);
 
 		// Main controls layout
 		FlowLayout layoutControls = new FlowLayout();
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(layoutControls);
-		con.setLayout(layoutMaster);
 
 		// Declare and Add Panels here
 		SortUI sort = new SortUI();
 		mainPanel.add(sort);
-		mainPanel.add(new TestPanel());
+
+		list = new ListPanel();
+		mainPanel.add(list);
+
+		buttonPane = new TestPanel();
+		mainPanel.add(buttonPane);
 
 		// Arrange vertical screen layout
 		con.add(title);
@@ -58,7 +66,17 @@ public class BrowseInventory extends BaseFrame {
 
 	@Override
 	protected void addListener() {
+		ViewListener ol = new ViewListener();
+		buttonPane.btnView.addActionListener(ol);
+	}
 
+	class ViewListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String vin = list.table.getValueAt(list.table.getSelectedRow(), 0).toString();
+			System.out.println("Got VIN: " + vin);
+		}
 	}
 
 	public static void main(String args[]) {
@@ -72,19 +90,15 @@ public class BrowseInventory extends BaseFrame {
  * (Still some issues with the combo box width)
  */
 class TestPanel extends JPanel {
+	JButton btnView;
 
 	public TestPanel() {
 		// Arrange in vertical order, with spacing of 10
 		super(new GridLayout(0, 1, 0, 10));
 
-		JComboBox box = new JComboBox();
-		JComboBox box2 = new JComboBox();
-		box.addItem("First box");
-		box2.addItem("Second box");
+		btnView = new JButton("View Vehicle");
 
-		add(new JLabel("I am inside a panel."));
-		add(box);
-		add(box2);
+		add(btnView);
 	}
 
 	@Override
@@ -92,5 +106,41 @@ class TestPanel extends JPanel {
 		super.add(comp);
 		comp.setMaximumSize( comp.getPreferredSize() ); // Limits size from expanding
 		return comp;
+	}
+}
+
+class ListPanel extends JPanel {
+	private JPanel mainList;
+	public JTable table;
+
+	public ListPanel() {
+
+		mainList = new JPanel();
+		mainList.setLayout(new BorderLayout());
+
+		Object[][] data = getVehicleData();
+		String[] labels = {"VIN", "Make", "Model", "Year", "Type", "Color", "Mileage"};
+		table = new JTable(data, labels);
+
+		JScrollPane tableContainer = new JScrollPane(table);
+		tableContainer.setPreferredSize(new Dimension(500, 150));
+
+		mainList.add(tableContainer, BorderLayout.CENTER);
+		add(tableContainer);
+	}
+
+	private static Object[][] getVehicleData() {
+		Object[][] data = {
+				{"VIN-NO1", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
+				{"VIN-NO2", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
+				{"VIN-NO3", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
+				{"VIN-NO4", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
+				{"VIN-NO5", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
+				{"VIN-NO6", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
+				{"VIN-NO7", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
+				{"VIN-NO8", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
+				{"VIN-NO9", "Honda", "Civic", "2012", "Sedan", "White", "5000"}
+		};
+		return data;
 	}
 }
