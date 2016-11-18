@@ -9,7 +9,7 @@ public class Dealer {
 	private String id, name, url;
 	// HashMap for vehicles. Key : VIN, Value : Vehicle object
 	private HashMap<Long, Vehicle> vehicles = new HashMap<Long, Vehicle>();
-	 
+	
 	public Dealer(String id, String name, String url){
 		this.id = id;
 		this.name = name;

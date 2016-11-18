@@ -13,7 +13,7 @@ public class InventoryManager {
 	// HashMap for vehicles. Key : Id, Value : Dealer object
 	private HashMap<String, Dealer> dealers = new HashMap<String, Dealer>();
 	private long maxVin = Long.MIN_VALUE;
-	 
+	
 	private InventoryManager(){
 		
 	}
