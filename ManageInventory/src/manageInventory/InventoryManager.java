@@ -85,8 +85,7 @@ public class InventoryManager {
 	}
 	
 	public Collection<Vehicle> getVehiclesByDealerId(String dealerID){
-		Dealer target = dealers.get(dealerID);
-		return target.getVehicles();
+		return getDealerById(dealerID).getVehicles();
 	}
 	
 	public void saveVehiclesByDealerId(String dealerID){
