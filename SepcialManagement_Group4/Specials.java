@@ -1,7 +1,3 @@
-package SepcialManagement_Group4;
-
-import SepcialManagement_Group4.Special;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -10,6 +6,10 @@ import java.util.ArrayList;
  */
 public class Specials {
     private static ArrayList<Special> specialList = new ArrayList<>();
+
+    public static ArrayList<Special> getList() {
+        return specialList;
+    }
 
     public Specials(String inputFile) throws FileNotFoundException, IOException, Exception {
         BufferedReader reader = new BufferedReader(new FileReader(new File(inputFile)));

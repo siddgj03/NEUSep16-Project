@@ -1,5 +1,3 @@
-package SepcialManagement_Group4;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,7 +25,7 @@ public class Special {
         return specialID;
     }
 
-    public void setSpecialID(int specialID) {
+    public void setSpecialID(Integer specialID) {
         this.specialID = specialID;
     }
 
@@ -51,7 +49,7 @@ public class Special {
         return discountValue;
     }
 
-    public void setDiscountValue(double discountValue) {
+    public void setDiscountValue(Double discountValue) {
         this.discountValue = discountValue;
     }
 
@@ -59,7 +57,7 @@ public class Special {
         return discountPercentage;
     }
 
-    public void setDicountPercentage(double dicountPercentage) {
+    public void setDicountPercentage(Double dicountPercentage) {
         this.discountPercentage = dicountPercentage;
     }
 
@@ -83,7 +81,7 @@ public class Special {
         return carYear;
     }
 
-    public void setCarYear(int carYear) {
+    public void setCarYear(Integer carYear) {
         this.carYear = carYear;
     }
 
@@ -115,7 +113,7 @@ public class Special {
         return carMinPrice;
     }
 
-    public void setCarMinPrice(double carMinPrice) {
+    public void setCarMinPrice(Double carMinPrice) {
         this.carMinPrice = carMinPrice;
     }
 
@@ -123,7 +121,7 @@ public class Special {
         return carMaxPrice;
     }
 
-    public void setCarMaxPrice(double carMaxPrice) {
+    public void setCarMaxPrice(Double carMaxPrice) {
         this.carMaxPrice = carMaxPrice;
     }
 
@@ -147,7 +145,7 @@ public class Special {
 
     }
 
-    private Date stringToDate(String s) throws Exception {
+    private static Date stringToDate(String s) throws Exception {
         if (s == null) {
             return null;
         }
@@ -193,6 +191,12 @@ public class Special {
 //        } catch (Exception e) {
 //            System.out.println("Invalid input");
 //        }
+        String s = "2017/02/21";
+        try{
+            System.out.println(stringToDate(s));
+        } catch(Exception e) {
+            System.out.println("invalid input ");
+        }
 
     }
 }

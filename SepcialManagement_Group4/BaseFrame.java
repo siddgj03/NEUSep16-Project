@@ -1,5 +1,3 @@
-package SepcialManagement_Group4;
-
 import javax.swing.*;
 
 /**
@@ -7,7 +5,9 @@ import javax.swing.*;
  */
 public class BaseFrame {
     public static void main(String[] args) {
+        Specials specials = new Specials();
         JFrame frame = new JFrame();
+        frame.setTitle("Add Special");
         frame.add(new AddSpecialPanel());
         frame.setSize(700, 300);
         frame.setVisible(true);
