@@ -1,5 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -41,7 +39,7 @@ public class AddSpecialPanel extends JPanel {
         ComponetInitialize(dicountPercentageInfo, 3, 1, 1, 0, true);
         dicountPercentageInfo.addKeyListener(new InputValidNumberListener());
 
-        ComponetInitialize(new JLabel("Start Date："), 0, 2, 1, 1, false);
+        ComponetInitialize(new JLabel("Start Date(yyyy/mm/dd)："), 0, 2, 1, 1, false);
         specialStartDateInfo = new JTextField();
         ComponetInitialize(specialStartDateInfo, 1, 2, 1, 0, true);
 
