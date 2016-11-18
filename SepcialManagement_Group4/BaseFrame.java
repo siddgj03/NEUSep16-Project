@@ -1,5 +1,3 @@
-import javax.swing.*;
-
 /**
  * Created by qiqi on 2016/11/16.
  */
