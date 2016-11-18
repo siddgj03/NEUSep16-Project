@@ -16,13 +16,14 @@ public class Specials {
         while (true) {
             String line = reader.readLine();
             if (line == null) break;
-            String[] info = line.split("|");
+
+            String[] info = line.split("\\|");
             Special newSpecial = new Special();
             newSpecial.setSpecialID(Integer.parseInt(info[0]));
             newSpecial.setDealerWebID(info[1]);
             newSpecial.setSpecialTitle(info[2]);
             newSpecial.setDiscountValue(Double.parseDouble(info[3]));
-            newSpecial.setDicountPercentage(Double.parseDouble(info[4]));
+            newSpecial.setDiscountPercentage(Double.parseDouble(info[4]));
             newSpecial.setSpecialStartDate(info[5]);
             newSpecial.setSpecialEndDate(info[6]);
             newSpecial.setCarYear(Integer.parseInt(info[7]));
@@ -41,10 +42,11 @@ public class Specials {
     }
 
     public static void addSpeical(Special special) {
-        special.setSpecialID(specialList.size());
+        special.setSpecialID(specialList.size() + 1);
         specialList.add(special);
     }
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Special s: specialList) {
@@ -52,15 +54,5 @@ public class Specials {
         }
         return sb.toString();
     }
-
-    public static void main(String[] args) {
-        try{
-            String inputFile = "a.txt";
-            Specials specials = new Specials(inputFile);
-        } catch (Exception ex) {
-            System.out.println("invalid input file path");
-        }
-    }
-
 
 }

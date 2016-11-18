@@ -57,7 +57,7 @@ public class Special {
         return discountPercentage;
     }
 
-    public void setDicountPercentage(Double dicountPercentage) {
+    public void setDiscountPercentage(Double dicountPercentage) {
         this.discountPercentage = dicountPercentage;
     }
 
@@ -77,7 +77,7 @@ public class Special {
         this.specialEndDate = stringToDate(specialEndDate);
     }
 
-    public int getCarYear() {
+    public Integer getCarYear() {
         return carYear;
     }
 
@@ -181,23 +181,17 @@ public class Special {
         sb.append((trim == null ? "" : trim) + "|");
         sb.append((carMinPrice == null ? "" : carMinPrice) + "|");
         sb.append((carMaxPrice == null ? "" : carMaxPrice));
+        sb.append("\n");
         return sb.toString();
     }
 
     public static void main(String[] args) {
-//        try {
-//            Special newSpecial = new Special(001, "gmps-xyz", "Winter Sale", 250.0, null, "2016/11/01", "2017/01/01", 2017, "Chevrolet", "Camaro", "", null, 35000.0);
-//            System.out.println(newSpecial);
-//        } catch (Exception e) {
-//            System.out.println("Invalid input");
-//        }
-        String s = "2017/02/21";
-        try{
-            System.out.println(stringToDate(s));
-        } catch(Exception e) {
-            System.out.println("invalid input ");
+        try {
+            Special newSpecial = new Special(001, "gmps-xyz", "Winter Sale", 250.0, null, "2016/11/01", "2017/01/01", 2017, "Chevrolet", "Camaro", "", null, 35000.0);
+            System.out.println(newSpecial);
+        } catch (Exception e) {
+            System.out.println("Invalid input");
         }
-
     }
 }
 

@@ -5,11 +5,17 @@ import javax.swing.*;
  */
 public class BaseFrame {
     public static void main(String[] args) {
-        Specials specials = new Specials();
-        JFrame frame = new JFrame();
-        frame.setTitle("Add Special");
-        frame.add(new AddSpecialPanel());
-        frame.setSize(700, 300);
-        frame.setVisible(true);
+        try {
+            Specials specials = new Specials("C://Users//qiqi//IdeaProjects//NEU_Final_Project//abc.txt");
+            JFrame frame = new JFrame();
+            frame.setTitle("Add Special");
+            frame.add(new AddSpecialPanel());
+            frame.setSize(700, 300);
+            frame.setVisible(true);
+            System.out.println(specials.getList());
+        } catch (Exception e) {
+            System.out.println("invalid file path");
+        }
+
     }
 }

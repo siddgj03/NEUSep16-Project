@@ -21,7 +21,7 @@ public class AddSpecialPanel extends JPanel {
     private JTextField discountPercentageInfo;
     private JTextField specialStartDateInfo;
     private JTextField specialEndDateInfo;
-    private JTextField carYearInfo;
+    private JComboBox carYearInfo;
     private JComboBox carMakeInfo;
     private JComboBox carModelInfo;
     private JTextField trimInfo;
@@ -55,9 +55,19 @@ public class AddSpecialPanel extends JPanel {
         ComponetInitialize(specialEndDateInfo, 3, 2, 1, 0, true);
 
         ComponetInitialize(new JLabel("Year："), 2, 3, 1, 1, false);
-        carYearInfo = new JTextField();
+        carYearInfo = new JComboBox();
         ComponetInitialize(carYearInfo, 3, 3, 1, 0, true);
-        carYearInfo.addKeyListener(new InputValidNumberListener());
+        carYearInfo.addItem("2016");     carYearInfo.addItem("2005");
+        carYearInfo.addItem("2016");     carYearInfo.addItem("2004");
+        carYearInfo.addItem("2014");     carYearInfo.addItem("2003");
+        carYearInfo.addItem("2013");     carYearInfo.addItem("2002");
+        carYearInfo.addItem("2012");     carYearInfo.addItem("2001");
+        carYearInfo.addItem("2011");     carYearInfo.addItem("2000");
+        carYearInfo.addItem("2010");     carYearInfo.addItem("1999");
+        carYearInfo.addItem("2009");     carYearInfo.addItem("1998");
+        carYearInfo.addItem("2008");     carYearInfo.addItem("1997");
+        carYearInfo.addItem("2007");     carYearInfo.addItem("1996");
+        carYearInfo.addItem("2006");     carYearInfo.addItem("1995");
 
         ComponetInitialize(new JLabel("Make："), 0, 3, 1, 1, false);
         carMakeInfo = new JComboBox();
@@ -133,14 +143,11 @@ public class AddSpecialPanel extends JPanel {
             discountPercentageInfo.setText("");
             specialStartDateInfo.setText("");
             specialEndDateInfo.setText("");
-            carYearInfo.setText("");
             trimInfo.setText("");
             carMinPriceInfo.setText("");
             carMaxPriceInfo.setText("");
         }
     }
-
-
 
     class AddSpecialActionListener implements ActionListener {
         public void actionPerformed(final ActionEvent e) {
@@ -151,44 +158,56 @@ public class AddSpecialPanel extends JPanel {
                 return;
             }
             Special newSpecial = new Special();
+
             newSpecial.setSpecialTitle(specialTitleInfo.getText());
             try {
                 newSpecial.setSpecialStartDate(specialStartDateInfo.getText().trim());
+
+                if (specialEndDateInfo.getText() != null && specialEndDateInfo.getText().length() != 0) {
+                    newSpecial.setSpecialEndDate(specialEndDateInfo.getText().trim());
+                } else {
+                    newSpecial.setSpecialEndDate("2099/12/31");
+                }
+
                 if (discountValueInfo.getText() != null) {
                     newSpecial.setDiscountValue(Double.parseDouble(discountValueInfo.getText()));
                 } else {
-                    newSpecial.setDicountPercentage(Double.parseDouble(discountPercentageInfo.getText()));
+                    newSpecial.setDiscountPercentage(Double.parseDouble(discountPercentageInfo.getText()));
                 }
-                newSpecial.setSpecialStartDate(specialStartDateInfo.getText());
-                if (specialEndDateInfo.getText() != null && specialEndDateInfo.getText().length() != 0) {
-                    newSpecial.setSpecialEndDate(specialEndDateInfo.getText().trim());
-                }
-                if (carYearInfo.getText() != null) {
-                    newSpecial.setCarYear(Integer.parseInt(carYearInfo.getText()));
-                }
+
+                newSpecial.setCarYear(Integer.parseInt(carYearInfo.getSelectedItem().toString()));
+
                 newSpecial.setCarMake(carMakeInfo.getSelectedItem().toString());
+
                 newSpecial.setCarModel(carModelInfo.getSelectedItem().toString());
+
                 if (trimInfo.getText() != null) {
                     newSpecial.setCarModel(trimInfo.getText());
                 }
+
                 if (carMinPriceInfo.getText() != null) {
                     newSpecial.setCarMinPrice(Double.parseDouble(carMinPriceInfo.getText()));
                 }
+
                 if (carMaxPriceInfo.getText() != null) {
                     newSpecial.setCarMaxPrice(Double.parseDouble(carMaxPriceInfo.getText()));
-                } else {
-                    newSpecial.setCarMaxPrice(null);
                 }
+
                 Specials.addSpeical(newSpecial);
-                addToFile(Specials.getList(),"C:\\Users\\qiqi\\IdeaProjects\\NEU_Final_Project\\a.txt");
+                addToFile(Specials.getList(),"C://Users//qiqi//IdeaProjects//NEU_Final_Project//b.txt");
                 JOptionPane.showMessageDialog(null, "New Special Generated!", "Conformation Dialog", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 System.out.println("Invalid date input");
             }
         }
+
         private void addToFile(ArrayList<Special> specials, String output) throws IOException {
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File(output)));
-            writer.write(specials.toString());
+            for (Special special: specials) {
+                writer.write(special.toString());
+                writer.newLine();
+            }
+            writer.close();
         }
     }
 
