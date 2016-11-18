@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class TextWriter {
-	
+	 
 	private static TextWriter instance = new TextWriter();
 	
 	private TextWriter(){}

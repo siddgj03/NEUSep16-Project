@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class TextReader {
     public static final String defaultDirectory = "/Users/Jim_Pai/NEUSep16-Project/data/";
-	
+	 
 	public void readfile(String filepath) throws FileNotFoundException, IOException {
 
         File files = new File(filepath);
