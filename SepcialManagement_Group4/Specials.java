@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -25,12 +26,12 @@ public class Specials {
             newSpecial.setDiscountPercentage(Double.parseDouble(info[4]));
             newSpecial.setSpecialStartDate(info[5]);
             newSpecial.setSpecialEndDate(info[6]);
-            newSpecial.setCarYear(Integer.parseInt(info[7]));
+            newSpecial.setCarYear(info[7]);
             newSpecial.setCarMake(info[8]);
             newSpecial.setCarModel(info[9]);
             newSpecial.setTrim(info[10]);
-            newSpecial.setCarMinPrice(Double.parseDouble(info[11]));
-            newSpecial.setCarMaxPrice(Double.parseDouble(info[12]));
+            newSpecial.setCarMinPrice(info[11]);
+            newSpecial.setCarMaxPrice(info[12]);
             specialList.add(newSpecial);
         }
       reader.close();

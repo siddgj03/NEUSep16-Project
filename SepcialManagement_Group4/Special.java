@@ -81,8 +81,12 @@ public class Special {
         return carYear;
     }
 
-    public void setCarYear(Integer carYear) {
-        this.carYear = carYear;
+    public void setCarYear(String carYearString) {
+        if (carYearString == null || carYearString.equals("")) {
+            carYear = new Integer(1990);
+        } else {
+            this.carYear = Integer.parseInt(carYearString);
+        }
     }
 
     public String getCarMake() {
@@ -113,24 +117,33 @@ public class Special {
         return carMinPrice;
     }
 
-    public void setCarMinPrice(Double carMinPrice) {
-        this.carMinPrice = carMinPrice;
+    public void setCarMinPrice(String carMinPrice) {
+        if (carMinPrice == null || carMinPrice.equals("")) {
+            this.carMinPrice = new Double(0.0);
+        } else {
+            this.carMinPrice = Double.parseDouble(carMinPrice);
+        }
     }
 
     public double getCarMaxPrice() {
         return carMaxPrice;
     }
 
-    public void setCarMaxPrice(Double carMaxPrice) {
-        this.carMaxPrice = carMaxPrice;
+    public void setCarMaxPrice(String  carMaxPrice) {
+        if (carMaxPrice == null || carMaxPrice.equals("")) {
+            this.carMaxPrice = new Double(10000000.0);
+        } else {
+            this.carMaxPrice = Double.parseDouble(carMaxPrice);
+        }
+
     }
 
-    public Special(int specialID, String dealerWebID, String specialTitle, Double discountValue, Double dicountPercentage, String specialStartDate, String specialEndDate, Integer carYear, String carMake, String carModel, String trim, Double carMinPrice, Double carMaxPrice) throws Exception {
+    public Special(int specialID, String dealerWebID, String specialTitle, Double discountValue, Double discountPercentage, String specialStartDate, String specialEndDate, Integer carYear, String carMake, String carModel, String trim, Double carMinPrice, Double carMaxPrice) throws Exception {
         this.specialID = specialID;
         this.dealerWebID = dealerWebID;
         this.specialTitle = specialTitle;
         this.discountValue = discountValue;
-        this.discountPercentage = dicountPercentage;
+        this.discountPercentage = discountPercentage;
         this.specialStartDate = stringToDate(specialStartDate);
         this.specialEndDate = stringToDate(specialEndDate);
         this.carYear = carYear;

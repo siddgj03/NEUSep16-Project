@@ -176,7 +176,7 @@ public class AddSpecialPanel extends JPanel {
                     newSpecial.setDiscountPercentage(Double.parseDouble(discountPercentageInfo.getText()));
                 }
 
-                newSpecial.setCarYear(Integer.parseInt(carYearInfo.getSelectedItem().toString()));
+                newSpecial.setCarYear(carYearInfo.getSelectedItem().toString());
 
                 newSpecial.setCarMake(carMakeInfo.getSelectedItem().toString());
 
@@ -187,11 +187,11 @@ public class AddSpecialPanel extends JPanel {
                 }
 
                 if (carMinPriceInfo.getText() != null) {
-                    newSpecial.setCarMinPrice(Double.parseDouble(carMinPriceInfo.getText()));
+                    newSpecial.setCarMinPrice(carMinPriceInfo.getText());
                 }
 
                 if (carMaxPriceInfo.getText() != null) {
-                    newSpecial.setCarMaxPrice(Double.parseDouble(carMaxPriceInfo.getText()));
+                    newSpecial.setCarMaxPrice(carMaxPriceInfo.getText());
                 }
 
                 Specials.addSpeical(newSpecial);
