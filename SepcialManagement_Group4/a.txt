@@ -1,0 +1,2 @@
+100|gmps-xyz|Winter Sale|250||11-01-2016|01-01-2017|2017|Chevrolet|Camaro|||35000
+101|gmps-xyz|Manager Discount||5|11-01-2016|01-01-2017|2017|Buick|Enclave|||
