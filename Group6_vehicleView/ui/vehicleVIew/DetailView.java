@@ -16,6 +16,7 @@ public class DetailView extends BaseFrame {
 		super(scrWidth, scrHeight);
 		this.selectedVehicle = selectedVehicle;
 		add();
+		setup();
 	}
 
 	@Override
