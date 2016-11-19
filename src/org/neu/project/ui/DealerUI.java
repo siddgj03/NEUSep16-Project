@@ -1,11 +1,10 @@
 package org.neu.project.ui;
 
-import java.util.List;
-
-import javax.swing.JComboBox;
-
 import org.neu.project.service.DealerManager;
 import org.neu.project.service.DummyDealerManager;
+
+import javax.swing.*;
+import java.util.List;
 
 public class DealerUI {
 

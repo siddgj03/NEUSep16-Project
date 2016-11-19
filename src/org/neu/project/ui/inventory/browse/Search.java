@@ -1,5 +1,6 @@
-package ui.inventory.browse;
+package org.neu.project.ui.inventory.browse;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,8 +9,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
-
-import javax.swing.*;
 
 public class Search extends JPanel {
 //	public static void main(String[] args) {

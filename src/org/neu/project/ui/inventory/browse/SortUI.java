@@ -1,4 +1,4 @@
-package ui.inventory.browse;
+package org.neu.project.ui.inventory.browse;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package ui;
+package org.neu.project.ui.common;
 
 import javax.swing.*;
 

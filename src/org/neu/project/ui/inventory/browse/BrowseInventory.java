@@ -1,6 +1,6 @@
-package ui.inventory.browse;
+package org.neu.project.ui.inventory.browse;
 
-import ui.BaseFrame;
+import org.neu.project.ui.common.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,7 +62,7 @@ public class BrowseInventory extends BaseFrame {
 	}
 
 	public static void main(String args[]) {
-		JFrame f = new BrowseInventory();
+		new BrowseInventory();
 	}
 }
 
