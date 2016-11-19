@@ -4,7 +4,7 @@ import ui.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.io.IOException;
 
 /**
  * @author ken prayogo
@@ -12,12 +12,10 @@ import java.awt.event.*;
  */
 public class BrowseInventory extends BaseFrame {
 	// Static values
-	private static final int scrWidth = 1020;
+	private static final int scrWidth = 1200;
 	private static final int scrHeight = 720;
 	// Components
-	private JLabel title;
-	private ListPanel list;
-	private TestPanel buttonPane;
+	private ButtonPanel buttonPanel;
 
 	public BrowseInventory() {
 		super(scrWidth, scrHeight);
@@ -25,58 +23,42 @@ public class BrowseInventory extends BaseFrame {
 
 	@Override
 	protected void create() {
-		title = new JLabel("Inventory");
-		title.setHorizontalAlignment(JLabel.CENTER);
-		title.setVerticalAlignment(JLabel.NORTH);
-		title.setFont(new Font(title.getFont().getName(), Font.BOLD, 20));
-
+		this.setTitle("Inventory List");
 	}
 
 	@Override
 	protected void add() {
-		Container con = this.getContentPane();
+		Container container = this.getContentPane();
 		// First layout to separate header, controls and footer
-		GridLayout layoutMaster = new GridLayout(3,1,0,10);
-		con.setLayout(layoutMaster);
+//		GridLayout layoutMaster = new GridLayout(1,3,0,10);
+		container.setLayout(new FlowLayout());
 
-		// Main controls layout
-		FlowLayout layoutControls = new FlowLayout();
-		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(layoutControls);
+		/* Declare and Add Panels here */
 
-		// Declare and Add Panels here
-		SortUI sort = new SortUI();
-		mainPanel.add(sort);
+		// Search/Filter panel
+		JPanel filterPanel = new JPanel();
+		try {
+			Search searchPane = new Search();
+			filterPanel.add(searchPane);
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		filterPanel.setPreferredSize(new Dimension(300,720));
 
-		list = new ListPanel();
-		mainPanel.add(list);
+		// Results panel
+		Result results = new Result();
+		results.setPreferredSize(new Dimension(600,600));
 
-		buttonPane = new TestPanel();
-		mainPanel.add(buttonPane);
-
-		// Arrange vertical screen layout
-		con.add(title);
-		con.add(mainPanel);
-
-		JLabel footerNote = new JLabel("Footer goes here");
-		footerNote.setHorizontalAlignment(JLabel.CENTER);
-		footerNote.setVerticalAlignment(JLabel.CENTER);
-		con.add(footerNote);
+		// Arrange Horizontal screen layout
+		container.add(filterPanel);
+		container.add(results);
+		buttonPanel = new ButtonPanel();
+		container.add(buttonPanel);
 	}
 
 	@Override
 	protected void addListener() {
-		ViewListener ol = new ViewListener();
-		buttonPane.btnView.addActionListener(ol);
-	}
 
-	class ViewListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			String vin = list.table.getValueAt(list.table.getSelectedRow(), 0).toString();
-			System.out.println("Got VIN: " + vin);
-		}
 	}
 
 	public static void main(String args[]) {
@@ -85,30 +67,9 @@ public class BrowseInventory extends BaseFrame {
 }
 
 /**
- * Example custom JPanel to group controls into one
- * Uses the BoxLayout, which places controls vertically
- * (Still some issues with the combo box width)
+ * Example for reference.
+ * Renders a scrollable Table.
  */
-class TestPanel extends JPanel {
-	JButton btnView;
-
-	public TestPanel() {
-		// Arrange in vertical order, with spacing of 10
-		super(new GridLayout(0, 1, 0, 10));
-
-		btnView = new JButton("View Vehicle");
-
-		add(btnView);
-	}
-
-	@Override
-	public Component add(Component comp) {
-		super.add(comp);
-		comp.setMaximumSize( comp.getPreferredSize() ); // Limits size from expanding
-		return comp;
-	}
-}
-
 class ListPanel extends JPanel {
 	private JPanel mainList;
 	public JTable table;
