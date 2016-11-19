@@ -17,7 +17,7 @@ public abstract class BaseFrame extends JFrame {
 		create();
 		//add();
 		addListener();
-		setup();
+		//setup();
 	}
 
 	protected void setup() {
