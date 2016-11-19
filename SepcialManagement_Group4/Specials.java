@@ -22,8 +22,11 @@ public class Specials {
             newSpecial.setSpecialID(Integer.parseInt(info[0]));
             newSpecial.setDealerWebID(info[1]);
             newSpecial.setSpecialTitle(info[2]);
-            newSpecial.setDiscountValue(Double.parseDouble(info[3]));
-            newSpecial.setDiscountPercentage(Double.parseDouble(info[4]));
+            if (info[3] == null || info[3].equals("")) {
+                newSpecial.setDiscountPercentage(Double.parseDouble(info[4]));
+            } else {
+                newSpecial.setDiscountValue(Double.parseDouble(info[3]));
+            }
             newSpecial.setSpecialStartDate(info[5]);
             newSpecial.setSpecialEndDate(info[6]);
             newSpecial.setCarYear(info[7]);
