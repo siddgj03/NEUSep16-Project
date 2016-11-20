@@ -3,14 +3,14 @@ import java.util.ArrayList;
 public class carYearList {
 	
 	public static ArrayList getCarYearList(){
-		ArrayList caeYearList=new ArrayList();
+		ArrayList carYearList=new ArrayList();
 		
-		caeYearList.add("2017"); caeYearList.add("2016"); caeYearList.add("2015"); caeYearList.add("2014"); 
-		caeYearList.add("2013"); caeYearList.add("2012"); caeYearList.add("2011"); caeYearList.add("2010"); 
-		caeYearList.add("2009"); caeYearList.add("2008"); caeYearList.add("2007"); caeYearList.add("2006"); 
-		caeYearList.add("2005"); caeYearList.add("2004"); caeYearList.add("2003"); caeYearList.add("2002"); 
-		caeYearList.add("2001"); caeYearList.add("2000"); caeYearList.add("1999"); caeYearList.add("1998"); 
+		carYearList.add("2017"); carYearList.add("2016"); carYearList.add("2015"); carYearList.add("2014"); 
+		carYearList.add("2013"); carYearList.add("2012"); carYearList.add("2011"); carYearList.add("2010"); 
+		carYearList.add("2009"); carYearList.add("2008"); carYearList.add("2007"); carYearList.add("2006"); 
+		carYearList.add("2005"); carYearList.add("2004"); carYearList.add("2003"); carYearList.add("2002"); 
+		carYearList.add("2001"); carYearList.add("2000"); carYearList.add("1999"); carYearList.add("1998"); 
 		
-		return caeYearList;
+		return carYearList;
 	}
 }
