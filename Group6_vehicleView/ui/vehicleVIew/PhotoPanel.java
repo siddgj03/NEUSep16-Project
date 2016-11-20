@@ -5,11 +5,10 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.TitledBorder;
+
+import service.ImageFetchingRunnable;
 
 public class PhotoPanel extends BasePanel {
 	private static final String BORDER_TITLE = "Current Offer";
@@ -32,16 +33,20 @@ public class PhotoPanel extends BasePanel {
 	private static final String MODEL = "Model:";
 	private static final String YEAR = "year:";
 	private static final String COLOR = "Color:";
-	private static final Font font = new Font("", Font.ITALIC,14);
+	private static final Font font = new Font("", Font.ITALIC, 14);
+
+	JPanel photoShowPanel;
+	int imageIndex = 0;
+
 	public PhotoPanel(Vehicle selectedVehicle) {
 		this.selectedVehicle = selectedVehicle;
 		add();
 	}
 
 	private void add() {
-		
-		this.setLayout(new FlowLayout(FlowLayout.LEFT,20,20));
-		
+
+		this.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
+
 		this.add(getPhotoShowPanel());
 		this.add(getCurrentOfferPanel());
 		this.add(getSpecsPanel());
@@ -55,34 +60,34 @@ public class PhotoPanel extends BasePanel {
 		JPanel panel = new JPanel();
 		panel.setBorder(title);
 		panel.setLayout(new GridLayout(5, 2));
-		
-	     //category
+
+		// category
 		JLabel category = new JLabel(CATEGORY);
 		JLabel cateValue = new JLabel(selectedVehicle.getCategory());
 		panel.add(category);
 		panel.add(cateValue);
-		//make
+		// make
 		JLabel make = new JLabel(MAKE);
 		JLabel makeValue = new JLabel(selectedVehicle.getMake());
 		panel.add(make);
 		panel.add(makeValue);
-		//model
+		// model
 		JLabel model = new JLabel(MODEL);
 		JLabel modelValue = new JLabel(selectedVehicle.getModel());
 		panel.add(model);
 		panel.add(modelValue);
-        //year
+		// year
 		JLabel year = new JLabel(YEAR);
-		JLabel yearValue = new JLabel(selectedVehicle.getYear()+"");
+		JLabel yearValue = new JLabel(selectedVehicle.getYear() + "");
 		panel.add(year);
 		panel.add(yearValue);
-		//color
+		// color
 		JLabel color = new JLabel(COLOR);
 		JLabel colorValue = new JLabel(selectedVehicle.getColor());
 		panel.add(color);
 		panel.add(colorValue);
-		panel.setPreferredSize(new Dimension(700,300));
-		
+		panel.setPreferredSize(new Dimension(700, 300));
+
 		return panel;
 	}
 
@@ -94,7 +99,7 @@ public class PhotoPanel extends BasePanel {
 		panel.setBorder(title);
 		panel.setLayout(new GridLayout(4, 2));
 		// MSRP
-		
+
 		JLabel msrp = new JLabel(MSRP);
 		msrp.setFont(font);
 		JLabel msrpValue = new JLabel(selectedVehicle.getMsrp() + "");
@@ -118,18 +123,18 @@ public class PhotoPanel extends BasePanel {
 		JLabel date = new JLabel(selectedVehicle.getExpires() + "");
 		panel.add(expires);
 		panel.add(date);
-		panel.setPreferredSize(new Dimension(400,300));
+		panel.setPreferredSize(new Dimension(400, 300));
 		return panel;
 	}
 
 	private Component getPhotoShowPanel() {
-		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.add(getTitlePanel());
-		panel.add(getPhotoPanel());
-		panel.add(getArrowPanel());
-		panel.setPreferredSize(new Dimension(550,300));
-		return panel;
+		photoShowPanel = new JPanel();
+		photoShowPanel.setLayout(new BoxLayout(photoShowPanel, BoxLayout.Y_AXIS));
+		photoShowPanel.add(getTitlePanel());
+		photoShowPanel.add(getPhotoPanel());
+		photoShowPanel.add(getArrowPanel());
+		photoShowPanel.setPreferredSize(new Dimension(550, 300));
+		return photoShowPanel;
 	}
 
 	private Component getArrowPanel() {
@@ -137,22 +142,43 @@ public class PhotoPanel extends BasePanel {
 		panel.setLayout(new GridLayout(1, 2));
 		JButton goPre = new JButton(PREVIOUS);
 		JButton goNext = new JButton(NEXT);
+
+		goNext.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imageIndex++;
+				replaceImage();
+				if (!goPre.isEnabled())
+					goPre.setEnabled(true);
+				if (imageIndex == (selectedVehicle.getImageList().size() - 1)) {
+					goNext.setEnabled(false);
+				}
+			}
+		});
+		goPre.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				imageIndex--;
+				replaceImage();
+				if (!goNext.isEnabled())
+					goNext.setEnabled(true);
+				if (imageIndex == 0) {
+					goPre.setEnabled(false);
+				}
+			}
+		});
+		goPre.setEnabled(false);
 		panel.add(goPre);
 		panel.add(goNext);
 		return panel;
 	}
 
 	private Component getPhotoPanel() {
-		BufferedImage img = null;
-		JLabel label = null;
-		try {
-			img = ImageIO.read(new File(selectedVehicle.getImagePath()));
-			ImageIcon icon = new ImageIcon(img);
-			label = new JLabel(icon);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return label;
+		JLabel photoLabel = new JLabel("loading");
+		photoLabel.setPreferredSize(new Dimension(500, 260));
+		Thread imageFetching = new Thread(new ImageFetchingRunnable(selectedVehicle, photoShowPanel));
+		imageFetching.start();
+		return photoLabel;
 	}
 
 	private Component getTitlePanel() {
@@ -162,4 +188,13 @@ public class PhotoPanel extends BasePanel {
 		return title;
 	}
 
+	private void replaceImage() {
+		photoShowPanel.remove(1);
+		List<ImageIcon> imageList = selectedVehicle.getImageList();
+		if (imageIndex < imageList.size()) {
+			JLabel photoLabel = new JLabel(imageList.get(imageIndex));
+			photoShowPanel.add(photoLabel, 1);
+			photoShowPanel.updateUI();
+		}
+	}
 }
