@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -7,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by qiqi on 2016/11/16.
+ * edit line 61 81 106.
  */
 public class AddSpecialPanel extends JPanel {
 
@@ -55,46 +57,60 @@ public class AddSpecialPanel extends JPanel {
         ComponetInitialize(new JLabel("Year："), 2, 3, 1, 1, false);
         carYearInfo = new JComboBox();
         ComponetInitialize(carYearInfo, 3, 3, 1, 0, true);
-        carYearInfo.addItem("2017");     carYearInfo.addItem("2016");
-        carYearInfo.addItem("2015");     carYearInfo.addItem("2014");
-        carYearInfo.addItem("2013");     carYearInfo.addItem("2012");
-        carYearInfo.addItem("2011");     carYearInfo.addItem("2010");
-        carYearInfo.addItem("2009");     carYearInfo.addItem("2008");
-        carYearInfo.addItem("2007");     carYearInfo.addItem("2006");
-        carYearInfo.addItem("2005");     carYearInfo.addItem("2004");
-        carYearInfo.addItem("2003");     carYearInfo.addItem("2002");
-        carYearInfo.addItem("2001");     carYearInfo.addItem("2000");
-        carYearInfo.addItem("1999");     carYearInfo.addItem("1998");
-        carYearInfo.addItem("1997");     carYearInfo.addItem("1996");
-        carYearInfo.addItem("1995");     carYearInfo.addItem("1994");
+        
+        int carYearListSize=carYearList.getCarYearList().size();
+        for(int i=0; i<carYearListSize; i++){
+        	carYearInfo.addItem(carYearList.getCarYearList().get(i));
+        }        
+//        carYearInfo.addItem("2016");     carYearInfo.addItem("2005");
+//        carYearInfo.addItem("2016");     carYearInfo.addItem("2004");
+//        carYearInfo.addItem("2014");     carYearInfo.addItem("2003");
+//        carYearInfo.addItem("2013");     carYearInfo.addItem("2002");
+//        carYearInfo.addItem("2012");     carYearInfo.addItem("2001");
+//        carYearInfo.addItem("2011");     carYearInfo.addItem("2000");
+//        carYearInfo.addItem("2010");     carYearInfo.addItem("1999");
+//        carYearInfo.addItem("2009");     carYearInfo.addItem("1998");
+//        carYearInfo.addItem("2008");     carYearInfo.addItem("1997");
+//        carYearInfo.addItem("2007");     carYearInfo.addItem("1996");
+//        carYearInfo.addItem("2006");     carYearInfo.addItem("1995");
 
         ComponetInitialize(new JLabel("Make："), 0, 3, 1, 1, false);
         carMakeInfo = new JComboBox();
         ComponetInitialize(carMakeInfo, 1, 3, 1, 0, true);
-        carMakeInfo.addItem("All");				carMakeInfo.addItem("Acura");		carMakeInfo.addItem("Alfa Romeo");	carMakeInfo.addItem("AM General");
-        carMakeInfo.addItem("Aston Martin");	carMakeInfo.addItem("Audi");		carMakeInfo.addItem("Bentley");		carMakeInfo.addItem("BMW");
-        carMakeInfo.addItem("Bugatti");			carMakeInfo.addItem("Buick");		carMakeInfo.addItem("Cadillac");	carMakeInfo.addItem("Chevrolet");
-        carMakeInfo.addItem("Chrysler");		carMakeInfo.addItem("Daewoo");		carMakeInfo.addItem("Dodge");		carMakeInfo.addItem("Eagle");
-        carMakeInfo.addItem("Ferrari");			carMakeInfo.addItem("FIAT");		carMakeInfo.addItem("Fisker");		carMakeInfo.addItem("Ford");
-        carMakeInfo.addItem("Genesis");			carMakeInfo.addItem("Geo");			carMakeInfo.addItem("GMC");			carMakeInfo.addItem("Honda");
-        carMakeInfo.addItem("HUMMER");			carMakeInfo.addItem("Hyundai");		carMakeInfo.addItem("Infiniti");	carMakeInfo.addItem("Isuzu");
-        carMakeInfo.addItem("Jaguar");			carMakeInfo.addItem("Jeep");		carMakeInfo.addItem("Kia");			carMakeInfo.addItem("Lamborghini");
-        carMakeInfo.addItem("Land Rover");		carMakeInfo.addItem("Lexus");		carMakeInfo.addItem("Lincoln");		carMakeInfo.addItem("Lotus");
-        carMakeInfo.addItem("Maserati");		carMakeInfo.addItem("Maybach");		carMakeInfo.addItem("Mazda");		carMakeInfo.addItem("McLaren");
-        carMakeInfo.addItem("Mercedes-Benz");	carMakeInfo.addItem("Mercury");		carMakeInfo.addItem("MINI");		carMakeInfo.addItem("Mitsubishi");
-        carMakeInfo.addItem("Nissan");			carMakeInfo.addItem("Oldsmobile");	carMakeInfo.addItem("Panoz");		carMakeInfo.addItem("Plymouth");
-        carMakeInfo.addItem("Pontiac");			carMakeInfo.addItem("Porsche");		carMakeInfo.addItem("Ram");			carMakeInfo.addItem("Rolls-Royce");
-        carMakeInfo.addItem("Saab");			carMakeInfo.addItem("Saturn");		carMakeInfo.addItem("Scion");		carMakeInfo.addItem("Smart");
-        carMakeInfo.addItem("Spyker");			carMakeInfo.addItem("Subaru");		carMakeInfo.addItem("Suzuki");		carMakeInfo.addItem("Tesla");
-        carMakeInfo.addItem("Toyota");			carMakeInfo.addItem("Volkswagen");	carMakeInfo.addItem("Volvo");
+        
+        int carMakeListSize=carMakeList.getCarMakeList().size();
+        for(int i=0; i<carMakeListSize; i++){
+        	carMakeInfo.addItem(carMakeList.getCarMakeList().get(i));
+        }
+ //       carMakeInfo.addItem("All");				carMakeInfo.addItem("Acura");		carMakeInfo.addItem("Alfa Romeo");	carMakeInfo.addItem("AM General");
+ //       carMakeInfo.addItem("Aston Martin");	carMakeInfo.addItem("Audi");		carMakeInfo.addItem("Bentley");		carMakeInfo.addItem("BMW");
+ //       carMakeInfo.addItem("Bugatti");			carMakeInfo.addItem("Buick");		carMakeInfo.addItem("Cadillac");	carMakeInfo.addItem("Chevrolet");
+ //       carMakeInfo.addItem("Chrysler");		carMakeInfo.addItem("Daewoo");		carMakeInfo.addItem("Dodge");		carMakeInfo.addItem("Eagle");
+ //       carMakeInfo.addItem("Ferrari");			carMakeInfo.addItem("FIAT");		carMakeInfo.addItem("Fisker");		carMakeInfo.addItem("Ford");
+ //       carMakeInfo.addItem("Genesis");			carMakeInfo.addItem("Geo");			carMakeInfo.addItem("GMC");			carMakeInfo.addItem("Honda");
+ //       carMakeInfo.addItem("HUMMER");			carMakeInfo.addItem("Hyundai");		carMakeInfo.addItem("Infiniti");	carMakeInfo.addItem("Isuzu");
+ //       carMakeInfo.addItem("Jaguar");			carMakeInfo.addItem("Jeep");		carMakeInfo.addItem("Kia");			carMakeInfo.addItem("Lamborghini");
+ //       carMakeInfo.addItem("Land Rover");		carMakeInfo.addItem("Lexus");		carMakeInfo.addItem("Lincoln");		carMakeInfo.addItem("Lotus");
+ //       carMakeInfo.addItem("Maserati");		carMakeInfo.addItem("Maybach");		carMakeInfo.addItem("Mazda");		carMakeInfo.addItem("McLaren");
+ //       carMakeInfo.addItem("Mercedes-Benz");	carMakeInfo.addItem("Mercury");		carMakeInfo.addItem("MINI");		carMakeInfo.addItem("Mitsubishi");
+ //       carMakeInfo.addItem("Nissan");			carMakeInfo.addItem("Oldsmobile");	carMakeInfo.addItem("Panoz");		carMakeInfo.addItem("Plymouth");
+ //       carMakeInfo.addItem("Pontiac");			carMakeInfo.addItem("Porsche");		carMakeInfo.addItem("Ram");			carMakeInfo.addItem("Rolls-Royce");
+ //       carMakeInfo.addItem("Saab");			carMakeInfo.addItem("Saturn");		carMakeInfo.addItem("Scion");		carMakeInfo.addItem("Smart");
+ //       carMakeInfo.addItem("Spyker");			carMakeInfo.addItem("Subaru");		carMakeInfo.addItem("Suzuki");		carMakeInfo.addItem("Tesla");
+ //       carMakeInfo.addItem("Toyota");			carMakeInfo.addItem("Volkswagen");	carMakeInfo.addItem("Volvo");
 
         ComponetInitialize(new JLabel("Model："), 0, 4, 1, 1, false);
         carModelInfo = new JComboBox();
         ComponetInitialize(carModelInfo, 1, 4, 1, 0, true);
-        carModelInfo.addItem("All");		carModelInfo.addItem("Convertible");	carModelInfo.addItem("Coupe");				carModelInfo.addItem("Crossover");
-        carModelInfo.addItem("Diesel"); 	carModelInfo.addItem("Hatchback");		carModelInfo.addItem("Hybrid/Electric");	carModelInfo.addItem("Luxury");
-        carModelInfo.addItem("Minivan"); 	carModelInfo.addItem("Sedan");			carModelInfo.addItem("SUV");				carModelInfo.addItem("Truck");
-        carModelInfo.addItem("Wagon");
+        
+        int carTypeListSize=carTypeList.getCarTypeList().size();
+        for(int i=0; i<carTypeListSize; i++){
+        	carModelInfo.addItem(carTypeList.getCarTypeList().get(i));
+        }       
+//        carModelInfo.addItem("All");		carModelInfo.addItem("Convertible");	carModelInfo.addItem("Coupe");				carModelInfo.addItem("Crossover");
+//        carModelInfo.addItem("Diesel"); 	carModelInfo.addItem("Hatchback");		carModelInfo.addItem("Hybrid/Electric");	carModelInfo.addItem("Luxury");
+//        carModelInfo.addItem("Minivan"); 	carModelInfo.addItem("Sedan");			carModelInfo.addItem("SUV");				carModelInfo.addItem("Truck");
+//        carModelInfo.addItem("Wagon");
 
         ComponetInitialize(new JLabel("Trim："), 2, 4, 1, 1, false);
         trimInfo = new JTextField();
@@ -174,7 +190,7 @@ public class AddSpecialPanel extends JPanel {
                     newSpecial.setDiscountPercentage(Double.parseDouble(discountPercentageInfo.getText()));
                 }
 
-                newSpecial.setCarYear(carYearInfo.getSelectedItem().toString());
+                newSpecial.setCarYear(Integer.parseInt(carYearInfo.getSelectedItem().toString()));
 
                 newSpecial.setCarMake(carMakeInfo.getSelectedItem().toString());
 
@@ -185,11 +201,11 @@ public class AddSpecialPanel extends JPanel {
                 }
 
                 if (carMinPriceInfo.getText() != null) {
-                    newSpecial.setCarMinPrice(carMinPriceInfo.getText());
+                    newSpecial.setCarMinPrice(Double.parseDouble(carMinPriceInfo.getText()));
                 }
 
                 if (carMaxPriceInfo.getText() != null) {
-                    newSpecial.setCarMaxPrice(carMaxPriceInfo.getText());
+                    newSpecial.setCarMaxPrice(Double.parseDouble(carMaxPriceInfo.getText()));
                 }
 
                 Specials.addSpeical(newSpecial);
