@@ -14,17 +14,15 @@ public class ResultPanel extends JPanel {
 	
 	private JLabel details;
 
+	private JLabel id;
+	private JLabel webId;
+	private JLabel category;
+	private JLabel year;
+	private JLabel make;
+	private JLabel model;
+	private JLabel trim;
 	private JLabel type;
 	private JLabel price;
-	private JLabel picture;
-	private JLabel vin;
-	private JLabel make;
-	private JLabel mileage;
-	private JLabel model;
-	private JLabel year;
-	private JLabel doors;
-	private JLabel bodyType;
-	private JLabel color;
 
 	private JCheckBox select;
 
@@ -39,21 +37,21 @@ public class ResultPanel extends JPanel {
 		super(new FlowLayout());
 		add(new JScrollPane());
 
-		Car[] cars = this.getResultCars();
-		for (Car object : cars) {
+		List<Vehicle> vehicles = this.getResultVehicles();
+		for (Vehicle object : vehicles) {
 			add(showResultCar(object));
 		}
 
 	}
 
-	private Car[] getResultCars() {
-		Car a = new Car();
-		Car b = new Car();
-		Car c = new Car();
-		Car d = new Car();
-		Car e = new Car();
-		Car f = new Car();
-		Car g = new Car();
+	private Vehicle[] getResultVehicles() {
+		Vehicle a = new Vehicle();
+		Vehicle b = new Vehicle();
+		Vehicle c = new Vehicle();
+		Vehicle d = new Vehicle();
+		Vehicle e = new Vehicle();
+		Vehicle f = new Vehicle();
+		Vehicle g = new Vehicle();
 		a.setVin("1");
 		b.setVin("2");
 		c.setVin("3");
@@ -61,11 +59,11 @@ public class ResultPanel extends JPanel {
 		e.setVin("5");
 		f.setVin("6");
 		g.setVin("7");
-		Car[] cars = { a, b, c, d, e, f, g };
-		return cars;
+		List<Vehicle> vehicles = { a, b, c, d, e, f, g };
+		return vehicles;
 	}
 
-	public Component showResultCar(Car car) {
+	public Component showResultCar(Vehicle vehicle) {
 
 		carResultCombo = new JPanel();
 		carResultCombo.setLayout(null);
@@ -75,26 +73,23 @@ public class ResultPanel extends JPanel {
 		ClickMeListener cml = new ClickMeListener();
 		select.addActionListener(cml);
 
-		type = new JLabel("Type   " + car.type);
-		price = new JLabel("Sale Price   " + car.price);
-		picture = new JLabel("Picture   " + car.picture);
-		make = new JLabel("Make   " + car.make);
-		vin = new JLabel("Vin   " + car.vin);
-		mileage = new JLabel("Mileage   " + car.mileage);
-		model = new JLabel("Model   " + car.model);
-		year = new JLabel("Year   " + car.year);
-		doors = new JLabel("Doors   " + car.doors);
-		bodyType = new JLabel("BodyType   " + car.bodyType);
-		color = new JLabel("Color   " + car.color);
+		id = new JLabel("ID   " + vehicle.id);
+		webId = new JLabel("webId   " + vehicle.webId);
+		category = new JLabel("Category   " + vehicle.category);
+		year = new JLabel("Year   " + vehicle.year);
+		make = new JLabel("Make   " + vehicle.make);
+		model = new JLabel("Model   " + vehicle.model);
+		trim = new JLabel("Trim   " + vehicle.trim);
+		type = new JLabel("Type   " + vehicle.type);
+		price = new JLabel("Price   " + vehicle.price);
 
-		details.add(make);
-		details.add(vin);
-		details.add(mileage);
-		details.add(model);
+		details.add(id);
+		details.add(webId);
+		details.add(category);
 		details.add(year);
-		details.add(doors);
-		details.add(bodyType);
-		details.add(color);
+		details.add(make);
+		details.add(model);
+		details.add(trim);
 
 		carResultCombo.add(type);
 		carResultCombo.add(price);
