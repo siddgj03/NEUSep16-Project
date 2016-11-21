@@ -64,12 +64,13 @@ public class FileManager {
     private Inventory readInventoryFile(File file) {
         
         try {
+            Inventory inventory = new Inventory();
             
             BufferedReader br = new BufferedReader(new FileReader(file));
             String data = br.readLine();
-            data = br.readLine();
+            inventory.setTitles(data.split("~"));
             
-            Inventory inventory = new Inventory();
+            data = br.readLine();
             
             while (data != null) {
                 String[] info = data.split("~");

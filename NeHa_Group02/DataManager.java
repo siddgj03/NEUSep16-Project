@@ -8,9 +8,6 @@ public class DataManager {
     
     DealerPool dealerPool;
     InventoryPool inventoryPool;
-   
-    
-    
 
     public DataManager(String dealerfilePath, String inventoryFilefoldPath) {
         FileManager fm = new FileManager();

@@ -13,8 +13,11 @@ public class Inventory {
     
     public Inventory() {
         pool = new HashMap<String, Vehicle>();
-        titles = new String[] {"ID", "DealerID", "Category", "Year", "Make", "Model", "Trim", "Type", "Price"};
         
+    }
+    
+    public void setTitles(String[] titles) {
+        this.titles = titles;
     }
     
     public String[] getTitles() {
@@ -62,6 +65,61 @@ public class Inventory {
         for (Vehicle ve: pool.values()) ls.add(ve.getMake());
         
         return ls;
+    }
+    
+    public void removeVehicle(String vehicleID) {
+        if (pool.containsKey(vehicleID)) {
+            pool.remove(vehicleID);
+        }
+    }
+    
+    public void modifyCategory(String vehicleID, String category) {
+        if (pool.containsKey(vehicleID)) {
+            Vehicle ve = pool.get(vehicleID);
+            ve.setCategory(category);
+        }
+    }
+    
+    public void modifyYear(String vehicleID, String year) {
+        if (pool.containsKey(vehicleID)) {
+            Vehicle ve = pool.get(vehicleID);
+            ve.setYear(year);
+        }
+    }
+    
+    public void modifyMaker(String vehicleID, String make) {
+        if (pool.containsKey(vehicleID)) {
+            Vehicle ve = pool.get(vehicleID);
+            ve.setMake(make);
+        }
+    }
+    
+    public void modifyModel(String vehicleID, String model) {
+        if (pool.containsKey(vehicleID)) {
+            Vehicle ve = pool.get(vehicleID);
+            ve.setModel(model);
+        }
+    }
+    
+    public void modfiyTrime(String vehicleID, String trim) {
+        if (pool.containsKey(vehicleID)) {
+            Vehicle ve = pool.get(vehicleID);
+            ve.setTrim(trim);
+        }
+    }
+    
+    public void modfiyType(String vehicleID, String type) {
+        if (pool.containsKey(vehicleID)) {
+            Vehicle ve = pool.get(vehicleID);
+            ve.setType(type);
+        }
+    }
+    
+    public void modifyPrice(String vehicleID, String price) {
+        if (pool.containsKey(vehicleID)) {
+            Vehicle ve = pool.get(vehicleID);
+            ve.setPrice(price);
+        }
     }
 
 
