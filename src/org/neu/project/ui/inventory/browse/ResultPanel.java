@@ -12,6 +12,7 @@ import org.neu.project.dto.Vehicle;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
 
 
 
@@ -33,7 +34,7 @@ public class ResultPanel extends JPanel {
 
 	private JCheckBox select;
 
-	public ResultPanel() {
+	public ResultPanel(Collection<Vehicle> vehivles) {
 
 		super(new FlowLayout());
 		add(new JScrollPane());
