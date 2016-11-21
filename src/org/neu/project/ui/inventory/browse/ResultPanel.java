@@ -59,7 +59,7 @@ public class ResultPanel extends JPanel {
 		e.setVin("5");
 		f.setVin("6");
 		g.setVin("7");
-		List<Vehicle> vehicles = { a, b, c, d, e, f, g };
+		Vehicle[] vehicles = { a, b, c, d, e, f, g };
 		return vehicles;
 	}
 
@@ -73,15 +73,15 @@ public class ResultPanel extends JPanel {
 		ClickMeListener cml = new ClickMeListener();
 		select.addActionListener(cml);
 
-		id = new JLabel("ID   " + vehicle.id);
-		webId = new JLabel("webId   " + vehicle.webId);
-		category = new JLabel("Category   " + vehicle.category);
-		year = new JLabel("Year   " + vehicle.year);
-		make = new JLabel("Make   " + vehicle.make);
-		model = new JLabel("Model   " + vehicle.model);
-		trim = new JLabel("Trim   " + vehicle.trim);
-		type = new JLabel("Type   " + vehicle.type);
-		price = new JLabel("Price   " + vehicle.price);
+		id = new JLabel("ID   " + vehicle.getId());
+		webId = new JLabel("webId   " + vehicle.getWebId());
+		category = new JLabel("Category   " + vehicle.getCategory());
+		year = new JLabel("Year   " + vehicle.getYear());
+		make = new JLabel("Make   " + vehicle.getMake());
+		model = new JLabel("Model   " + vehicle.getModel());
+		trim = new JLabel("Trim   " + vehicle.getTrim());
+		type = new JLabel("Type   " + vehicle.getType());
+		price = new JLabel("Price   " + vehicle.getPrice());
 
 		details.add(id);
 		details.add(webId);
