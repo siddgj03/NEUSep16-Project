@@ -3,6 +3,8 @@ package org.neu.project.ui.inventory.browse;
 
 
 
+
+
 import javax.swing.*;
 
 import org.neu.project.dto.Vehicle;
@@ -30,12 +32,6 @@ public class ResultPanel extends JPanel {
 	private JLabel price;
 
 	private JCheckBox select;
-
-	public static void main(String[] args) {
-
-		ResultPanel gui = new ResultPanel();
-
-	}
 
 	public ResultPanel() {
 
@@ -131,4 +127,5 @@ class ClickMeListener implements ActionListener {
 
 	}
 }
+
 
