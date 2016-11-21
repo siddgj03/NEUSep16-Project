@@ -46,7 +46,7 @@ public class BrowseInventory extends BaseFrame {
 		filterPanel.setPreferredSize(new Dimension(300,720));
 
 		// Results panel
-		Result results = new Result();
+		ResultPanel results = new ResultPanel();
 		results.setPreferredSize(new Dimension(600,600));
 
 		// Arrange Horizontal screen layout

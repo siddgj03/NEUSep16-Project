@@ -21,7 +21,7 @@ public class ButtonPanel extends JPanel {
 		add(btnDelete);
 	}
 
-	private void addListener(Result resultPanel) {
+	private void addListener(ResultPanel resultPanel) {
 		// Look for what's checked in the results panel
 
 	}

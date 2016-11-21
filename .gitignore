@@ -2,3 +2,4 @@
 *.idea
 # Output folder
 out/
+/bin/

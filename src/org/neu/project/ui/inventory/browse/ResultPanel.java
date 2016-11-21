@@ -1,7 +1,12 @@
 package org.neu.project.ui.inventory.browse;
 
 
+
+
 import javax.swing.*;
+
+import org.neu.project.dto.Vehicle;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +42,7 @@ public class ResultPanel extends JPanel {
 		super(new FlowLayout());
 		add(new JScrollPane());
 
-		List<Vehicle> vehicles = this.getResultVehicles();
+		Vehicle[] vehicles = this.getResultVehicles();
 		for (Vehicle object : vehicles) {
 			add(showResultCar(object));
 		}
@@ -52,13 +57,13 @@ public class ResultPanel extends JPanel {
 		Vehicle e = new Vehicle();
 		Vehicle f = new Vehicle();
 		Vehicle g = new Vehicle();
-		a.setVin("1");
-		b.setVin("2");
-		c.setVin("3");
-		d.setVin("4");
-		e.setVin("5");
-		f.setVin("6");
-		g.setVin("7");
+		a.setTrim("1");
+		b.setTrim("2");
+		c.setTrim("3");
+		d.setTrim("4");
+		e.setTrim("5");
+		f.setTrim("6");
+		g.setTrim("7");
 		Vehicle[] vehicles = { a, b, c, d, e, f, g };
 		return vehicles;
 	}
@@ -93,13 +98,13 @@ public class ResultPanel extends JPanel {
 
 		carResultCombo.add(type);
 		carResultCombo.add(price);
-		carResultCombo.add(picture);
+		//carResultCombo.add(picture);
 		carResultCombo.add(details);
 		carResultCombo.add(select);
 
 		type.setBounds(5, 5, 100, 35);
 		price.setBounds(400, 5, 100, 35);
-		picture.setBounds(5, 150, 150, 150);
+		//picture.setBounds(5, 150, 150, 150);
 		details.setBounds(250, 150, 300, 200);
 		select.setBounds(500, 250, 250, 50);
 
@@ -126,3 +131,4 @@ class ClickMeListener implements ActionListener {
 
 	}
 }
+
