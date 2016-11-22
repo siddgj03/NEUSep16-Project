@@ -1,4 +1,4 @@
-package finalProject;
+package NeHa_Group02;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -58,9 +58,7 @@ public class FileManager {
         return inventoryPool;
         
     }
-    
-    
-    
+
     private Inventory readInventoryFile(File file) {
         
         try {
@@ -114,9 +112,7 @@ public class FileManager {
         return null;
     }
     
-    public void writeDealerInfo(File file, Dealer dealr) {
-        
-    }
+
     
     public void writeInventoryInfo(File file, Vehicle car) {
         

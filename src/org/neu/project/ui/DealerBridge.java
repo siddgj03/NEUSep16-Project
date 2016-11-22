@@ -1,4 +1,4 @@
-package finalProject;
+package src.org.neu.project.ui;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -120,7 +120,7 @@ public class DealerBridge extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
-            new DealerBrowsingInventory(curDealerID);
+            new BrowseInventoryDealer(curDealerID);
  
         }
         

@@ -1,4 +1,4 @@
-package NEUSep16_Project.ui.dealer;
+package NeHa_Group02;
 
 
 import java.awt.BorderLayout;

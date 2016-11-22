@@ -11,7 +11,7 @@ public class Dealer {
     }
 
     public Dealer(String id, String name, String url) {
-        super();
+
         this.id = id;
         this.name = name;
         this.url = url;

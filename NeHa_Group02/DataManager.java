@@ -1,4 +1,4 @@
-package finalProject;
+package NeHa_Group02;
 
 import java.io.File;
 import java.io.IOException;

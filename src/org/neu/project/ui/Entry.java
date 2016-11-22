@@ -1,4 +1,4 @@
-package finalProject;
+package src.org.neu.project.ui;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -34,11 +34,10 @@ public class Entry extends JFrame{
     private DealerPool dealers;
     
 
-    public Entry() {
+    public Entry(String dealerFile, String dealerFile) {
         super();
         // TODO Auto-generated constructor stub
-        String dealerFile = "/Users/xiaoyue/NEU_2016FALL__InformationSystem/INFO5100_JAVA/Assigments/finalProject/data/car-dealers.txt";
-        String inventoryFileFoldPath = "/Users/xiaoyue/NEU_2016FALL__InformationSystem/INFO5100_JAVA/Assigments/finalProject/data/inventorys/";
+       
         DataManager dataManager = new DataManager(dealerFile, inventoryFileFoldPath);
         dealers = dataManager.getDealerPool();
 
@@ -160,7 +159,7 @@ public class Entry extends JFrame{
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
             String dealerid = dealers.getDealerIDbyName(dealerList.getSelectedItem().toString());
-            new CustomerBrowsingInventory(dealerid);
+            new BrowseInventoryCustomer(dealerid);
 
         }   
     }
@@ -182,8 +181,9 @@ public class Entry extends JFrame{
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        
-        Entry entry = new Entry();
+        String dealerFile = "/Users/xiaoyue/NEU_2016FALL__InformationSystem/INFO5100_JAVA/Assigments/finalProject/data/car-dealers.txt";
+        String inventoryFileFolderPath = "/Users/xiaoyue/NEU_2016FALL__InformationSystem/INFO5100_JAVA/Assigments/finalProject/data/inventorys/";
+        Entry entry = new Entry(dealerFile, inventoryFileFolderPath);
         
     }
 
