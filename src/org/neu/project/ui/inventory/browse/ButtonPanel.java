@@ -8,27 +8,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ButtonPanel extends JPanel {
-	BrowseButton btnView;
-	BrowseButton btnEdit;
-	BrowseButton btnDelete;
-	BrowseButton btnAdd;
 
-	public ButtonPanel(JFrame currentFrame) {
+	public ButtonPanel(JFrame currentFrame, boolean isDealer) {
 		// Arrange in vertical order, with spacing of 10
 		super(new GridLayout(4,1,0,5));
 
 		BrowseActionListener commonListener = new BrowseActionListener();
 		commonListener.setFrame(currentFrame);
 
-		btnView = new BrowseButton("View Vehicle", BrowseInventory.COMMAND_VIEW, commonListener);
-		btnEdit = new BrowseButton("Edit Vehicle", BrowseInventory.COMMAND_EDIT, commonListener);
-		btnDelete = new BrowseButton("Delete Vehicle", BrowseInventory.COMMAND_DELETE, commonListener);
-		btnAdd = new BrowseButton("Add New Vehicle", BrowseInventory.COMMAND_ADD, commonListener);
-
+		BrowseButton btnView = new BrowseButton("View Vehicle", BrowseInventory.COMMAND_VIEW, commonListener);
 		add(btnView);
-		add(btnEdit);
-		add(btnDelete);
-		add(btnAdd);
+
+		// Only add Dealer-allowed controls
+		if (isDealer) {
+			BrowseButton btnEdit = new BrowseButton("Edit Vehicle", BrowseInventory.COMMAND_EDIT, commonListener);
+			BrowseButton btnDelete = new BrowseButton("Delete Vehicle", BrowseInventory.COMMAND_DELETE, commonListener);
+			BrowseButton btnAdd = new BrowseButton("Add New Vehicle", BrowseInventory.COMMAND_ADD, commonListener);
+
+			add(btnEdit);
+			add(btnDelete);
+			add(btnAdd);
+		}
 	}
 
 	private void addListener() {
