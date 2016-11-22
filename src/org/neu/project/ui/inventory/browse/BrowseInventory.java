@@ -1,10 +1,14 @@
 package org.neu.project.ui.inventory.browse;
 
+import org.neu.project.dto.Inventory;
+import org.neu.project.dto.Vehicle;
 import org.neu.project.ui.common.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * @author ken prayogo
@@ -14,16 +18,38 @@ public class BrowseInventory extends BaseFrame {
 	// Static values
 	private static final int scrWidth = 1200;
 	private static final int scrHeight = 720;
+	// Dealer
+	private String dealerId;
+	// Use InventoryPool -> Get inventory by Dealer ID
+	public Collection<Vehicle> inventory;
 	// Components
 	private ButtonPanel buttonPanel;
 
-	public BrowseInventory() {
+	public BrowseInventory(String dealerId) {
 		super(scrWidth, scrHeight);
+		this.dealerId = dealerId;
+	}
+
+	private void refresh() {
+//		Inventory inv = new Inventory();
+//		Vehicle test = new Vehicle("a", "123", "SUV", "2014", "CRV", "Honda", "some trim", "6 Cylinder", "20000");
+//		inv.addVehicle(test);
+//		this.inventory = inv.getAllVehicles();
+		ArrayList<Vehicle> list = new ArrayList<>();
+		list.add(new Vehicle("a", "gmps-goldstein", "SUV", "2014", "CRV", "Honda", "4-Door", "6 Cylinder", "25000"));
+		list.add(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Civic", "Honda", "2-Door", "6 Cylinder", "20000"));
+		list.add(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Civic", "Honda", "2-Door", "6 Cylinder", "20000"));
+		list.add(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Civic", "Honda", "2-Door", "6 Cylinder", "20000"));
+		list.add(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Civic", "Honda", "2-Door", "6 Cylinder", "20000"));
+		list.add(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Civic", "Honda", "2-Door", "6 Cylinder", "20000"));
+		System.out.println(list.toString());
+		this.inventory = list;
 	}
 
 	@Override
 	protected void create() {
 		this.setTitle("Inventory List");
+		refresh();
 	}
 
 	@Override
@@ -37,21 +63,22 @@ public class BrowseInventory extends BaseFrame {
 
 		// Search/Filter panel
 		JPanel filterPanel = new JPanel();
-		try {
-			Search searchPane = new Search();
-			filterPanel.add(searchPane);
-		} catch (IOException e) {
-			System.out.println(e);
-		}
+//		SearchPanel searchPane = new SearchPanel();
+//		filterPanel.add(searchPane);
+		filterPanel.add(new SortUI());
 		filterPanel.setPreferredSize(new Dimension(300,720));
 
 		// Results panel
-		ResultPanel results = new ResultPanel();
-		results.setPreferredSize(new Dimension(600,600));
+		JPanel resultsMaster = new JPanel();
+		resultsMaster.setLayout(new GridLayout(0, 1, 0, 5));
+		ResultPanel results = new ResultPanel(inventory);
+		resultsMaster.add(results);
+		JScrollPane resultsCont = new JScrollPane(results);
+		resultsCont.setPreferredSize(new Dimension(600,400));
 
 		// Arrange Horizontal screen layout
 		container.add(filterPanel);
-		container.add(results);
+		container.add(resultsCont);
 		buttonPanel = new ButtonPanel();
 		container.add(buttonPanel);
 	}
@@ -62,7 +89,7 @@ public class BrowseInventory extends BaseFrame {
 	}
 
 	public static void main(String args[]) {
-		new BrowseInventory();
+		new BrowseInventory("TestID1");
 	}
 }
 

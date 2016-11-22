@@ -3,28 +3,68 @@ package org.neu.project.ui.inventory.browse;
 import javax.swing.*;
 import java.awt.*;
 
+import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import javax.swing.*;
 /**
- * @author Ruby,Liao
+ * @author Ruby Liao
  * SortUI in browse inventory page
  * FlowLayout to place title label and sort items horizontally
- * Pending addListeners
+ * Pending sort function
  */
-
 class SortUI extends JPanel
 {
-	SortUI()
+	public SortUI()
 	{
 		this.setLayout(new FlowLayout());
-		String[] sortItems = {"Select Sort By","Price: High To Low","Price: Low To High",
-                "Year: High To Low","Year: Low To High","Make: A - Z","Maker: Z - A",
-                "Model: A - Z","Model: Z - A","Mileage: High To Low","Mileage: Low To High",
-                "HWY MPG: High To Low","HWY MPG: Low To High","Exterior Color: A - Z",
-                "Exterior Color: Z - A","Specials","Certified"};
-
-		JComboBox sortList = new JComboBox<>(sortItems);
+		JComboBox<SortItems> sortList = new JComboBox<>();
+		sortList.addItem(new SortItems("Select Sort By"));
+		sortList.addItem(new SortItems("Price: High To Low"));
+		sortList.addItem(new SortItems("Year: High To Low"));
+		sortList.addItem(new SortItems("Year: Low To High"));
+		sortList.addItem(new SortItems("Model: A - Z"));
+		sortList.addItem(new SortItems("Model: Z - A"));
+		sortList.addItem(new SortItems("Mileage: High To Low"));
+		sortList.addItem(new SortItems("Mileage: Low To High"));
+		sortList.addItem(new SortItems("HWY MPG: High To Low"));
+		sortList.addItem(new SortItems("HWY MPG: Low To High"));
+		sortList.addItem(new SortItems("Exterior Color: A - Z"));
+		sortList.addItem(new SortItems("Exterior Color: Z - A"));
+		sortList.addItem(new SortItems("Specials"));
+		sortList.addItem(new SortItems("Certified"));
 		JLabel sortLabel = new JLabel("Sort By:");
-
 		add(sortLabel);
 		add(sortList);
+
+		sortList.addItemListener(new ItemChangeListener());
+	}
+
+}
+class SortItems
+{
+	private String item;
+
+	public SortItems(String item)
+	{
+		this.item = item;
+	}
+
+	public String toString()
+	{
+		return this.item;
+	}
+}
+class ItemChangeListener implements ItemListener
+{
+	@Override
+	public void itemStateChanged(ItemEvent event)
+	{
+		if (event.getStateChange() == ItemEvent.SELECTED)
+		{
+			Object item = event.getItem();
+			System.out.println(item.toString());
+			//result = result.sort(item.toString());
+		}
 	}
 }
