@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 /**
  * edit line 61 81 106.
+ * edit line 174.
  */
 public class AddSpecialPanel extends JPanel {
 
@@ -168,8 +169,18 @@ public class AddSpecialPanel extends JPanel {
         public void actionPerformed(final ActionEvent e) {
             if (specialTitleInfo.getText().equals("") || (discountValueInfo.getText().equals("")
                     && discountPercentageInfo.getText().equals(""))
-                    || specialStartDateInfo.getText().equals("")) {
+                    || specialStartDateInfo.getText().equals("")) {              
                 JOptionPane.showMessageDialog(AddSpecialPanel.this, "please add necessary information");
+
+                if (specialTitleInfo.getText().equals(""))
+                	specialTitleInfo.setText("*");
+                if (discountValueInfo.getText().equals(""))
+                	discountValueInfo.setText("*");
+                if (discountPercentageInfo.getText().equals(""))
+                	discountPercentageInfo.setText("*");
+                if (specialStartDateInfo.getText().equals(""))
+                	specialStartDateInfo.setText("*");
+                
                 return;
             }
             Special newSpecial = new Special();
