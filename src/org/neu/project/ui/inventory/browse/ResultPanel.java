@@ -1,26 +1,17 @@
 package org.neu.project.ui.inventory.browse;
 
-
-
-
-
-
-import javax.swing.*;
-
 import org.neu.project.dto.Vehicle;
-
 import java.awt.*;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 
-
-
 public class ResultPanel extends JPanel {
 
 	private JPanel carResultCombo;
-	
-	private JLabel details;
+
+	private JPanel details;
 
 	private JLabel id;
 	private JLabel webId;
@@ -34,42 +25,22 @@ public class ResultPanel extends JPanel {
 
 	private JCheckBox select;
 
-	public ResultPanel(Collection<Vehicle> vehivles) {
+	public ResultPanel(Collection<Vehicle> vehicles) {
 
 		super(new FlowLayout());
 		add(new JScrollPane());
 
-		Vehicle[] vehicles = this.getResultVehicles();
 		for (Vehicle object : vehicles) {
 			add(showResultCar(object));
 		}
 
 	}
 
-	private Vehicle[] getResultVehicles() {
-		Vehicle a = new Vehicle();
-		Vehicle b = new Vehicle();
-		Vehicle c = new Vehicle();
-		Vehicle d = new Vehicle();
-		Vehicle e = new Vehicle();
-		Vehicle f = new Vehicle();
-		Vehicle g = new Vehicle();
-		a.setTrim("1");
-		b.setTrim("2");
-		c.setTrim("3");
-		d.setTrim("4");
-		e.setTrim("5");
-		f.setTrim("6");
-		g.setTrim("7");
-		Vehicle[] vehicles = { a, b, c, d, e, f, g };
-		return vehicles;
-	}
-
 	public Component showResultCar(Vehicle vehicle) {
 
 		carResultCombo = new JPanel();
-		carResultCombo.setLayout(null);
-		details = new JLabel();
+		carResultCombo.setLayout(new BorderLayout());
+		details = new JPanel();
 		details.setLayout(new BoxLayout(details, BoxLayout.Y_AXIS));
 		select = new JCheckBox("Select");
 		ClickMeListener cml = new ClickMeListener();
@@ -93,17 +64,10 @@ public class ResultPanel extends JPanel {
 		details.add(model);
 		details.add(trim);
 
-		carResultCombo.add(type);
-		carResultCombo.add(price);
-		//carResultCombo.add(picture);
+		carResultCombo.add(type, BorderLayout.NORTH);
+		carResultCombo.add(price, BorderLayout.SOUTH);
 		carResultCombo.add(details);
-		carResultCombo.add(select);
-
-		type.setBounds(5, 5, 100, 35);
-		price.setBounds(400, 5, 100, 35);
-		//picture.setBounds(5, 150, 150, 150);
-		details.setBounds(250, 150, 300, 200);
-		select.setBounds(500, 250, 250, 50);
+		carResultCombo.add(select, BorderLayout.EAST);
 
 		return carResultCombo;
 
@@ -128,5 +92,3 @@ class ClickMeListener implements ActionListener {
 
 	}
 }
-
-
