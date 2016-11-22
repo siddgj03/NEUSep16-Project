@@ -11,6 +11,9 @@ public class Dealer {
 	 private String dealerID;
 	 private String URL;
 	 private Inventory inventory;
+	
+	 public Dealer(){
+	 }
 	 
 	 public Dealer(String dealerID, String dealerName,String URL){
 		 this.dealerName = dealerName;
@@ -42,9 +45,8 @@ public class Dealer {
 	 public void setURL(String URL) {
 		this.URL = URL;
 	}
+	 	
 	 
-	
-	 /*
 	 @Override
 	 public int hashCode(){
 		 return dealerName.hashCode() * dealerID.hashCode() * URL.hashCode();
@@ -57,7 +59,6 @@ public class Dealer {
 		 Dealer d1 = (Dealer)obj;
 		    return this.dealerName.equals(d1.dealerName) && this.dealerID.equals(d1.dealerID) && this.URL.equals(d1.URL);
 	 }
-	*/
 }
 
 
