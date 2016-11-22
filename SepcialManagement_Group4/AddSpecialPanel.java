@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  * edit line 61 81 106.
- * edit line 174.
+ * edit line 158 179.
  */
 public class AddSpecialPanel extends JPanel {
 
@@ -155,9 +155,13 @@ public class AddSpecialPanel extends JPanel {
     class ResetActionListener implements ActionListener {
         public void actionPerformed(final ActionEvent e) {
             specialTitleInfo.setText("");
+    		specialTitleInfo.setBackground(Color.WHITE);
             discountValueInfo.setText("");
+    		discountValueInfo.setBackground(Color.WHITE);
             discountPercentageInfo.setText("");
+    		discountPercentageInfo.setBackground(Color.WHITE);
             specialStartDateInfo.setText("");
+    		specialStartDateInfo.setBackground(Color.WHITE);
             specialEndDateInfo.setText("");
             trimInfo.setText("");
             carMinPriceInfo.setText("");
@@ -172,15 +176,22 @@ public class AddSpecialPanel extends JPanel {
                     || specialStartDateInfo.getText().equals("")) {              
                 JOptionPane.showMessageDialog(AddSpecialPanel.this, "please add necessary information");
 
-                if (specialTitleInfo.getText().equals(""))
+                if (specialTitleInfo.getText().equals("")) {
                 	specialTitleInfo.setText("*");
-                if (discountValueInfo.getText().equals(""))
+            		specialTitleInfo.setBackground(Color.RED);
+                }
+                if (discountValueInfo.getText().equals("")) {
                 	discountValueInfo.setText("*");
-                if (discountPercentageInfo.getText().equals(""))
+            		discountValueInfo.setBackground(Color.RED);
+                }
+                if (discountPercentageInfo.getText().equals("")) {
                 	discountPercentageInfo.setText("*");
-                if (specialStartDateInfo.getText().equals(""))
+            		discountPercentageInfo.setBackground(Color.RED);
+                }
+                if (specialStartDateInfo.getText().equals("")) {
                 	specialStartDateInfo.setText("*");
-                
+            		specialStartDateInfo.setBackground(Color.RED);
+                }
                 return;
             }
             Special newSpecial = new Special();
