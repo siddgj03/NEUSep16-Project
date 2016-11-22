@@ -18,38 +18,53 @@ public class BrowseInventory extends BaseFrame {
 	// Static values
 	private static final int scrWidth = 1200;
 	private static final int scrHeight = 720;
+
+	static final String COMMAND_VIEW = "view";
+	static final String COMMAND_EDIT = "edit";
+	static final String COMMAND_DELETE = "delete";
+	static final String COMMAND_ADD = "add";
+
 	// Dealer
 	private String dealerId;
+
+	// User/Employee
+	boolean isEmployee;
+
 	// Use InventoryPool -> Get inventory by Dealer ID
 	public Collection<Vehicle> inventory;
-	// Components
-	private ButtonPanel buttonPanel;
 
+	/**
+	 * Frame constructor with DealerID to determine inventory list
+	 * @param dealerId - ID of the Dealer
+	 */
 	public BrowseInventory(String dealerId) {
 		super(scrWidth, scrHeight);
 		this.dealerId = dealerId;
 	}
 
-	private void refresh() {
-//		Inventory inv = new Inventory();
-//		Vehicle test = new Vehicle("a", "123", "SUV", "2014", "CRV", "Honda", "some trim", "6 Cylinder", "20000");
-//		inv.addVehicle(test);
-//		this.inventory = inv.getAllVehicles();
-		ArrayList<Vehicle> list = new ArrayList<>();
-		list.add(new Vehicle("a", "gmps-goldstein", "SUV", "2014", "CRV", "Honda", "4-Door", "6 Cylinder", "25000"));
-		list.add(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Civic", "Honda", "2-Door", "6 Cylinder", "20000"));
-		list.add(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Civic", "Honda", "2-Door", "6 Cylinder", "20000"));
-		list.add(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Civic", "Honda", "2-Door", "6 Cylinder", "20000"));
-		list.add(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Civic", "Honda", "2-Door", "6 Cylinder", "20000"));
-		list.add(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Civic", "Honda", "2-Door", "6 Cylinder", "20000"));
-		System.out.println(list.toString());
-		this.inventory = list;
+	/**
+	 * Loads list of Vehicles to browse through
+	 */
+	private void loadVehicles() {
+		Inventory inv = new Inventory();
+		inv.addVehicle(new Vehicle("a", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
+		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
+		inv.addVehicle(new Vehicle("a", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
+		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
+		inv.addVehicle(new Vehicle("a", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
+		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
+		inv.addVehicle(new Vehicle("a", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
+		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
+		inv.addVehicle(new Vehicle("a", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
+		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
+		this.inventory = inv.getAllVehicles();
+		System.out.println(inv.getAllModel().toString());
 	}
 
 	@Override
 	protected void create() {
 		this.setTitle("Inventory List");
-		refresh();
+		loadVehicles();
 	}
 
 	@Override
@@ -61,25 +76,28 @@ public class BrowseInventory extends BaseFrame {
 
 		/* Declare and Add Panels here */
 
-		// Search/Filter panel
+		// SearchPanel/Filter panel
 		JPanel filterPanel = new JPanel();
-//		SearchPanel searchPane = new SearchPanel();
-//		filterPanel.add(searchPane);
 		filterPanel.add(new SortUI());
-		filterPanel.setPreferredSize(new Dimension(300,720));
+		try {
+			SearchPanel searchPane = new SearchPanel();
+			filterPanel.add(searchPane);
+			filterPanel.setPreferredSize(new Dimension(300,600));
+		} catch (IOException e) {
+			System.out.println(e);
+		}
 
 		// Results panel
-		JPanel resultsMaster = new JPanel();
-		resultsMaster.setLayout(new GridLayout(0, 1, 0, 5));
 		ResultPanel results = new ResultPanel(inventory);
-		resultsMaster.add(results);
-		JScrollPane resultsCont = new JScrollPane(results);
-		resultsCont.setPreferredSize(new Dimension(600,400));
+		// ToDo: Scroll not working with BorderLayout for now
+		JScrollPane resultsContainer = new JScrollPane(results);
+		resultsContainer.setPreferredSize(new Dimension(600,600));
 
 		// Arrange Horizontal screen layout
 		container.add(filterPanel);
-		container.add(resultsCont);
-		buttonPanel = new ButtonPanel();
+		container.add(resultsContainer);
+		// ToDo: Pass in reference to Vehicle data to determine selection
+		ButtonPanel buttonPanel = new ButtonPanel(this);
 		container.add(buttonPanel);
 	}
 
@@ -89,7 +107,7 @@ public class BrowseInventory extends BaseFrame {
 	}
 
 	public static void main(String args[]) {
-		new BrowseInventory("TestID1");
+		new BrowseInventory("gmps-goldstein");
 	}
 }
 
