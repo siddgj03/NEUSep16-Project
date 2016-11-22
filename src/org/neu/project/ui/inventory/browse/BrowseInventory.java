@@ -28,7 +28,7 @@ public class BrowseInventory extends BaseFrame {
 	private String dealerId;
 
 	// User/Employee
-	boolean isEmployee;
+	boolean isDealer;
 
 	// Use InventoryPool -> Get inventory by Dealer ID
 	public Collection<Vehicle> inventory;
@@ -36,10 +36,12 @@ public class BrowseInventory extends BaseFrame {
 	/**
 	 * Frame constructor with DealerID to determine inventory list
 	 * @param dealerId - ID of the Dealer
+	 * @param isDealer - TRUE if Dealer, FALSE if Customer
 	 */
-	public BrowseInventory(String dealerId) {
+	public BrowseInventory(String dealerId, boolean isDealer) {
 		super(scrWidth, scrHeight);
 		this.dealerId = dealerId;
+		this.isDealer = isDealer;
 	}
 
 	/**
@@ -97,7 +99,7 @@ public class BrowseInventory extends BaseFrame {
 		container.add(filterPanel);
 		container.add(resultsContainer);
 		// ToDo: Pass in reference to Vehicle data to determine selection
-		ButtonPanel buttonPanel = new ButtonPanel(this);
+		ButtonPanel buttonPanel = new ButtonPanel(this, isDealer);
 		container.add(buttonPanel);
 	}
 
@@ -107,7 +109,7 @@ public class BrowseInventory extends BaseFrame {
 	}
 
 	public static void main(String args[]) {
-		new BrowseInventory("gmps-goldstein");
+		new BrowseInventory("gmps-goldstein", false);
 	}
 }
 
