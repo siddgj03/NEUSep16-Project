@@ -5,6 +5,9 @@ Tips & Requests:
 - Please make src your Project's "Source folder". Otherwise all your package definitions will start with "src.org.x.x.x" and it's supposed to be "org.x.x.x".
   If we have different file structures, it won't even compile for some of us and we can't test anything without having to change it all :)
 
+- After moving files to the src/ folder, TEST it out. If it won't compile for you, reach out to the team responsible for the code showing errors.
+  If it doesn't compile, don't push it just yet.
+
 - Try using this code to get the files in the "data" folder
   - String path = new File("data/something.txt").getAbsolutePath();
   - So this way others can execute your code without having to rename all the local computer paths ("C:/Someone's/Private/Computer")
