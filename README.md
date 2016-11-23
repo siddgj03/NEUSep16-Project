@@ -6,8 +6,8 @@ Tips & Requests:
   If we have different file structures, it won't even compile for some of us and we can't test anything without having to change it all :)
 
 - Try using this code to get the files in the "data" folder
-  String path = new File("data/something.txt").getAbsolutePath();
-  So this way others can execute your code without having to rename all the local computer paths ("C:/Someone's/Private/Computer")
+  - String path = new File("data/something.txt").getAbsolutePath();
+  - So this way others can execute your code without having to rename all the local computer paths ("C:/Someone's/Private/Computer")
 
 -- from BrowseInventory group, Nov 23rd 2016
 
