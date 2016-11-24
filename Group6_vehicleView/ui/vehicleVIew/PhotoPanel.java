@@ -1,5 +1,6 @@
 package ui.vehicleView;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -7,6 +8,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -31,15 +33,19 @@ public class PhotoPanel extends BasePanel {
 	private static final String CATEGORY = "Category:";
 	private static final String MAKE = "Make:";
 	private static final String MODEL = "Model:";
-	private static final String YEAR = "year:";
-	private static final String COLOR = "Color:";
+	private static final String YEAR = "Year:";
+	private static final String BODY_TYPE = "Body Type:";
+	private static final String TRIM = "Trim:";
 	private static final Font font = new Font("", Font.ITALIC, 14);
-
+	private static final Font titleFont = new Font("", Font.BOLD, 16);
+	private static final Font nameFont = new Font("", Font.BOLD, 16);
+	
 	JPanel photoShowPanel;
 	int imageIndex = 0;
 
 	public PhotoPanel(Vehicle selectedVehicle) {
 		this.selectedVehicle = selectedVehicle;
+		this.setBackground(Color.WHITE);
 		add();
 	}
 
@@ -57,9 +63,10 @@ public class PhotoPanel extends BasePanel {
 		TitledBorder title = new TitledBorder(SPECS_BORDER_TITLE);
 		title.setTitleJustification(TitledBorder.CENTER);
 		title.setTitlePosition(TitledBorder.TOP);
+		title.setTitleFont(titleFont);
 		JPanel panel = new JPanel();
 		panel.setBorder(title);
-		panel.setLayout(new GridLayout(5, 2));
+		panel.setLayout(new GridLayout(6, 2));
 
 		// category
 		JLabel category = new JLabel(CATEGORY);
@@ -81,13 +88,18 @@ public class PhotoPanel extends BasePanel {
 		JLabel yearValue = new JLabel(selectedVehicle.getYear() + "");
 		panel.add(year);
 		panel.add(yearValue);
-		// color
-		JLabel color = new JLabel(COLOR);
-		JLabel colorValue = new JLabel(selectedVehicle.getColor());
-		panel.add(color);
-		panel.add(colorValue);
+		// body type
+		JLabel bodyType = new JLabel(BODY_TYPE);
+		JLabel typeValue = new JLabel(selectedVehicle.getBodyType());
+		panel.add(bodyType);
+		panel.add(typeValue);
+		// trim
+		JLabel trim = new JLabel(TRIM);
+		JLabel trimValue = new JLabel(selectedVehicle.getTrim());
+		panel.add(trim);
+		panel.add(trimValue);
 		panel.setPreferredSize(new Dimension(700, 300));
-
+        panel.setBackground(Color.WHITE);
 		return panel;
 	}
 
@@ -95,6 +107,7 @@ public class PhotoPanel extends BasePanel {
 		TitledBorder title = new TitledBorder(BORDER_TITLE);
 		title.setTitleJustification(TitledBorder.CENTER);
 		title.setTitlePosition(TitledBorder.TOP);
+		title.setTitleFont(titleFont);
 		JPanel panel = new JPanel();
 		panel.setBorder(title);
 		panel.setLayout(new GridLayout(4, 2));
@@ -108,22 +121,25 @@ public class PhotoPanel extends BasePanel {
 		// sale price
 		JLabel salePrice = new JLabel(SALE_PRICE);
 		salePrice.setFont(font);
+		// TODO:get sale price from special
 		JLabel priceValue = new JLabel(selectedVehicle.getSale() + "");
 		panel.add(salePrice);
 		panel.add(priceValue);
 		// save
 		JLabel save = new JLabel(SAVE);
 		save.setFont(font);
-		JLabel saveValue = new JLabel(selectedVehicle.getSave() + "");
+		JLabel saveValue = new JLabel((selectedVehicle.getMsrp() - selectedVehicle.getSale()) + "");
 		panel.add(save);
 		panel.add(saveValue);
 		// expires
 		JLabel expires = new JLabel(SPECIAL_EXPIRES);
 		expires.setFont(font);
-		JLabel date = new JLabel(selectedVehicle.getExpires() + "");
+		// TODO:get expires from special
+        JLabel date = new JLabel(selectedVehicle.getExpires());
 		panel.add(expires);
 		panel.add(date);
 		panel.setPreferredSize(new Dimension(400, 300));
+		panel.setBackground(Color.WHITE);
 		return panel;
 	}
 
@@ -134,6 +150,7 @@ public class PhotoPanel extends BasePanel {
 		photoShowPanel.add(getPhotoPanel());
 		photoShowPanel.add(getArrowPanel());
 		photoShowPanel.setPreferredSize(new Dimension(550, 300));
+		photoShowPanel.setBackground(Color.WHITE);
 		return photoShowPanel;
 	}
 
@@ -170,6 +187,7 @@ public class PhotoPanel extends BasePanel {
 		goPre.setEnabled(false);
 		panel.add(goPre);
 		panel.add(goNext);
+		panel.setBackground(Color.WHITE);
 		return panel;
 	}
 
@@ -185,6 +203,7 @@ public class PhotoPanel extends BasePanel {
 		JTextPane title = new JTextPane();
 		title.setEnabled(false);
 		title.setText(this.selectedVehicle.getTitle());
+		title.setFont(nameFont);
 		return title;
 	}
 
