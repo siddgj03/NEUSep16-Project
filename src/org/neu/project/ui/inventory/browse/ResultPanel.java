@@ -24,14 +24,15 @@ public class ResultPanel extends JPanel {
 
 	public ResultPanel(Collection<Vehicle> vehicles) {
 
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		ButtonGroup selects  = new ButtonGroup();
-		
+
 		for (Vehicle object : vehicles) {
-			
-			selects.add(getRadioButton(showResultCar(object)));
-			add(showResultCar(object));
+
+			JPanel panel = showResultCar(object);
+			selects.add(getRadioButton(panel));
+			add(panel);
 
 		}
 
