@@ -2,7 +2,8 @@ package ui.vehicleView;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
+
+import javax.swing.JButton;
 
 import ui.BaseFrame;
 
@@ -26,7 +27,6 @@ public class DetailView extends BaseFrame {
 	}
 	@Override
 	protected void add() {
-		
 		this.add(new TabPanel(selectedVehicle));
 	}
 
@@ -42,7 +42,7 @@ public class DetailView extends BaseFrame {
 		s1.setName("special1");
 		HashMap<String,String> criteria1 = new HashMap<String,String>();
 		criteria1.put("make", "Cadillac");
-		s1.setCriteria(criteria1);
+		s1.setCriteria(criteria1);x
 		HashMap<String,Integer> type1 = new HashMap<String,Integer>();
 		type1.put("cash", 500);
 		s1.setType(type1);
@@ -64,16 +64,18 @@ public class DetailView extends BaseFrame {
 		
 		Vehicle vehicle = new Vehicle();
 		vehicle.setTitle("NEW 2016 BUICK ENCORE FWD");
-		vehicle.setImagePath("car.jpg");
+		vehicle.setImagePath("src/data/image/vehicle/pathList.txt");
 		vehicle.setMsrp(24990);
 		vehicle.setSale(19992);
 		vehicle.setSave(4998);
-		vehicle.setExpires(new Date(2016/11/30));
+		vehicle.setExpires("11/30/2016");
 		vehicle.setCategory("new");
 		vehicle.setMake("Cadillac");
 		vehicle.setModel("ATS");
 		vehicle.setYear(2016);
 		vehicle.setColor("white");
+		vehicle.setBodyType("Compact");
+		vehicle.setTrim("3.6L V6 RWD Luxury");
 		new DetailView(vehicle);
 	}
 
