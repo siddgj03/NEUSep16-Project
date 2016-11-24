@@ -11,8 +11,6 @@ public class ResultPanel extends JPanel {
 
 	private JPanel carResultCombo;
 
-	// private JPanel details;
-
 	private JLabel id;
 	private JLabel webId;
 	private JLabel category;
@@ -23,15 +21,15 @@ public class ResultPanel extends JPanel {
 	private JLabel type;
 	private JLabel price;
 
-	private ButtonGroup selects;
-	private JRadioButton select;
 
 	public ResultPanel(Collection<Vehicle> vehicles) {
 
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+		ButtonGroup selects  = new ButtonGroup();
+		
 		for (Vehicle object : vehicles) {
-
+			
 			selects.add(getRadioButton(showResultCar(object)));
 			add(showResultCar(object));
 
@@ -40,23 +38,25 @@ public class ResultPanel extends JPanel {
 	}
 
 	public JPanel showResultCar(Vehicle vehicle) {
+
 		carResultCombo = new JPanel();
 		GroupLayout layout = new GroupLayout(carResultCombo);
 		carResultCombo.setLayout(layout);
+		carResultCombo.setBorder(BorderFactory.createTitledBorder( "details "));
 
-		select = new JRadioButton("Select");
+		JRadioButton select = new JRadioButton("Select " + vehicle.getId());
 		ClickMeListener cml = new ClickMeListener();
 		select.addActionListener(cml);
 
-		id = new JLabel("ID   " + vehicle.getId());
-		webId = new JLabel("webId   " + vehicle.getWebId());
-		category = new JLabel("Category   " + vehicle.getCategory());
-		year = new JLabel("Year   " + vehicle.getYear());
-		make = new JLabel("Make   " + vehicle.getMake());
-		model = new JLabel("Model   " + vehicle.getModel());
-		trim = new JLabel("Trim   " + vehicle.getTrim());
-		type = new JLabel("Type   " + vehicle.getType());
-		price = new JLabel("Price   " + vehicle.getPrice());
+		id = new JLabel("ID:   " + vehicle.getId());
+		webId = new JLabel("webId:   " + vehicle.getWebId());
+		category = new JLabel("Category:   " + vehicle.getCategory());
+		year = new JLabel("Year:   " + vehicle.getYear());
+		make = new JLabel("Make:   " + vehicle.getMake());
+		model = new JLabel("Model:   " + vehicle.getModel());
+		trim = new JLabel("Trim:   " + vehicle.getTrim());
+		type = new JLabel("Type:   " + vehicle.getType());
+		price = new JLabel("Price:   " + vehicle.getPrice());
 
 		GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 		hGroup.addGap(10);
@@ -68,6 +68,7 @@ public class ResultPanel extends JPanel {
 		hGroup.addGroup(layout.createParallelGroup().addComponent(price).addComponent(select));
 		hGroup.addGap(10);
 		layout.setHorizontalGroup(hGroup);
+		
 		GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
 		vGroup.addGap(10);
 		vGroup.addGroup(layout.createParallelGroup().addComponent(id));
@@ -78,7 +79,7 @@ public class ResultPanel extends JPanel {
 		vGroup.addGap(10);
 		vGroup.addGroup(layout.createParallelGroup().addComponent(model).addComponent(year));
 		vGroup.addGap(10);
-		vGroup.addGroup(layout.createParallelGroup().addComponent(trim).addComponent(price));
+		vGroup.addGroup(layout.createParallelGroup().addComponent(trim).addComponent(select));
 		vGroup.addGap(10);
 		layout.setVerticalGroup(vGroup);
 
