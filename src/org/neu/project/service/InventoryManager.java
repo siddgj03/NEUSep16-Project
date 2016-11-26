@@ -2,7 +2,7 @@ package org.neu.project.service;
 
 import org.neu.project.dto.Inventory;
 import org.neu.project.dto.InventoryResults;
-import org.neu.project.dto.InventorySearchControl;
+
 
 /**
  * please refer to InventorySearchControl and InventorySortControl

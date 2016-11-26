@@ -1,19 +1,17 @@
 package org.neu.project.dto;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
+
 
 public class Inventory {
     
-    HashMap<String, Vehicle> pool;
+    private HashMap<String, Vehicle> pool;
     private String[] titles;
     
     public Inventory() {
         pool = new HashMap<String, Vehicle>();
-        
     }
     
     public void setTitles(String[] titles) {
@@ -120,12 +118,6 @@ public class Inventory {
             Vehicle ve = pool.get(vehicleID);
             ve.setPrice(price);
         }
-    }
-
-
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
     }
 
 }
