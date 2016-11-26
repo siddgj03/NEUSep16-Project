@@ -46,7 +46,7 @@ public class ResultPanel extends JPanel {
 		carResultCombo.setBorder(BorderFactory.createTitledBorder( "details "));
 
 		JRadioButton select = new JRadioButton("Select " + vehicle.getId());
-		ClickMeListener cml = new ClickMeListener();
+		ClickMeListener cml = new ClickMeListener(vehicle.getId());
 		select.addActionListener(cml);
 
 		id = new JLabel("ID:   " + vehicle.getId());
@@ -106,16 +106,17 @@ public class ResultPanel extends JPanel {
 
 class ClickMeListener implements ActionListener {
 	int cnt = 0;
-	private JFrame frame;
+	private String vehicleId;
 
-	public void setFrame(JFrame frame) {
-		this.frame = frame;
+	public ClickMeListener(String vehicleId) {
+		this.vehicleId = vehicleId;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (cnt % 2 == 0) {
-			System.out.println("Car selected");
+			BrowseInventory.setSelectedVehicleId(vehicleId);
+			System.out.println("Car selected: " + vehicleId);
 		}
 		cnt++;
 
