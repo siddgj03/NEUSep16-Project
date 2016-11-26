@@ -1,6 +1,7 @@
 package org.neu.project.ui.inventory.browse;
 
 import org.neu.project.dto.Inventory;
+import org.neu.project.dto.InventoryResults;
 import org.neu.project.dto.Vehicle;
 import org.neu.project.ui.common.BaseFrame;
 
@@ -53,16 +54,20 @@ public class BrowseInventory extends BaseFrame {
 	 */
 	private void loadVehicles() {
 		Inventory inv = new Inventory();
-		inv.addVehicle(new Vehicle("a", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("c", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("d", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("e", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("f", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("g", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("h", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("i", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("j", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
+//		InventoryResults ir = new InventoryResults();
+//		Inventory inv = ir.getInventoryByDealerId(dealerId);
+
+		// Temporary placeholder Vehicles
+		inv.addVehicle(new Vehicle("a", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
+		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
+		inv.addVehicle(new Vehicle("c", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
+		inv.addVehicle(new Vehicle("d", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
+		inv.addVehicle(new Vehicle("e", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
+		inv.addVehicle(new Vehicle("f", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
+		inv.addVehicle(new Vehicle("g", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
+		inv.addVehicle(new Vehicle("h", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
+		inv.addVehicle(new Vehicle("i", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
+		inv.addVehicle(new Vehicle("j", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
 		this.inventory = inv.getAllVehicles();
 		System.out.println(inv.getAllModel().toString());
 	}
