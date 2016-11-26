@@ -54,8 +54,13 @@ class BrowseActionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()) {
+			case BrowseInventory.COMMAND_VIEW:
+				String selectedVehicleId = BrowseInventory.getSelectedVehicleId();
+				System.out.println("Viewing Vehicle ID: " + selectedVehicleId);
+				break;
 			case BrowseInventory.COMMAND_ADD:
 				frame.dispose();
+				break;
 		}
 	}
 }

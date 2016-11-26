@@ -32,6 +32,11 @@ public class BrowseInventory extends BaseFrame {
 	// Use InventoryPool -> Get inventory by Dealer ID
 	public Collection<Vehicle> inventory;
 
+	// Mutating variables
+	private static String selectedVehicleId;
+
+	// Components
+
 	/**
 	 * Frame constructor with DealerID to determine inventory list
 	 * @param dealerId - ID of the Dealer
@@ -107,47 +112,15 @@ public class BrowseInventory extends BaseFrame {
 
 	}
 
+	static String getSelectedVehicleId() {
+		return selectedVehicleId;
+	}
+
+	static void setSelectedVehicleId(String selectedVehicleId) {
+		BrowseInventory.selectedVehicleId = selectedVehicleId;
+	}
+
 	public static void main(String args[]) {
 		new BrowseInventory("gmps-goldstein", false);
-	}
-}
-
-/**
- * Example for reference.
- * Renders a scrollable Table.
- */
-class ListPanel extends JPanel {
-	private JPanel mainList;
-	public JTable table;
-
-	public ListPanel() {
-
-		mainList = new JPanel();
-		mainList.setLayout(new BorderLayout());
-
-		Object[][] data = getVehicleData();
-		String[] labels = {"VIN", "Make", "Model", "Year", "Type", "Color", "Mileage"};
-		table = new JTable(data, labels);
-
-		JScrollPane tableContainer = new JScrollPane(table);
-		tableContainer.setPreferredSize(new Dimension(500, 150));
-
-		mainList.add(tableContainer, BorderLayout.CENTER);
-		add(tableContainer);
-	}
-
-	private static Object[][] getVehicleData() {
-		Object[][] data = {
-				{"VIN-NO1", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO2", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO3", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO4", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO5", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO6", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO7", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO8", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO9", "Honda", "Civic", "2012", "Sedan", "White", "5000"}
-		};
-		return data;
 	}
 }
