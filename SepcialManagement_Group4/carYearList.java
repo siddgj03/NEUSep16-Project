@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
-public class carYearList {
-	
+public final class carYearList {
 	public static ArrayList getCarYearList(){
 		ArrayList carYearList=new ArrayList();
 		

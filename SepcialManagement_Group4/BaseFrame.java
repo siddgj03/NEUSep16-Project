@@ -3,16 +3,16 @@
  */
 public class BaseFrame {
     public static void main(String[] args) {
+        Specials specials = new Specials();
+        JFrame frame = new JFrame();
+        frame.setTitle("Add Special");
+//        frame.add(new AddSpecialPanel());
         try {
-            Specials specials = new Specials("C://Users//qiqi//IdeaProjects//NEU_Final_Project//abc.txt");
-            JFrame frame = new JFrame();
-            frame.setTitle("Add Special");
-            frame.add(new AddSpecialPanel());
+            frame.add(new EditSpecialPanel(4, 2));
             frame.setSize(700, 300);
             frame.setVisible(true);
-            System.out.println(specials.getList());
         } catch (Exception e) {
-            System.out.println("invalid file path");
+            System.out.println("invalid input");
         }
 
     }

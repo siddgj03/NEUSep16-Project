@@ -1,50 +1,34 @@
-import java.io.*;
 import java.util.ArrayList;
 
 /**
  * Created by qiqi on 2016/11/15.
  */
 public class Specials {
-    private static ArrayList<Special> specialList = new ArrayList<>();
+    public ArrayList<Special> specialList = new ArrayList<>();
+    private int dealerId;
 
-    public static ArrayList<Special> getList() {
-        return specialList;
-    }
-
-    public Specials(String inputFile) throws FileNotFoundException, IOException, Exception {
+    public Specials(String inputFile, int dealId) throws FileNotFoundException, IOException, Exception {
+    	setDealerId(dealId);
         BufferedReader reader = new BufferedReader(new FileReader(new File(inputFile)));
         while (true) {
             String line = reader.readLine();
-            if (line == null) break;
+            System.out.println(line);
+            if (line == null || line.equals("")) break;
+            specialList.add(StringToSpecial.toSpecial(line));
 
-            String[] info = line.split("\\|");
-            Special newSpecial = new Special();
-            newSpecial.setSpecialID(Integer.parseInt(info[0]));
-            newSpecial.setDealerWebID(info[1]);
-            newSpecial.setSpecialTitle(info[2]);
-            if (info[3] == null || info[3].equals("")) {
-                newSpecial.setDiscountPercentage(Double.parseDouble(info[4]));
-            } else {
-                newSpecial.setDiscountValue(Double.parseDouble(info[3]));
-            }
-            newSpecial.setSpecialStartDate(info[5]);
-            newSpecial.setSpecialEndDate(info[6]);
-            newSpecial.setCarYear(info[7]);
-            newSpecial.setCarMake(info[8]);
-            newSpecial.setCarModel(info[9]);
-            newSpecial.setTrim(info[10]);
-            newSpecial.setCarMinPrice(info[11]);
-            newSpecial.setCarMaxPrice(info[12]);
-            specialList.add(newSpecial);
         }
-      reader.close();
+        reader.close();
     }
 
     public Specials() {
 
     }
 
-    public static void addSpeical(Special special) {
+    public ArrayList<Special> getList() {
+        return specialList;
+    }
+
+    public void addSpeical(Special special) {
         special.setSpecialID(specialList.size() + 1);
         specialList.add(special);
     }
@@ -57,5 +41,13 @@ public class Specials {
         }
         return sb.toString();
     }
+
+	public int getDealerId() {
+		return dealerId;
+	}
+
+	public void setDealerId(int dealerId) {
+		this.dealerId = dealerId;
+	}
 
 }

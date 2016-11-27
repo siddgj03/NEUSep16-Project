@@ -1,3 +1,4 @@
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,16 +11,16 @@ public class Special {
     private int specialID;
     private String dealerWebID;
     private String specialTitle;
-    private Double discountValue;
-    private Double discountPercentage;
+    private Integer discountValue;
+    private Integer discountPercentage;
     private Date specialStartDate;
     private Date specialEndDate;
     private Integer carYear;
     private String carMake;
     private String carModel;
     private String trim;
-    private Double carMinPrice;
-    private Double carMaxPrice;
+    private Integer carMinPrice;
+    private Integer carMaxPrice;
 
     public int getSpecialID() {
         return specialID;
@@ -45,20 +46,26 @@ public class Special {
         this.specialTitle = specialTitle;
     }
 
-    public double getDiscountValue() {
+    public Integer getDiscountValue() {
         return discountValue;
     }
 
-    public void setDiscountValue(Double discountValue) {
-        this.discountValue = discountValue;
+    public void setDiscountValue(String discountValue) {
+        if (discountValue == null || discountValue.length() == 0) {
+            discountValue = null;
+        }
+        this.discountValue = Integer.parseInt(discountValue);
     }
 
-    public double getDicountPercentage() {
+    public Integer getDicountPercentage() {
         return discountPercentage;
     }
 
-    public void setDiscountPercentage(Double dicountPercentage) {
-        this.discountPercentage = dicountPercentage;
+    public void setDiscountPercentage(String discountPercentage) {
+        if (discountPercentage == null || discountPercentage.length() == 0) {
+            discountPercentage = null;
+        }
+        this.discountPercentage = Integer.parseInt(discountPercentage);
     }
 
     public Date getSpecialStartDate() {
@@ -113,32 +120,32 @@ public class Special {
         this.trim = trim;
     }
 
-    public double getCarMinPrice() {
+    public Integer getCarMinPrice() {
         return carMinPrice;
     }
 
     public void setCarMinPrice(String carMinPrice) {
-        if (carMinPrice == null || carMinPrice.equals("")) {
-            this.carMinPrice = new Double(0.0);
+        if (carMinPrice == null || carMinPrice.equals("") || carMinPrice.length() == 0) {
+            this.carMinPrice = new Integer(0);
         } else {
-            this.carMinPrice = Double.parseDouble(carMinPrice);
+            this.carMinPrice = Integer.parseInt(carMinPrice);
         }
     }
 
-    public double getCarMaxPrice() {
+    public Integer getCarMaxPrice() {
         return carMaxPrice;
     }
 
     public void setCarMaxPrice(String  carMaxPrice) {
-        if (carMaxPrice == null || carMaxPrice.equals("")) {
-            this.carMaxPrice = new Double(10000000.0);
+        if (carMaxPrice == null || carMaxPrice.equals("") || carMaxPrice.length() == 0) {
+            this.carMaxPrice = new Integer(10000000);
         } else {
-            this.carMaxPrice = Double.parseDouble(carMaxPrice);
+            this.carMaxPrice = Integer.parseInt(carMaxPrice);
         }
 
     }
 
-    public Special(int specialID, String dealerWebID, String specialTitle, Double discountValue, Double discountPercentage, String specialStartDate, String specialEndDate, Integer carYear, String carMake, String carModel, String trim, Double carMinPrice, Double carMaxPrice) throws Exception {
+    public Special(int specialID, String dealerWebID, String specialTitle, Integer discountValue, Integer discountPercentage, String specialStartDate, String specialEndDate, Integer carYear, String carMake, String carModel, String trim, Integer carMinPrice, Integer carMaxPrice) throws Exception {
         this.specialID = specialID;
         this.dealerWebID = dealerWebID;
         this.specialTitle = specialTitle;
@@ -158,6 +165,19 @@ public class Special {
 
     }
 
+    public Special(int specialID) throws Exception {
+        this.specialID = specialID;
+        this.dealerWebID = "Dealer_Web_Id(Deleted)";
+        this.specialTitle = "Special_Title(Deleted)";
+        this.discountValue = 0;
+        this.discountPercentage = 0;
+        this.specialStartDate = stringToDate("1970/01/01");
+        this.specialEndDate = stringToDate("1970/01/01");
+        this.carYear = 0;
+        this.carMinPrice = 0;
+        this.carMaxPrice = Integer.MAX_VALUE / 2;
+    }
+
     private static Date stringToDate(String s) throws Exception {
         if (s == null) {
             return null;
@@ -173,8 +193,8 @@ public class Special {
         return null;
     }
 
-    private String dateToString(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    protected String dateToString(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         String dateString = sdf.format(date);
         return dateString;
     }
@@ -184,27 +204,27 @@ public class Special {
         sb.append(specialID + "|");
         sb.append(dealerWebID + "|");
         sb.append(specialTitle + "|");
-        sb.append((discountValue == null ? "" : discountValue) + "|");
-        sb.append((discountPercentage == null ? "" : discountPercentage) + "|");
+        sb.append((discountValue == null ? "" : String.valueOf(discountValue)) + "|");
+        sb.append((discountPercentage == null ? "" : String.valueOf(discountPercentage)) + "|");
         sb.append((specialStartDate == null ? "" : dateToString(specialStartDate)) + "|");
         sb.append((specialEndDate == null ? "" : dateToString(specialEndDate)) + "|");
         sb.append((carYear == null ? "" : carYear) + "|");
         sb.append((carMake == null ? "" : carMake) + "|");
         sb.append((carModel == null ? "" : carModel) + "|");
         sb.append((trim == null ? "" : trim) + "|");
-        sb.append((carMinPrice == null ? "" : carMinPrice) + "|");
-        sb.append((carMaxPrice == null ? "" : carMaxPrice));
+        sb.append((carMinPrice == null ? "" : String.valueOf(carMinPrice)) + "|");
+        sb.append((carMaxPrice == null ? "" : String.valueOf(carMaxPrice)));
         sb.append("\n");
         return sb.toString();
     }
 
-    public static void main(String[] args) {
-        try {
-            Special newSpecial = new Special(001, "gmps-xyz", "Winter Sale", 250.0, null, "2016/11/01", "2017/01/01", 2017, "Chevrolet", "Camaro", "", null, 35000.0);
-            System.out.println(newSpecial);
-        } catch (Exception e) {
-            System.out.println("Invalid input");
-        }
-    }
+//    public static void main(String[] args) {
+//        try {
+//            Special newSpecial = new Special(001, "gmps-xyz", "Winter Sale", 250.0, null, "2016/11/01", "2017/01/01", 2017, "Chevrolet", "Camaro", "", null, 35000.0);
+//            System.out.println(newSpecial);
+//        } catch (Exception e) {
+//            System.out.println("Invalid input");
+//        }
+//    }
 }
 
