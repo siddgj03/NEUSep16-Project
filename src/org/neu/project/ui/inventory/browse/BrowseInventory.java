@@ -30,12 +30,13 @@ public class BrowseInventory extends BaseFrame {
 	boolean isDealer;
 
 	// Use InventoryPool -> Get inventory by Dealer ID
-	public Collection<Vehicle> inventory;
+	static Collection<Vehicle> inventory;
 
 	// Mutating variables
 	private static String selectedVehicleId;
 
 	// Components
+	private ResultPanel results;
 
 	/**
 	 * Frame constructor with DealerID to determine inventory list
@@ -54,7 +55,6 @@ public class BrowseInventory extends BaseFrame {
 	private void loadVehicles() {
 		Inventory inv = new Inventory();
 		inv.setDealerId(dealerId);
-//		InventoryResults ir = new InventoryResults();
 //		Inventory inv = ir.getInventoryByDealerId(dealerId);
 
 		// Temporary placeholder Vehicles
@@ -68,8 +68,15 @@ public class BrowseInventory extends BaseFrame {
 		inv.addVehicle(new Vehicle("h", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
 		inv.addVehicle(new Vehicle("i", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
 		inv.addVehicle(new Vehicle("j", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
-		this.inventory = inv.getVehicles();
+		inventory = inv.getVehicles();
 		System.out.println(inv.getAllModel().toString());
+	}
+
+	/**
+	 * ToDo: Needs testing. Not sure if re-declaring will cause UI to update
+	 */
+	void refreshResults() {
+		results = new ResultPanel(inventory);
 	}
 
 	@Override
@@ -99,10 +106,10 @@ public class BrowseInventory extends BaseFrame {
 		}
 
 		// Results panel
-		ResultPanel results = new ResultPanel(inventory);
+		refreshResults();
 		// ToDo: Scroll not working with BorderLayout for now
 		JScrollPane resultsContainer = new JScrollPane(results);
-		resultsContainer.setPreferredSize(new Dimension(600,600));
+		resultsContainer.setPreferredSize(new Dimension(500,600));
 
 		// Arrange Horizontal screen layout
 		container.add(filterPanel);
