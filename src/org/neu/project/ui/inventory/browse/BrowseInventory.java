@@ -1,7 +1,6 @@
 package org.neu.project.ui.inventory.browse;
 
 import org.neu.project.dto.Inventory;
-import org.neu.project.dto.InventoryResults;
 import org.neu.project.dto.Vehicle;
 import org.neu.project.ui.common.BaseFrame;
 
@@ -54,6 +53,7 @@ public class BrowseInventory extends BaseFrame {
 	 */
 	private void loadVehicles() {
 		Inventory inv = new Inventory();
+		inv.setDealerId(dealerId);
 //		InventoryResults ir = new InventoryResults();
 //		Inventory inv = ir.getInventoryByDealerId(dealerId);
 
@@ -68,7 +68,7 @@ public class BrowseInventory extends BaseFrame {
 		inv.addVehicle(new Vehicle("h", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
 		inv.addVehicle(new Vehicle("i", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
 		inv.addVehicle(new Vehicle("j", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
-		this.inventory = inv.getAllVehicles();
+		this.inventory = inv.getVehicles();
 		System.out.println(inv.getAllModel().toString());
 	}
 
