@@ -29,7 +29,7 @@ public class InventoryManagerImp implements InventoryManager{
 	 * */
 	@Override
 	public Inventory getInventory(String dealerId) {
-		return inventoryDao.getInventory(dealerId);
+		return inventoryDao.getInventoryByDealerId(dealerId);
 	}
 
 	@Override
