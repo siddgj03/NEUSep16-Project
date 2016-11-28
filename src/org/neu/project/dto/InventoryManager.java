@@ -1,12 +1,15 @@
-package NeHa_Group02;
+package src.org.neu.project.dto;
 
-import java.util.HashMap;
+import org.neu.project.dto.Inventory;
+import org.neu.project.dto.InventoryResults;
+import org.neu.project.dto.InventorySearchControl;
 
-public class InventoryPool {
+
+public interface InventoryManager {
     
     HashMap<String, Inventory> pool;
 
-    public InventoryPool() {
+    public InventoryManager() {
         // TODO Auto-generated constructor stub
         pool = new HashMap<String, Inventory>();
     }
@@ -22,11 +25,6 @@ public class InventoryPool {
         if (pool.containsKey(dealerId)) return pool.get(dealerId);
         return null;
         
-    }
-
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
     }
 
 }

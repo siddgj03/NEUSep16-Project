@@ -1,17 +1,13 @@
-package NeHa_Group02;
+package src.org.neu.project.dto;
 
-import java.util.HashMap;
-import java.util.Set;
 
-public class DealerPool {
+public class DealerManager {
     
-
     private HashMap<String, Dealer> pool;
     
     
 
-    public DealerPool() {
-        super();
+    public DealerManager() {
         pool = new HashMap<String, Dealer>();
     }
     
@@ -35,12 +31,6 @@ public class DealerPool {
             return dealer.getId();
         }
         return null;
-    }
-
-
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
     }
 
 }
