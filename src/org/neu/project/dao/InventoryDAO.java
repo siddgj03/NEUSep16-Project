@@ -49,7 +49,7 @@ public class InventoryDAO {
 	}
 	
 	public Collection<Vehicle> getAllVehicles(){
-		return inventoryResults.getAllVehicles();
+		return inventoryResults.getAllVehicles(); 
 	}
     
 //	public void writeFile(InventoryResults inventoryResults){
