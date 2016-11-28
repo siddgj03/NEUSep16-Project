@@ -45,12 +45,12 @@ public class ResultPanel extends JPanel {
 		carResultCombo.setLayout(layout);
 		carResultCombo.setBorder(BorderFactory.createTitledBorder( "details "));
 
-		JRadioButton select = new JRadioButton("Select " + vehicle.getId());
+		JRadioButton select = new JRadioButton("Select ");
 		ClickMeListener cml = new ClickMeListener(vehicle.getId());
 		select.addActionListener(cml);
 
 		id = new JLabel("ID:   " + vehicle.getId());
-		webId = new JLabel("webId:   " + vehicle.getWebId());
+//		webId = new JLabel("webId:   " + vehicle.getWebId());
 		category = new JLabel("Category:   " + vehicle.getCategory());
 		year = new JLabel("Year:   " + vehicle.getYear());
 		make = new JLabel("Make:   " + vehicle.getMake());
@@ -63,7 +63,7 @@ public class ResultPanel extends JPanel {
 		hGroup.addGap(10);
 		hGroup.addGroup(layout.createParallelGroup().addComponent(type).addComponent(make).addComponent(model));
 		hGroup.addGap(10);
-		hGroup.addGroup(layout.createParallelGroup().addComponent(id).addComponent(webId).addComponent(category)
+		hGroup.addGroup(layout.createParallelGroup().addComponent(id).addComponent(category)
 				.addComponent(year).addComponent(trim));
 		hGroup.addGap(10);
 		hGroup.addGroup(layout.createParallelGroup().addComponent(price).addComponent(select));
@@ -74,7 +74,7 @@ public class ResultPanel extends JPanel {
 		vGroup.addGap(10);
 		vGroup.addGroup(layout.createParallelGroup().addComponent(id));
 		vGroup.addGap(10);
-		vGroup.addGroup(layout.createParallelGroup().addComponent(type).addComponent(webId));
+		vGroup.addGroup(layout.createParallelGroup().addComponent(type));
 		vGroup.addGap(10);
 		vGroup.addGroup(layout.createParallelGroup().addComponent(make).addComponent(category).addComponent(price));
 		vGroup.addGap(10);
