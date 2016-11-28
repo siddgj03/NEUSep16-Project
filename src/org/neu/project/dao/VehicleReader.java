@@ -1,19 +1,22 @@
 package org.neu.project.dao;
 
 import java.io.File;
+import java.util.ArrayList;
 
+import org.neu.project.dto.Inventory;
 import org.neu.project.dto.Vehicle;
 import org.neu.project.dto.Vehicle.VehicleInfo;
 
 public class VehicleReader extends ReadFile{
 	
-	private InventoryDAO inventoryDAO;
 	private String defaultPath;
+	private ArrayList<Inventory> inventories;
+	private Inventory current;
 	
 	public VehicleReader() {
 		super();
-		inventoryDAO = new InventoryDAO();
 		defaultPath = System.getProperty("user.dir") + "/data/";
+		inventories = new ArrayList<Inventory>();
 	}
 	/*
 	 * Invoke this function to start reading all files of vehicles
@@ -24,7 +27,7 @@ public class VehicleReader extends ReadFile{
 		
 		for(String s: fileNames){
 			if(!s.contains("dealer")){
-				inventoryDAO.createNewInventory(s);
+				current = addNewInventory(s);
 				ReadFileHelper(defaultPath + s);
 				//System.out.println(defaultPath + s);
 			}
@@ -46,13 +49,18 @@ public class VehicleReader extends ReadFile{
 		String price = attributes[VehicleInfo.Price.ordinal()];
 		
 		Vehicle vehicle = new Vehicle(id, webId, category, year, make, model, trim, type, price);
-		inventoryDAO.getVehicleFromFile(vehicle);
+		current.addVehicle(vehicle);
 	}
 	
-//	public static void main(String[] args){
-//		VehicleReader vr = new VehicleReader();
-//		vr.readAllVehicleFiles();
-//		System.out.println(vr.inventoryDAO.getInventory("gmps-jimmy").getAllVehicles().size());
-//	}
+	public Inventory addNewInventory(String dealerId){
+		Inventory inventory = new Inventory();
+		inventory.setDealerId(dealerId);
+		inventories.add(inventory);
+		return inventory;
+	}
+	
+	public ArrayList<Inventory> getAllInventories(){
+		return inventories;
+	}
 
 }

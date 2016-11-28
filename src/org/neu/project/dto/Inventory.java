@@ -9,9 +9,18 @@ public class Inventory {
     
     private HashMap<String, Vehicle> pool;
     private String[] titles;
+    private String dealerId;
     
     public Inventory() {
         pool = new HashMap<String, Vehicle>();
+    }
+    
+    public String getDealerId(){
+    	return dealerId;
+    }
+    
+    public void setDealerId(String dealerId){
+    	this.dealerId = dealerId;
     }
     
     public void setTitles(String[] titles) {
@@ -28,7 +37,7 @@ public class Inventory {
         }
     }
     
-    public Collection<Vehicle> getAllVehicles() {
+    public Collection<Vehicle> getVehicles() {
         return pool.values();
     }
     

@@ -1,30 +1,59 @@
 package org.neu.project.dao;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.neu.project.dto.Inventory;
 import org.neu.project.dto.InventoryResults;
 import org.neu.project.dto.Vehicle;
 
 public class InventoryDAO {
     
-	private InventoryResults result;
-    //use filemanager()
+	private InventoryResults inventoryResults;
+	private VehicleReader reader;
+	//private VehicleWriter writer;
     
 	public InventoryDAO(){
-		result = new InventoryResults();
+		inventoryResults = new InventoryResults();
+		reader = new VehicleReader();
+		reader.readAllVehicleFiles();
+		setUpInventoryResult();
 	}
 	
-	public void createNewInventory(String dealerId){
-		Inventory newInventory = new Inventory();
-		result.addInventoryByDealerId(dealerId, newInventory);
+	public void createInventory(String dealerId){
+		
 	}
 	
-	public void getVehicleFromFile(Vehicle vehicle){
-		Inventory inventory = result.getInventoryByDealerId(vehicle.getWebId());
-		inventory.addVehicle(vehicle);
+	public void deleteInventory(String dealerId){
+		
 	}
 	
-    public Inventory getInventory(String dealerId) {
-        return result.getInventoryByDealerId(dealerId);
-    }
+	public void updateInventory(String dealerId){
+		
+	}
+	
+	public ArrayList<Inventory> getInventoriesFromReader(){
+		return reader.getAllInventories();
+	}
+	
+	public void setUpInventoryResult(){
+		ArrayList<Inventory> inventories = getInventoriesFromReader();
+		
+		for(Inventory i : inventories){
+			inventoryResults.addInventoryByDealerId(i.getDealerId(), i);
+		}
+	}
+	
+	public Inventory getInventory(String dealerId){
+		return inventoryResults.getInventoryByDealerId(dealerId);
+	}
+	
+	public Collection<Vehicle> getAllVehicles(){
+		return inventoryResults.getAllVehicles();
+	}
     
+//	public void writeFile(InventoryResults inventoryResults){
+//		
+//	}
+	
 }
