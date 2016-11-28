@@ -1,13 +1,13 @@
 package org.neu.project.ui.inventory.browse;
 
 import org.neu.project.dto.Inventory;
+import org.neu.project.dto.InventoryResults;
 import org.neu.project.dto.Vehicle;
 import org.neu.project.ui.common.BaseFrame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -33,6 +33,11 @@ public class BrowseInventory extends BaseFrame {
 	// Use InventoryPool -> Get inventory by Dealer ID
 	public Collection<Vehicle> inventory;
 
+	// Mutating variables
+	private static String selectedVehicleId;
+
+	// Components
+
 	/**
 	 * Frame constructor with DealerID to determine inventory list
 	 * @param dealerId - ID of the Dealer
@@ -49,16 +54,20 @@ public class BrowseInventory extends BaseFrame {
 	 */
 	private void loadVehicles() {
 		Inventory inv = new Inventory();
-		inv.addVehicle(new Vehicle("a", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("a", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("a", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("a", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("a", "123", "SUV", "2014", "Honda", "CR-V", "some trim", "6 Cylinder", "20000"));
-		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "Sedan", "2016", "Honda", "Civic", "2-Door", "6 Cylinder", "20000"));
+//		InventoryResults ir = new InventoryResults();
+//		Inventory inv = ir.getInventoryByDealerId(dealerId);
+
+		// Temporary placeholder Vehicles
+		inv.addVehicle(new Vehicle("a", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
+		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
+		inv.addVehicle(new Vehicle("c", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
+		inv.addVehicle(new Vehicle("d", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
+		inv.addVehicle(new Vehicle("e", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
+		inv.addVehicle(new Vehicle("f", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
+		inv.addVehicle(new Vehicle("g", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
+		inv.addVehicle(new Vehicle("h", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
+		inv.addVehicle(new Vehicle("i", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
+		inv.addVehicle(new Vehicle("j", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
 		this.inventory = inv.getAllVehicles();
 		System.out.println(inv.getAllModel().toString());
 	}
@@ -108,47 +117,15 @@ public class BrowseInventory extends BaseFrame {
 
 	}
 
+	static String getSelectedVehicleId() {
+		return selectedVehicleId;
+	}
+
+	static void setSelectedVehicleId(String selectedVehicleId) {
+		BrowseInventory.selectedVehicleId = selectedVehicleId;
+	}
+
 	public static void main(String args[]) {
 		new BrowseInventory("gmps-goldstein", false);
-	}
-}
-
-/**
- * Example for reference.
- * Renders a scrollable Table.
- */
-class ListPanel extends JPanel {
-	private JPanel mainList;
-	public JTable table;
-
-	public ListPanel() {
-
-		mainList = new JPanel();
-		mainList.setLayout(new BorderLayout());
-
-		Object[][] data = getVehicleData();
-		String[] labels = {"VIN", "Make", "Model", "Year", "Type", "Color", "Mileage"};
-		table = new JTable(data, labels);
-
-		JScrollPane tableContainer = new JScrollPane(table);
-		tableContainer.setPreferredSize(new Dimension(500, 150));
-
-		mainList.add(tableContainer, BorderLayout.CENTER);
-		add(tableContainer);
-	}
-
-	private static Object[][] getVehicleData() {
-		Object[][] data = {
-				{"VIN-NO1", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO2", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO3", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO4", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO5", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO6", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO7", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO8", "Honda", "Civic", "2012", "Sedan", "White", "5000"},
-				{"VIN-NO9", "Honda", "Civic", "2012", "Sedan", "White", "5000"}
-		};
-		return data;
 	}
 }

@@ -1,4 +1,4 @@
-package src.org.neu.project.dao;
+package org.neu.project.dao;
 
 import java.io.*;
 
@@ -8,24 +8,21 @@ import java.io.*;
 
 public abstract class ReadFile {
 
-	public void ReadFileHelper(File fileName) {
+	public void ReadFileHelper(String fileName) {
 		
 		try {
 			FileReader fr;
 			fr = new FileReader(fileName);
 			BufferedReader br = new BufferedReader(fr);
 			br.readLine();
-			String line ;
+			String line;
 
-			while ((line =br.readLine()) != null){
+			while ((line = br.readLine()) != null){
 				ReadFileLine(line);
-				//br.close();
-				//fr.close();
 			}
 			br.close();
 			fr.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

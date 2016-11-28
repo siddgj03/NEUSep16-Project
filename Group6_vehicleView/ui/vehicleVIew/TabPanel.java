@@ -16,6 +16,7 @@ public class TabPanel extends JTabbedPane {
 		this.add(SPECIAL, factory.getPanel(SPECIAL));
 		this.add(SIMILAR, factory.getPanel(SIMILAR));
 		this.add(RATING, factory.getPanel(RATING));
+		this.setBackground(Color.WHITE);
 		setUp();
 	}
 

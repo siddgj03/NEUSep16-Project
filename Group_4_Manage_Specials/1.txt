@@ -1,0 +1,4 @@
+1|gmps-xyz|Winter Sale|15||2016/07/08|2016/07/10|1998|Chevrolet|Camaro||1|35000
+
+2|gmps-xyz|Winter Sale|15||2016/07/08|2016/07/10|1998|Chevrolet|Camaro||1|35000
+3|111111gmps-xyz|Winter Sale|15||2016/07/08|2016/07/10|1998|Chevrolet|Camaro||1|35000

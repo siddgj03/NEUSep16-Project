@@ -11,7 +11,11 @@ public class Vehicle {
     private String trim;
     private String type;
     private double price;
-  
+    
+    public enum VehicleInfo{
+    	Id , WebId, Category, Year, Make, Model, Trim, Type, Price;
+    }
+    
     public Vehicle() {
         
     }
@@ -28,13 +32,11 @@ public class Vehicle {
         this.trim = trim;
         this.type = type;
         this.price = Double.parseDouble(price);
-     }
-    
+    }
     
     public String[] getVehicleInfo() {
         return new String[]{id, webId, category, year + "", make, model, trim, type, price + ""};
     }
-
 
     public String getId() {
         return id;
@@ -93,8 +95,8 @@ public class Vehicle {
     
     
     public String toString() {    
-        return id + " " + webId + " " + category + " " + year + " " + " " + make + " " +model + " " + trim + " " + type + " " +price;
-      }
+        return id + "~" + webId + "~" + category + "~" + year + "~" + make + "~" +model + "~" + trim + "~" + type + "~" + price;
+    }
    
 }
 	 

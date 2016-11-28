@@ -1,6 +1,8 @@
 package ui.vehicleView;
 
-import java.util.Date;
+import java.util.List;
+
+import javax.swing.ImageIcon;
 
 public class Vehicle {
 	private String title;
@@ -15,7 +17,26 @@ public class Vehicle {
 	private int year;
 	private String bodyType;
 	private String color;
-	private Date expires;
+	private String trim;
+	
+	private String expires;
+	private List<ImageIcon> imageList;
+
+	public String getTrim() {
+		return trim;
+	}
+
+	public void setTrim(String trim) {
+		this.trim = trim;
+	}
+
+	public List<ImageIcon> getImageList() {
+		return imageList;
+	}
+
+	public void setImageList(List<ImageIcon> imageList) {
+		this.imageList = imageList;
+	}
 
 	public String getCategory() {
 		return category;
@@ -97,11 +118,11 @@ public class Vehicle {
 		this.save = save;
 	}
 
-	public Date getExpires() {
+	public String getExpires() {
 		return expires;
 	}
 
-	public void setExpires(Date expires) {
+	public void setExpires(String expires) {
 		this.expires = expires;
 	}
 
