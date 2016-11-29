@@ -32,7 +32,7 @@ public class ResultPanel extends JPanel {
 
 		for (Vehicle object : vehicles) {
 
-			JPanel panel = showResultCar(object);
+			JPanel panel = showResultVehicle(object);
 			selects.add(getRadioButton(panel));
 			add(panel);
 
@@ -40,7 +40,7 @@ public class ResultPanel extends JPanel {
 
 	}
 
-	public JPanel showResultCar(Vehicle vehicle) {
+	public JPanel showResultVehicle(Vehicle vehicle) {
 
 		carResultCombo = new JPanel();
 		GroupLayout layout = new GroupLayout(carResultCombo);
