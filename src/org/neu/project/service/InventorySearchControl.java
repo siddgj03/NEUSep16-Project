@@ -1,12 +1,13 @@
-package src.org.neu.project.service;
+package org.neu.project.service;
 
+import org.neu.project.dto.Vehicle;
 import java.util.*;
 
 public class InventorySearchControl {
-	public List<vehicle> filterMake(List<vehicle> vehicles, String make) {
+	public List<Vehicle> filterMake(List<Vehicle> vehicles, String make) {
 	    
-		List<vehicle> result = new ArrayList<vehicle>();
-	    for(vehicle v : vehicles){
+		List<Vehicle> result = new ArrayList<Vehicle>();
+	    for(Vehicle v : vehicles){
 	    	if(v.getMake().equals(make))
 	    		result.add(v);
 	    }
@@ -14,10 +15,10 @@ public class InventorySearchControl {
 	    return result;
 	}
 	
-    public List<vehicle> filterType(List<vehicle> vehicles, String type) {
+    public List<Vehicle> filterType(List<Vehicle> vehicles, String type) {
 
-		List<vehicle> result = new ArrayList<vehicle>();
-	    for(vehicle v : vehicles){
+		List<Vehicle> result = new ArrayList<Vehicle>();
+	    for(Vehicle v : vehicles){
 	    	if(v.getType().equals(type))
 	    		result.add(v);
 	    }
@@ -25,10 +26,10 @@ public class InventorySearchControl {
 	    return result;
     }
 
-    public List<vehicle> filterCategory(List<vehicle> vehicles, String category) {
+    public List<Vehicle> filterCategory(List<Vehicle> vehicles, String category) {
 
-		List<vehicle> result = new ArrayList<vehicle>();
-	    for(vehicle v : vehicles){
+		List<Vehicle> result = new ArrayList<Vehicle>();
+	    for(Vehicle v : vehicles){
 	    	if(v.getCategory().equals(category))
 	    		result.add(v);
 	    }
@@ -36,10 +37,10 @@ public class InventorySearchControl {
 	    return result;
     }
     
-    public List<vehicle> filterCarId(List<vehicle> vehicles, String carId) {
+    public List<Vehicle> filterCarId(List<Vehicle> vehicles, String carId) {
 
-		List<vehicle> result = new ArrayList<vehicle>();
-	    for(vehicle v : vehicles){
+		List<Vehicle> result = new ArrayList<Vehicle>();
+	    for(Vehicle v : vehicles){
 	    	if(v.getId().equals(carId))
 	    		result.add(v);
 	    }
@@ -47,10 +48,10 @@ public class InventorySearchControl {
 	    return result;
     }
     
-    public List<vehicle> filterYear(List<vehicle> vehicles, int year) {
+    public List<Vehicle> filterYear(List<Vehicle> vehicles, int year) {
 
-		List<vehicle> result = new ArrayList<vehicle>();
-	    for(vehicle v : vehicles){
+		List<Vehicle> result = new ArrayList<Vehicle>();
+	    for(Vehicle v : vehicles){
 	    	if(v.getYear()==year)
 	    		result.add(v);
 	    }
@@ -58,10 +59,10 @@ public class InventorySearchControl {
 	    return result;
     }
     
-    public List<vehicle> filterModel(List<vehicle> vehicles, String model) {
+    public List<Vehicle> filterModel(List<Vehicle> vehicles, String model) {
 
-		List<vehicle> result = new ArrayList<vehicle>();
-	    for(vehicle v : vehicles){
+		List<Vehicle> result = new ArrayList<Vehicle>();
+	    for(Vehicle v : vehicles){
 	    	if(v.getModel().equals(model))
 	    		result.add(v);
 	    }
@@ -69,10 +70,10 @@ public class InventorySearchControl {
 	    return result;
     }
     
-    public List<vehicle> filterTrim(List<vehicle> vehicles, String trim) {
+    public List<Vehicle> filterTrim(List<Vehicle> vehicles, String trim) {
 
-		List<vehicle> result = new ArrayList<vehicle>();
-	    for(vehicle v : vehicles){
+		List<Vehicle> result = new ArrayList<Vehicle>();
+	    for(Vehicle v : vehicles){
 	    	if(v.getTrim().equals(trim))
 	    		result.add(v);
 	    }
@@ -80,10 +81,10 @@ public class InventorySearchControl {
 	    return result;
     }
 	
-    public List<vehicle> filterPrice(List<vehicle> vehicles, int price) {
+    public List<Vehicle> filterPrice(List<Vehicle> vehicles, int price) {
 
-		List<vehicle> result = new ArrayList<vehicle>();
-	    for(vehicle v : vehicles){
+		List<Vehicle> result = new ArrayList<Vehicle>();
+	    for(Vehicle v : vehicles){
 	    	if(v.getPrice()<=price)
 	    		result.add(v);
 	    }
@@ -91,4 +92,3 @@ public class InventorySearchControl {
 	    return result;
     }
 }
-
