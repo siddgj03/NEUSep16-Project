@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ui.vehicleView.Utility;
+import dataAccess.ImageAccess;
 import ui.vehicleView.Vehicle;
 
 public class ImageFetchingRunnable implements Runnable {
@@ -19,7 +19,8 @@ public class ImageFetchingRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		List<ImageIcon> imageList = Utility.getImageList(selectedVehicle);
+		ImageAccess imgAccess = new ImageAccess(this.selectedVehicle.getImagePath());
+		List<ImageIcon> imageList = imgAccess.getImageList(selectedVehicle);
 		selectedVehicle.setImageList(imageList);
 		JLabel photoLabel = new JLabel(imageList.get(0));
 		this.photoShowPanel.remove(1);

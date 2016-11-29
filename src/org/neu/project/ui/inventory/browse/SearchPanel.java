@@ -166,8 +166,7 @@ class addSearchInformation {
 	private static void readFile(HashSet<String> setMakes, HashSet<String> setModels, HashSet<String> setTypes)
 			throws IOException {
 
-		File filefolder = new File(
-				"C:/Users/yzwddsgysz/Downloads/NEUSep16-Project-master/NEUSep16-Project-master/data");
+		File filefolder = new File("data/");
 		String file = findFile(filefolder);
 		@SuppressWarnings("resource")
 		BufferedReader reader = new BufferedReader(new FileReader(file));
