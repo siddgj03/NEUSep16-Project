@@ -9,7 +9,9 @@ import java.util.Collection;
 
 public class ResultPanel extends JPanel {
 	
-//	private Image image;
+	private JLabel image;
+//	private ImageIcon img;
+
 
 	private JPanel carResultCombo;
 
@@ -41,6 +43,10 @@ public class ResultPanel extends JPanel {
 	}
 
 	public JPanel showResultVehicle(Vehicle vehicle) {
+		
+//	    image = new JLabel();
+//		img = new ImageIcon(vehicle.getImage());
+//		image.setIcon(img);
 
 		carResultCombo = new JPanel();
 		GroupLayout layout = new GroupLayout(carResultCombo);
