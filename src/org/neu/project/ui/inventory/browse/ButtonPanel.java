@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class ButtonPanel extends JPanel {
 
-	public ButtonPanel(JFrame currentFrame, boolean isDealer) {
+	public ButtonPanel(BrowseInventory currentFrame) {
 		// Arrange in vertical order, with spacing of 10
 		super(new GridLayout(4,1,0,5));
 
@@ -20,7 +20,7 @@ public class ButtonPanel extends JPanel {
 		add(btnView);
 
 		// Only add Dealer-allowed controls
-		if (isDealer) {
+		if (currentFrame.isDealer) {
 			BrowseButton btnEdit = new BrowseButton("Edit Vehicle", BrowseInventory.COMMAND_EDIT, commonListener);
 			BrowseButton btnDelete = new BrowseButton("Delete Vehicle", BrowseInventory.COMMAND_DELETE, commonListener);
 			BrowseButton btnAdd = new BrowseButton("Add New Vehicle", BrowseInventory.COMMAND_ADD, commonListener);
@@ -29,11 +29,6 @@ public class ButtonPanel extends JPanel {
 			add(btnDelete);
 			add(btnAdd);
 		}
-	}
-
-	private void addListener() {
-		// Look for what's checked in the results panel
-
 	}
 
 	@Override
@@ -45,9 +40,9 @@ public class ButtonPanel extends JPanel {
 }
 
 class BrowseActionListener implements ActionListener {
-	private JFrame frame;
+	private BrowseInventory frame;
 
-	public void setFrame(JFrame frame) {
+	public void setFrame(BrowseInventory frame) {
 		this.frame = frame;
 	}
 
@@ -55,8 +50,12 @@ class BrowseActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()) {
 			case BrowseInventory.COMMAND_VIEW:
-				String selectedVehicleId = BrowseInventory.getSelectedVehicleId();
-				System.out.println("Viewing Vehicle ID: " + selectedVehicleId);
+				String selectedVehicleId = frame.getSelectedVehicleId();
+				if (frame == null) {
+					JOptionPane.showMessageDialog(null, "Please select a Vehicle.");
+				} else {
+					System.out.println("Viewing Vehicle ID: " + selectedVehicleId);
+				}
 				break;
 			case BrowseInventory.COMMAND_ADD:
 				frame.dispose();
