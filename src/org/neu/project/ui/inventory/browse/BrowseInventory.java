@@ -1,5 +1,6 @@
 package org.neu.project.ui.inventory.browse;
 
+import org.neu.project.dto.Dealer;
 import org.neu.project.dto.Inventory;
 import org.neu.project.dto.Vehicle;
 import org.neu.project.ui.common.BaseFrame;
@@ -30,23 +31,27 @@ public class BrowseInventory extends BaseFrame {
 	boolean isDealer;
 
 	// Use InventoryPool -> Get inventory by Dealer ID
-	static Collection<Vehicle> inventory;
+	private Collection<Vehicle> inventory;
 
 	// Mutating variables
-	private static String selectedVehicleId;
+	private String selectedVehicleId;
 
 	// Components
-	private ResultPanel results;
+	private Container container;
+	private JScrollPane resultsContainer;
 
 	/**
 	 * Frame constructor with DealerID to determine inventory list
 	 * @param dealerId - ID of the Dealer
 	 * @param isDealer - TRUE if Dealer, FALSE if Customer
 	 */
-	public BrowseInventory(String dealerId, boolean isDealer) {
+	BrowseInventory(String dealerId, boolean isDealer) {
 		super(scrWidth, scrHeight);
+
 		this.dealerId = dealerId;
 		this.isDealer = isDealer;
+
+		setTitle("Inventory List - Dealer ID " + dealerId);
 	}
 
 	/**
@@ -58,45 +63,48 @@ public class BrowseInventory extends BaseFrame {
 //		Inventory inv = ir.getInventoryByDealerId(dealerId);
 
 		// Temporary placeholder Vehicles
-		inv.addVehicle(new Vehicle("a", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
-		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
-		inv.addVehicle(new Vehicle("c", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
-		inv.addVehicle(new Vehicle("d", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
-		inv.addVehicle(new Vehicle("e", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
+		inv.addVehicle(new Vehicle("a", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "30000"));
+		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "21000"));
+		inv.addVehicle(new Vehicle("c", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "32000"));
+		inv.addVehicle(new Vehicle("d", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20500"));
+		inv.addVehicle(new Vehicle("e", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20020"));
 		inv.addVehicle(new Vehicle("f", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
-		inv.addVehicle(new Vehicle("g", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
+		inv.addVehicle(new Vehicle("g", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "29000"));
 		inv.addVehicle(new Vehicle("h", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
-		inv.addVehicle(new Vehicle("i", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20000"));
+		inv.addVehicle(new Vehicle("i", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "31000"));
 		inv.addVehicle(new Vehicle("j", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
 		inventory = inv.getVehicles();
 		System.out.println(inv.getAllModel().toString());
 	}
 
-	/**
-	 * ToDo: Needs testing. Not sure if re-declaring will cause UI to update
-	 */
-	void refreshResults() {
-		results = new ResultPanel(inventory);
+	Collection<Vehicle> getInventory() {
+		return inventory;
 	}
 
-	@Override
-	protected void create() {
-		this.setTitle("Inventory List");
-		loadVehicles();
+	/**
+	 * Sets the inventory. Automatically refreshes the UI
+	 * @param inventory - The collection of Vehicle
+	 */
+	void setInventory(Collection<Vehicle> inventory) {
+		if (!this.inventory.equals(inventory)) {
+			this.inventory = inventory;
+			container.remove(resultsContainer);
+			addResultsPanel();
+			container.validate();
+			container.repaint();
+		}
 	}
 
 	@Override
 	protected void add() {
-		Container container = this.getContentPane();
-		// First layout to separate header, controls and footer
-//		GridLayout layoutMaster = new GridLayout(1,3,0,10);
+		container = this.getContentPane();
 		container.setLayout(new FlowLayout());
 
 		/* Declare and Add Panels here */
 
 		// SearchPanel/Filter panel
 		JPanel filterPanel = new JPanel();
-		filterPanel.add(new SortUI());
+		filterPanel.add(new SortPanel(this));
 		try {
 			SearchPanel searchPane = new SearchPanel();
 			filterPanel.add(searchPane);
@@ -104,19 +112,30 @@ public class BrowseInventory extends BaseFrame {
 		} catch (IOException e) {
 			System.out.println(e);
 		}
+		container.add(filterPanel);
 
 		// Results panel
-		refreshResults();
-		// ToDo: Scroll not working with BorderLayout for now
-		JScrollPane resultsContainer = new JScrollPane(results);
-		resultsContainer.setPreferredSize(new Dimension(500,600));
+		addResultsPanel();
 
 		// Arrange Horizontal screen layout
-		container.add(filterPanel);
-		container.add(resultsContainer);
-		// ToDo: Pass in reference to Vehicle data to determine selection
-		ButtonPanel buttonPanel = new ButtonPanel(this, isDealer);
+		ButtonPanel buttonPanel = new ButtonPanel(this);
 		container.add(buttonPanel);
+	}
+
+	/**
+	 * Set scrolling panel with fixed dimensions
+	 * Always add to the middle container space (index 1)
+	 */
+	private void addResultsPanel() {
+		ResultPanel results = new ResultPanel(this);
+		resultsContainer = new JScrollPane(results);
+		resultsContainer.setPreferredSize(new Dimension(500,600));
+		container.add(resultsContainer, 1);
+	}
+
+	@Override
+	protected void create() {
+		loadVehicles();
 	}
 
 	@Override
@@ -124,12 +143,12 @@ public class BrowseInventory extends BaseFrame {
 
 	}
 
-	static String getSelectedVehicleId() {
+	String getSelectedVehicleId() {
 		return selectedVehicleId;
 	}
 
-	static void setSelectedVehicleId(String selectedVehicleId) {
-		BrowseInventory.selectedVehicleId = selectedVehicleId;
+	void setSelectedVehicleId(String selectedVehicleId) {
+		this.selectedVehicleId = selectedVehicleId;
 	}
 
 	public static void main(String args[]) {
