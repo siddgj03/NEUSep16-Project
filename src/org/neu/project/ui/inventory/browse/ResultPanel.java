@@ -8,15 +8,14 @@ import java.awt.event.ActionListener;
 import java.util.Collection;
 
 public class ResultPanel extends JPanel {
-	
-	private JLabel image;
-//	private ImageIcon img;
 
+	// private JLabel image;
+	// private ImageIcon img;
 
 	private JPanel carResultCombo;
 
 	private JLabel id;
-//	private JLabel webId;
+	// private JLabel webId;
 	private JLabel category;
 	private JLabel year;
 	private JLabel make;
@@ -26,15 +25,17 @@ public class ResultPanel extends JPanel {
 	private JLabel price;
 	private JLabel special;
 
-	public ResultPanel(Collection<Vehicle> vehicles) {
+	public ResultPanel(BrowseInventory frame) {
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		ButtonGroup selects = new ButtonGroup();
 
-		for (Vehicle object : vehicles) {
+		for (Vehicle object : frame.getInventory()) {
 
 			JPanel panel = showResultVehicle(object);
+			ClickMeListener cml = new ClickMeListener(object.getId(),frame);
+			getRadioButton(panel).addActionListener(cml);
 			selects.add(getRadioButton(panel));
 			add(panel);
 
@@ -43,10 +44,10 @@ public class ResultPanel extends JPanel {
 	}
 
 	public JPanel showResultVehicle(Vehicle vehicle) {
-		
-//	    image = new JLabel();
-//		img = new ImageIcon(vehicle.getImage());
-//		image.setIcon(img);
+
+		// image = new JLabel();
+		// img = new ImageIcon(vehicle.getImage());
+		// image.setIcon(img);
 
 		carResultCombo = new JPanel();
 		GroupLayout layout = new GroupLayout(carResultCombo);
@@ -54,8 +55,6 @@ public class ResultPanel extends JPanel {
 		carResultCombo.setBorder(BorderFactory.createTitledBorder("details "));
 
 		JRadioButton select = new JRadioButton("Select ");
-		ClickMeListener cml = new ClickMeListener(vehicle.getId());
-		select.addActionListener(cml);
 
 		id = new JLabel("ID:   " + vehicle.getId());
 		// webId = new JLabel("webId: " + vehicle.getWebId());
@@ -114,16 +113,19 @@ public class ResultPanel extends JPanel {
 }
 
 class ClickMeListener implements ActionListener {
-	private String vehicleId;
 
-	public ClickMeListener(String vehicleId) {
+	private String vehicleId;
+	private BrowseInventory frame;
+
+	public ClickMeListener(String vehicleId, BrowseInventory frame) {
 		this.vehicleId = vehicleId;
+		this.frame = frame;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		BrowseInventory.setSelectedVehicleId(vehicleId);
+		frame.setSelectedVehicleId(vehicleId);
 		System.out.println("Car selected: " + vehicleId);
 
 	}
