@@ -3,18 +3,20 @@ package org.neu.project.ui.inventory.browse;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+
+import org.neu.project.dto.Vehicle;
 
 @SuppressWarnings("serial")
 class SearchPanel extends JPanel {
@@ -27,6 +29,13 @@ class SearchPanel extends JPanel {
 	private JComboBox<String> maxPrice;
 	private JComboBox<String> types;
 	private JButton search; 
+	String selectmakes;
+	String selectmodels;
+	String selecttypes;
+	int selectmaxprice;
+	boolean selectnew;
+	boolean selectused;
+	boolean selectcertified;
 
 	public SearchPanel() throws IOException {
 
@@ -57,33 +66,66 @@ class SearchPanel extends JPanel {
 
 		
 		addSearchInformation asi = new addSearchInformation(makes, models, types, maxPrice);
-	}
-
-	class OperationListener implements ItemListener {
-
-		@Override
-		public void itemStateChanged(ItemEvent e) {
-			// TODO Auto-generated method stub
-			if (e.getStateChange()==ItemEvent.SELECTED) {
-				String selectmake = (String) makes.getSelectedItem();
-				String selectmodel = (String) models.getSelectedItem();
-				String selectmaxpreice = (String) maxPrice.getSelectedItem();
-				String selecttypes = (String) types.getSelectedItem();
-			}
-		}
-
 		
-
+		
+		addListener();
+	}
+	public void addListener() {
+		
+		
+		ClickMeSearch cms = new ClickMeSearch();
+		search.addActionListener(cms);
 	}
 
-	class clickMeSearch implements ActionListener {
+
+	class ClickMeSearch implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-
+			//InventorySearchControl.filterMake(vehicles, ol.selectmakes, ol.selectmodels, ol.selecttypes, ol.selectmaxprice, ol.selectnew, ol.selectused, ol.selectcertified);
+            selectnew = New.isSelected();
+            selectused = Used.isSelected();
+			selectcertified = Certified.isSelected();
+			selectmakes = (String) makes.getSelectedItem();
+			selectmodels = (String) models.getSelectedItem();
+			selecttypes = (String) types.getSelectedItem();
+			selectmaxprice = maxPrice.getSelectedIndex();
+			
+			if (selectnew==true) System.out.println("i want new");
+			if (selectused==true) System.out.println("i want used");
+			if (selectcertified==true) System.out.println("i want certified");
+			if (selectmakes!=null) System.out.println(selectmakes);
+			if (selectmodels!=null) System.out.println(selectmodels);
+			if (selecttypes!=null) System.out.println(selecttypes);
+			if (selectmaxprice!=0) System.out.println(selectmaxprice*10000);
 		}
 
+	}
+
+}
+
+class InventorySearchControl {
+
+	List<Vehicle> result = new ArrayList<Vehicle>();
+
+	public List<Vehicle> filterMake(List<Vehicle> vehicles, String make, String model, String type, int price, boolean categorynew, boolean categoryused, boolean categorycertified) {
+
+		for (Vehicle v : vehicles) {
+			result.clear();
+			if (v.getMake() == make && v.getModel() == model && v.getType() == type && v.getPrice() <= price) {
+				if (categorynew == true && v.getCategory()=="new") {
+					result.add(v);
+				} else if (categoryused == true && v.getCategory()=="used") {
+					result.add(v);
+				} else if (categorycertified == true && v.getCategory()=="certified") {
+					result.add(v);
+				}  
+			} 
+			
+		}
+
+		return result;
 	}
 
 }
@@ -149,6 +191,7 @@ class addSearchInformation {
 	}
 
 }
+
 
 
 
