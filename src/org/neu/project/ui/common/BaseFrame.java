@@ -13,7 +13,12 @@ public abstract class BaseFrame extends JFrame {
 	public BaseFrame(int width, int height) {
 		this.width = width;
 		this.height = height;
+	}
 
+	/**
+	 * Separated the 4 base methods to allow constructor of child classes to setup variables first
+	 */
+	protected void display() {
 		create();
 		add();
 		addListener();

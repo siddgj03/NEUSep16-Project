@@ -3,6 +3,7 @@ package org.neu.project.ui.inventory.browse;
 import org.neu.project.dto.Dealer;
 import org.neu.project.dto.Inventory;
 import org.neu.project.dto.Vehicle;
+import org.neu.project.service.InventoryManagerImp;
 import org.neu.project.ui.common.BaseFrame;
 
 import javax.swing.*;
@@ -58,23 +59,10 @@ public class BrowseInventory extends BaseFrame {
 	 * Loads list of Vehicles to browse through
 	 */
 	private void loadVehicles() {
-		Inventory inv = new Inventory();
-		inv.setDealerId(dealerId);
-//		Inventory inv = ir.getInventoryByDealerId(dealerId);
-
-		// Temporary placeholder Vehicles
-		inv.addVehicle(new Vehicle("a", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "30000"));
-		inv.addVehicle(new Vehicle("b", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "21000"));
-		inv.addVehicle(new Vehicle("c", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "32000"));
-		inv.addVehicle(new Vehicle("d", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20500"));
-		inv.addVehicle(new Vehicle("e", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "20020"));
-		inv.addVehicle(new Vehicle("f", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
-		inv.addVehicle(new Vehicle("g", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "29000"));
-		inv.addVehicle(new Vehicle("h", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
-		inv.addVehicle(new Vehicle("i", "gmps-goldstein", "new", "2014", "Honda", "CR-V", "3.6L 2Dr", "SUV", "31000"));
-		inv.addVehicle(new Vehicle("j", "gmps-goldstein", "new", "2016", "Honda", "Civic", "2-Door", "CAR", "20000"));
+		InventoryManagerImp invManager = new InventoryManagerImp();
+		System.out.println(dealerId);
+		Inventory inv = invManager.getInventory(dealerId);
 		inventory = inv.getVehicles();
-		System.out.println(inv.getAllModel().toString());
 	}
 
 	Collection<Vehicle> getInventory() {
@@ -152,6 +140,7 @@ public class BrowseInventory extends BaseFrame {
 	}
 
 	public static void main(String args[]) {
-		new BrowseInventory("gmps-goldstein", false);
+		BrowseInventory bi = new BrowseInventory("gmps-priority", false);
+		bi.display();
 	}
 }
