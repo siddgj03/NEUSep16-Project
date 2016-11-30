@@ -1,6 +1,6 @@
 package src.org.neu.project.dao;
 
-import NEU_Project.DTO.*;
+import org.neu.project.dto.*;
 
 import java.io.BufferedWriter;
 import java.io.File;

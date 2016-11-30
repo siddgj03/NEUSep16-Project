@@ -1,10 +1,10 @@
 package org.neu.project.dto;
 
-import NEU_Project.DAO.StringToDate;
+import org.neu.project.utils.DateToString;
 
 import java.util.Date;
 
-import static NEU_Project.DAO.DateToString.dateToString;
+import static org.neu.project.utils.dateToString;
 
 /**
  * Created by qiqi on 2016/11/15.

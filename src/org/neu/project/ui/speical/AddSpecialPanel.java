@@ -1,8 +1,8 @@
 package org.neu.project.ui.special;
 
-import NEU_Project.DAO.WriteSpecialToFile;
-import NEU_Project.DTO.Special;
-import NEU_Project.Service.SpecialManagement;
+import org.neu.project.dao.WriteSpecialToFile;
+import org.neu.project.dto.Special;
+import org.neu.project.service.SpecialManagement;
 
 import javax.swing.*;
 import java.awt.*;

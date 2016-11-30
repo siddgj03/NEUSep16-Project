@@ -1,8 +1,8 @@
 package org.neu.project.ui.special;
 
-import NEU_Project.DTO.carMakeList;
-import NEU_Project.DTO.carTypeList;
-import NEU_Project.DTO.carYearList;
+import org.neu.project.dto.carMakeList;
+import org.neu.project.dto.carTypeList;
+import org.neu.project.dto.carYearList;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,8 +1,8 @@
 package org.neu.project.ui.special;
 
-import NEU_Project.DTO.Special;
-import NEU_Project.Service.SpecialManagement;
-import NEU_Project.DAO.DateToString;
+import org.neu.project.dto.Special;
+import org.neu.project.service.SpecialManagement;
+import org.neu.project.utils.DateToString;
 
 import javax.swing.*;
 import javax.swing.event.TableModelListener;

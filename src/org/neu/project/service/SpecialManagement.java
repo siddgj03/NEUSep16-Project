@@ -1,7 +1,7 @@
 package org.neu.project.service;
 
-import NEU_Project.DAO.StringToSpecial;
-import NEU_Project.DTO.Special;
+import org.neu.project.dao.StringToSpecial;
+import org.neu.project.dto.Special;
 
 import java.io.BufferedReader;
 import java.io.File;

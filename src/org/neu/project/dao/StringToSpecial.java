@@ -1,6 +1,6 @@
-package NEU_Project.DAO;
+package org.neu.project.dao;
 
-import NEU_Project.DTO.Special;
+import org.neu.project.dto.*;
 
 public class StringToSpecial {
         public static Special toSpecial(String line) throws Exception{
