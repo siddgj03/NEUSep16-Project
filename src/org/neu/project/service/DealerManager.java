@@ -5,8 +5,8 @@ import java.util.List;
 import org.neu.project.dto.Dealer;
 
 public interface DealerManager {
-	public List<Dealer> getAllDealersInSystem();
+	public Set<String> getDealersName();
 
-	public List<String> getAllDealerNamesInSystem();
+	public String getDealerIDbyName(String name);
 
 }
