@@ -119,7 +119,7 @@ public class ManageInventoryUI extends BaseFrame{
 	    }
 	    container.add(component, gridBagConstrains);
     }
-
+ 
 //    public static void main(String[] args) {
 //    	new ManageInventoryUI("gmps-aj-dohmann");
 //    }
