@@ -1,37 +1,126 @@
 package ui.vehicleView;
 
-import java.util.HashMap;
+import java.util.Date;
 
 public class Special {
-	private HashMap<String, String> criteria;
-	private HashMap<String, Integer> type;
-	private String name;
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	private int specialID;
+	private String dealerWebID;
+	private String specialTitle;
+	private Double discountValue;
+	private Double discountPercentage;
+	private Date specialStartDate;
+	private Date specialEndDate;
+	private Integer carYear;
+	private String carMake;
+	private String carModel;
+	private String trim;
+	private Double carMinPrice;
+	private Double carMaxPrice;
 	private String description;
 	private String disclosure;
-	private String Expires;
 
-	public HashMap<String, String> getCriteria() {
-		return criteria;
+	public int getSpecialID() {
+		return specialID;
 	}
 
-	public void setCriteria(HashMap<String, String> criteria) {
-		this.criteria = criteria;
+	public void setSpecialID(int specialID) {
+		this.specialID = specialID;
 	}
 
-	public HashMap<String, Integer> getType() {
-		return type;
+	public String getDealerWebID() {
+		return dealerWebID;
 	}
 
-	public void setType(HashMap<String, Integer> type) {
-		this.type = type;
+	public void setDealerWebID(String dealerWebID) {
+		this.dealerWebID = dealerWebID;
+	}
+
+	public String getSpecialTitle() {
+		return specialTitle;
+	}
+
+	public void setSpecialTitle(String specialTitle) {
+		this.specialTitle = specialTitle;
+	}
+
+	public Double getDiscountValue() {
+		return discountValue;
+	}
+
+	public void setDiscountValue(Double discountValue) {
+		this.discountValue = discountValue;
+	}
+
+	public Double getDiscountPercentage() {
+		return discountPercentage;
+	}
+
+	public void setDiscountPercentage(Double discountPercentage) {
+		this.discountPercentage = discountPercentage;
+	}
+
+	public Date getSpecialStartDate() {
+		return specialStartDate;
+	}
+
+	public void setSpecialStartDate(Date specialStartDate) {
+		this.specialStartDate = specialStartDate;
+	}
+
+	public Date getSpecialEndDate() {
+		return specialEndDate;
+	}
+
+	public void setSpecialEndDate(Date specialEndDate) {
+		this.specialEndDate = specialEndDate;
+	}
+
+	public Integer getCarYear() {
+		return carYear;
+	}
+
+	public void setCarYear(Integer carYear) {
+		this.carYear = carYear;
+	}
+
+	public String getCarMake() {
+		return carMake;
+	}
+
+	public void setCarMake(String carMake) {
+		this.carMake = carMake;
+	}
+
+	public String getCarModel() {
+		return carModel;
+	}
+
+	public void setCarModel(String carModel) {
+		this.carModel = carModel;
+	}
+
+	public String getTrim() {
+		return trim;
+	}
+
+	public void setTrim(String trim) {
+		this.trim = trim;
+	}
+
+	public Double getCarMinPrice() {
+		return carMinPrice;
+	}
+
+	public void setCarMinPrice(Double carMinPrice) {
+		this.carMinPrice = carMinPrice;
+	}
+
+	public Double getCarMaxPrice() {
+		return carMaxPrice;
+	}
+
+	public void setCarMaxPrice(Double carMaxPrice) {
+		this.carMaxPrice = carMaxPrice;
 	}
 
 	public String getDescription() {
@@ -49,13 +138,4 @@ public class Special {
 	public void setDisclosure(String disclosure) {
 		this.disclosure = disclosure;
 	}
-
-	public String getExpires() {
-		return Expires;
-	}
-
-	public void setExpires(String expires) {
-		Expires = expires;
-	}
-
 }
