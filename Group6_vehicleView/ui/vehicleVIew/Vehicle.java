@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 public class Vehicle {
 	private String title;
 	private String imagePath;
-	private int msrp;
+	private double msrp;
 	private int sale;
 	private int save;
 	private String category;
@@ -18,9 +18,17 @@ public class Vehicle {
 	private String bodyType;
 	private String color;
 	private String trim;
-	
+	private Rating rating;
 	private String expires;
 	private List<ImageIcon> imageList;
+
+	public Rating getRating() {
+		return rating;
+	}
+
+	public void setRating(Rating rating) {
+		this.rating = rating;
+	}
 
 	public String getTrim() {
 		return trim;
@@ -94,11 +102,11 @@ public class Vehicle {
 		this.color = color;
 	}
 
-	public int getMsrp() {
+	public double getMsrp() {
 		return msrp;
 	}
 
-	public void setMsrp(int msrp) {
+	public void setMsrp(double msrp) {
 		this.msrp = msrp;
 	}
 

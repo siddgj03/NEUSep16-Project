@@ -23,19 +23,6 @@ import service.ImageFetchingRunnable;
 
 public class PhotoPanel extends BasePanel {
 	private static final String BORDER_TITLE = "Current Offer";
-	private static final String MSRP = "MSRP:";
-	private static final String SALE_PRICE = "Sale Price:";
-	private static final String SAVE = "Save:";
-	private static final String SPECIAL_EXPIRES = "Special Expires:";
-	private static final String PREVIOUS = "<<Previous";
-	private static final String NEXT = "Next>>";
-	private static final String SPECS_BORDER_TITLE = "Specifications";
-	private static final String CATEGORY = "Category:";
-	private static final String MAKE = "Make:";
-	private static final String MODEL = "Model:";
-	private static final String YEAR = "Year:";
-	private static final String BODY_TYPE = "Body Type:";
-	private static final String TRIM = "Trim:";
 	private static final Font font = new Font("", Font.ITALIC, 14);
 	private static final Font titleFont = new Font("", Font.BOLD, 16);
 	private static final Font nameFont = new Font("", Font.BOLD, 16);
@@ -49,7 +36,7 @@ public class PhotoPanel extends BasePanel {
 		add();
 	}
 
-	private void add() {
+	 void add() {
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
 

@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -70,11 +71,56 @@ class SearchPanel extends JPanel {
 		
 		addListener();
 	}
+	
 	public void addListener() {
 		
 		
-		ClickMeSearch cms = new ClickMeSearch();
-		search.addActionListener(cms);
+		makes.addActionListener(new MatchMakesAndModelsListener());
+		models.addActionListener(new MatchModelsAndTypesListener());
+		
+		search.addActionListener(new ClickMeSearch());
+	}
+	
+	
+	class MatchMakesAndModelsListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+			selectmakes = (String) makes.getSelectedItem();
+			if (selectmakes != null && !selectmakes.equals("All Makes")) {
+				ConditionMatching cm = new ConditionMatching();
+				try {
+					cm.matchMakesAndModels(models, selectmakes);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+		}
+
+	}
+
+	class MatchModelsAndTypesListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+			selectmodels = (String) models.getSelectedItem();
+			if (selectmakes != null && !selectmodels.equals("All Models")) {
+				ConditionMatching cm = new ConditionMatching();
+				try {
+					cm.matchModelsAndTypes(types, selectmodels);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		}
+
 	}
 
 
@@ -83,25 +129,142 @@ class SearchPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			//InventorySearchControl.filterMake(vehicles, ol.selectmakes, ol.selectmodels, ol.selecttypes, ol.selectmaxprice, ol.selectnew, ol.selectused, ol.selectcertified);
-            selectnew = New.isSelected();
-            selectused = Used.isSelected();
+
+			selectnew = New.isSelected();
+			selectused = Used.isSelected();
 			selectcertified = Certified.isSelected();
 			selectmakes = (String) makes.getSelectedItem();
 			selectmodels = (String) models.getSelectedItem();
 			selecttypes = (String) types.getSelectedItem();
 			selectmaxprice = maxPrice.getSelectedIndex();
-			
-			if (selectnew==true) System.out.println("i want new");
-			if (selectused==true) System.out.println("i want used");
-			if (selectcertified==true) System.out.println("i want certified");
-			if (selectmakes!=null) System.out.println(selectmakes);
-			if (selectmodels!=null) System.out.println(selectmodels);
-			if (selecttypes!=null) System.out.println(selecttypes);
-			if (selectmaxprice!=0) System.out.println(selectmaxprice*10000);
+			//InventorySearchControl.filterMake(vehicles, selectmakes, selectmodels, selecttypes, selectmaxprice, selectnew, selectused, selectcertified);
+			if (selectnew == true)
+				System.out.println("i want new");
+			if (selectused == true)
+				System.out.println("i want used");
+			if (selectcertified == true)
+				System.out.println("i want certified");
+			if (selectmakes != null)
+				System.out.println(selectmakes);
+			if (selectmodels != null)
+				System.out.println(selectmodels);
+			if (selecttypes != null)
+				System.out.println(selecttypes);
+			if (selectmaxprice != 0)
+				System.out.println(selectmaxprice * 10000);
 		}
 
 	}
+
+}
+
+class ConditionMatching {
+
+	HashMap<String, HashSet<String>> vehicleMakes = new HashMap<String, HashSet<String>>();
+	HashMap<String, HashSet<String>> vehicleModels = new HashMap<String, HashSet<String>>();
+
+	HashSet<String>setMakes = new HashSet<String>();
+	HashSet<String>setModels = new HashSet<String>();
+	HashSet<String>setTypes = new HashSet<String>();
+	
+
+	public void matchMakesAndModels(JComboBox<String> models, String certainMake) throws IOException {
+		
+		readFile(setMakes, setModels, setTypes);
+		inputMakesAndModels(vehicleMakes);
+		
+		for (String s : setModels) {
+			models.removeItem(s);
+		}
+		for (String s : vehicleMakes.get(certainMake)) {
+			models.addItem(s);
+		}
+	}
+	
+	public void matchModelsAndTypes(JComboBox<String> types, String certainModel) throws IOException {
+		
+		readFile(setMakes, setModels, setTypes);
+		inputModelsAndTypes(vehicleModels);
+		
+		for (String s : setTypes) {
+			types.removeItem(s);
+		}
+		for (String s : vehicleModels.get(certainModel)) {
+			types.addItem(s);
+		}
+
+	}
+		
+
+	
+		private void inputMakesAndModels(HashMap<String, HashSet<String>> vehicleMakes2) throws IOException {
+
+			File filefolder = new File("data/");
+			String file = findFile(filefolder);
+			@SuppressWarnings("resource")
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+
+			while ((line = reader.readLine()) != null) {
+				String[] str = line.split("~");
+				if (!vehicleMakes2.containsKey(str[4])) {
+					vehicleMakes2.put(str[4], new HashSet<String>());
+					vehicleMakes2.get(str[4]).add(str[5]);
+				} else {
+					vehicleMakes2.get(str[4]).add(str[5]);
+				}
+				
+
+			}
+		}
+		
+		private void inputModelsAndTypes(HashMap<String, HashSet<String>> vehicleModels2) throws IOException {
+
+			File filefolder = new File("data/");
+			String file = findFile(filefolder);
+			@SuppressWarnings("resource")
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+
+			while ((line = reader.readLine()) != null) {
+				String[] str = line.split("~");
+				if (!vehicleModels2.containsKey(str[5])) {
+					vehicleModels2.put(str[5], new HashSet<String>());
+					vehicleModels2.get(str[5]).add(str[7]);
+				} else {
+					vehicleModels2.get(str[5]).add(str[7]);
+				}
+				
+
+			}
+		}
+		
+		private void readFile(HashSet<String> setMakes, HashSet<String> setModels, HashSet<String> setTypes)
+				throws IOException {
+
+			File filefolder = new File("data/");
+			String file = findFile(filefolder);
+			@SuppressWarnings("resource")
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+			
+			while ((line = reader.readLine()) != null) {
+				String[] str = line.split("~");
+				setMakes.add(str[4]);
+				setModels.add(str[5]);
+				setTypes.add(str[7]);
+			}
+		}
+
+		private String findFile(File filefolder) {
+			// TODO Auto-generated method stub
+			String filepath = null;
+			for (File file : filefolder.listFiles()) {
+				filepath = file.getAbsolutePath();
+			}
+			return filepath;
+		}
+	
 
 }
 
@@ -190,6 +353,7 @@ class addSearchInformation {
 	}
 
 }
+
 
 
 

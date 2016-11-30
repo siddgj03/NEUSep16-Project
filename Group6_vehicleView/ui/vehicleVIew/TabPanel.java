@@ -1,7 +1,7 @@
 package ui.vehicleView;
 
 import javax.swing.JTabbedPane;
-
+import java.awt.Color;
 public class TabPanel extends JTabbedPane {
 
 	private static final long serialVersionUID = 1L;
