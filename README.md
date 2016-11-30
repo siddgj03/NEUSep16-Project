@@ -26,3 +26,7 @@ for BrowsingInventory team. We will call the Class Named CustomerBrowsingInvento
 for Specials team. We will call the Class Named BrowsingSpecials with passing dealerID(String);
 
 ---from Group02_desgining Class and top view team, Nov 20th 2016
+
+Please check out the Folder src/org/neu/project/service where we provide the InventroyManagerImp class for getting the inventory of a specific dealer and all vehicles in the system. Example code is at the end of InventroyManagerImp class. 
+
+---from Group05_ManageInventory, Nov 30th 2016
