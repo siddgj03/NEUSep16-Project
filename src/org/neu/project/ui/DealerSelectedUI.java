@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import org.neu.project.dao.PropertyReader;
 import org.neu.project.ui.inventory.browse.*;
+import org.neu.project.ui.special.ViewSpecialsUI;
 
 
 public class DealerSelectedUI extends JFrame {
@@ -41,18 +42,18 @@ public class DealerSelectedUI extends JFrame {
 		labelofDealerName = new JLabel(curDealerName);
 		labelofDealerName.setFont(new Font("Tohama", Font.BOLD, 14));
 
-		ImageIcon image = new ImageIcon(System.getProperty("user.dir")+rp.getString("dealerUIImage"));
+		ImageIcon image = new ImageIcon(System.getProperty("user.dir")+rp.getString("selectedDealerUIImage"));
 		image.setImage(image.getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT));
 		pic = new JLabel(image);
 		pic.setPreferredSize(new Dimension(350, 250));
 
 
 		inventory = new JButton("Inventory");
-		inventory.setPreferredSize(rp.getDimension("DealerUI.Buttons.Size"));
+		inventory.setPreferredSize(rp.getDimension("SelectedDealerUI.Buttons.Size"));
 		inventory.setFont(rp.getFont("DealerUI.Buttons.Font"));
 
 		specials = new JButton("Specials");
-		specials.setPreferredSize(rp.getDimension("DealerUI.Buttons.Size"));
+		specials.setPreferredSize(rp.getDimension("SelectedDealerUI.Buttons.Size"));
 		specials.setFont(rp.getFont("DealerUI.Buttons.Font"));
 	}
 
@@ -108,8 +109,8 @@ public class DealerSelectedUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			new BrowseInventoryDealer(curDealerID);
-
+			BrowseInventory browseDelaerInventory = new BrowseInventoryDealer(curDealerID);
+			browseDelaerInventory.display();
 		}
 
 	}
@@ -119,7 +120,7 @@ public class DealerSelectedUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			//new BrowsingSpecials(curDealerID);
+			new ViewSpecialsUI(curDealerID);
 
 		}
 
