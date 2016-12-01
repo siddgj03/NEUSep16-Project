@@ -63,7 +63,7 @@ public class DetailView extends DetailViewBaseFrame {
 		makeVehicleList();
 		Vehicle vehicle = new Vehicle();
 		vehicle.setTitle("NEW 2016 BUICK ENCORE FWD");
-		vehicle.setImagePath("src/data/image/vehicle/pathList.txt");
+		vehicle.setImagePath("src/org/neu/project/data/image/vehicle_1/pathList.txt");
 		vehicle.setPrice("24990");
 //		vehicle.setSale(19992);
 //		vehicle.setSave(4998);
@@ -89,8 +89,8 @@ public class DetailView extends DetailViewBaseFrame {
 	private static void makeVehicleList() {
 		Vehicle vehicle1 = new Vehicle();
 		vehicle1.setTitle("vehicle 1 NEW 2016 BUICK ENCORE FWD");
-		vehicle1.setImagePath("src/data/image/vehicle/pathList.txt");
-		vehicle1.setPrice(24990);
+		vehicle1.setImagePath("src/org/neu/project/data/image/vehicle_1/pathList.txt");
+		vehicle1.setPrice("24990");
 //		vehicle1.setSale(19992);
 //		vehicle1.setSave(4998);
 //		vehicle1.setExpires("11/30/2016");
@@ -104,7 +104,7 @@ public class DetailView extends DetailViewBaseFrame {
 
 		Vehicle vehicle2 = new Vehicle();
 		vehicle2.setTitle("vehicle 2 NEW 2016 BUICK ENCORE FWD");
-		vehicle2.setImagePath("src/data/image/vehicle/pathList.txt");
+		vehicle2.setImagePath("src/org/neu/project/data/image/vehicle_1/pathList.txt");
 		vehicle2.setPrice("25000");
 //		vehicle2.setSale(19992);
 //		vehicle2.setSave(4998);
@@ -119,7 +119,7 @@ public class DetailView extends DetailViewBaseFrame {
 
 		Vehicle vehicle3 = new Vehicle();
 		vehicle3.setTitle("vehicle 3 NEW 2016 BUICK ENCORE FWD");
-		vehicle3.setImagePath("src/data/image/vehicle/pathList.txt");
+		vehicle3.setImagePath("src/org/neu/project/data/image/vehicle_1/pathList.txt");
 		vehicle3.setPrice("24000");
 //		vehicle3.setSale(19992);
 //		vehicle3.setSave(4998);
@@ -134,7 +134,7 @@ public class DetailView extends DetailViewBaseFrame {
 
 		Vehicle vehicle4 = new Vehicle();
 		vehicle4.setTitle("vehicle 4 NEW 2016 BUICK ENCORE FWD");
-		vehicle4.setImagePath("src/data/image/vehicle/pathList.txt");
+		vehicle4.setImagePath("src/org/neu/project/data/image/vehicle_1/pathList.txt");
 		vehicle4.setPrice("24000");
 //		vehicle4.setSale(19992);
 //		vehicle4.setSave(4998);
@@ -149,7 +149,7 @@ public class DetailView extends DetailViewBaseFrame {
 
 		Vehicle vehicle5 = new Vehicle();
 		vehicle5.setTitle("vehicle 5 NEW 2016 BUICK ENCORE FWD");
-		vehicle5.setImagePath("src/data/image/vehicle/pathList.txt");
+		vehicle5.setImagePath("src/org/neu/project/data/image/vehicle_1/pathList.txt");
 		vehicle5.setPrice("24000");
 //		vehicle5.setSale(19992);
 //		vehicle5.setSave(4998);
@@ -164,8 +164,8 @@ public class DetailView extends DetailViewBaseFrame {
 
 		Vehicle vehicle6 = new Vehicle();
 		vehicle6.setTitle("vehicle 6 NEW 2016 BUICK ENCORE FWD");
-		vehicle6.setImagePath("src/data/image/vehicle/pathList.txt");
-		vehicle6.setPrice("24000);
+		vehicle6.setImagePath("src/org/neu/project/data/image/vehicle_1/pathList.txt");
+		vehicle6.setPrice("24000");
 //		vehicle6.setSale(19992);
 //		vehicle6.setSave(4998);
 //		vehicle6.setExpires("11/30/2016");
