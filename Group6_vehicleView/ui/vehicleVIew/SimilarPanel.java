@@ -149,7 +149,9 @@ public class SimilarPanel  extends BasePanel{
 			 if(vehicleList.get(index).getSale()-1000 < selectedVehicle.getSale() 
 				  && vehicleList.get(index).getSale()+1000 > selectedVehicle.getSale()
 				  && vehicleList.get(index) != selectedVehicle){
+				 
 				 vSimilarList.add(vehicleList.get(index));
+				 
 				 index++;
 		
 			 }
@@ -167,7 +169,6 @@ public class SimilarPanel  extends BasePanel{
 		
 		
 		similarShowPanel.updateUI();
-		
 
 	}
 	}
