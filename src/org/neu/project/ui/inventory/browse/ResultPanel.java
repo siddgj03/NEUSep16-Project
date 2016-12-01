@@ -34,6 +34,7 @@ public class ResultPanel extends JPanel {
 		for (Vehicle object : frame.getInventory()) {
 
 			JPanel panel = showResultVehicle(object);
+			setJLabelSize(panel);
 			ClickMeListener cml = new ClickMeListener(object.getId(),frame);
 			getRadioButton(panel).addActionListener(cml);
 			selects.add(getRadioButton(panel));
@@ -109,6 +110,16 @@ public class ResultPanel extends JPanel {
 
 		return radioButton;
 
+	}
+	
+	private void setJLabelSize(JPanel jpanel){
+		int count = jpanel.getComponentCount();
+		
+		for (int i = 0; i < count; i++) {
+			Component comp = jpanel.getComponent(i);
+			comp.setMaximumSize(new Dimension(130,20));
+			comp.setMinimumSize(new Dimension(130,20));
+		}
 	}
 }
 
