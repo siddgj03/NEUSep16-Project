@@ -58,7 +58,7 @@ public class BrowseInventory extends BaseFrame {
 	/**
 	 * Loads list of Vehicles to browse through
 	 */
-	private void loadVehicles() {
+	void loadVehicles() {
 		InventoryManagerImp invManager = new InventoryManagerImp();
 		System.out.println(dealerId);
 		Inventory inv = invManager.getInventory(dealerId);
@@ -94,7 +94,7 @@ public class BrowseInventory extends BaseFrame {
 		JPanel filterPanel = new JPanel();
 		filterPanel.add(new SortPanel(this));
 		try {
-			SearchPanel searchPane = new SearchPanel();
+			SearchPanel searchPane = new SearchPanel(this);
 			filterPanel.add(searchPane);
 			filterPanel.setPreferredSize(new Dimension(300,600));
 		} catch (IOException e) {

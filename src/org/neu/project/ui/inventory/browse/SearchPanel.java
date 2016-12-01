@@ -29,7 +29,7 @@ class SearchPanel extends JPanel {
 	private JComboBox<String> models;
 	private JComboBox<String> maxPrice;
 	private JComboBox<String> types;
-	private JButton search; 
+	private JButton search;
 	String selectmakes;
 	String selectmodels;
 	String selecttypes;
@@ -37,10 +37,13 @@ class SearchPanel extends JPanel {
 	boolean selectnew;
 	boolean selectused;
 	boolean selectcertified;
+	BrowseInventory frame;
 
-	public SearchPanel() throws IOException {
+	public SearchPanel(BrowseInventory frame) throws IOException {
 
 		super(new GridLayout(0,1,0,6));
+
+		this.frame = frame;
 
 		New = new JCheckBox("New");
 		Used = new JCheckBox("Used");
@@ -65,27 +68,27 @@ class SearchPanel extends JPanel {
 		add(maxPrice);
 		add(search);
 
-		
+
 		addSearchInformation asi = new addSearchInformation(makes, models, types, maxPrice);
-		
+
 		addListener();
 	}
-	
+
 	public void addListener() {
-		
+
 		makes.addActionListener(new MatchMakesAndModelsListener());
 		models.addActionListener(new MatchModelsAndTypesListener());
-		
-		search.addActionListener(new ClickMeSearch(null));
+
+		search.addActionListener(new ClickMeSearch(frame));
 	}
-	
-	
+
+
 	class MatchMakesAndModelsListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
+
 			selectmakes = (String) makes.getSelectedItem();
 			if (selectmakes != null && !selectmakes.equals("All Makes")) {
 				ConditionMatching cm = new ConditionMatching();
@@ -106,7 +109,7 @@ class SearchPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
+
 			selectmodels = (String) models.getSelectedItem();
 			if (selectmakes != null && !selectmodels.equals("All Models")) {
 				ConditionMatching cm = new ConditionMatching();
@@ -128,19 +131,18 @@ class SearchPanel extends JPanel {
 
 		public ClickMeSearch(BrowseInventory frame)
 		{
-			
+
 			this.frame = frame;
 		}
 
-		
-		
+
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
-//			bi.setInventory(null);
-			
-			
+
+			// First refresh the inventory
+			frame.loadVehicles();
 			selectnew = New.isSelected();
 			selectused = Used.isSelected();
 			selectcertified = Certified.isSelected();
@@ -148,20 +150,19 @@ class SearchPanel extends JPanel {
 			selectmodels = (String) models.getSelectedItem();
 			selecttypes = (String) types.getSelectedItem();
 			selectmaxprice = (String)maxPrice.getSelectedItem();
-			
+
 			InventorySearchControl isc = new InventorySearchControl();
-			BrowseInventory bi = new BrowseInventory(selectmakes, selectcertified);
-			
+
 			Collection<Vehicle> result = new ArrayList<Vehicle>();
-			result = isc.filterMake(BrowseInventory.getInventory(), result, selectmakes, selectmodels, selecttypes, selectmaxprice, selectnew, selectused, selectcertified);
-			bi.setInventory(result);
-			
+			result = isc.filterMake(frame.getInventory(), result, selectmakes, selectmodels, selecttypes, selectmaxprice, selectnew, selectused, selectcertified);
+			frame.setInventory(result);
+
 //			for (Vehicle v : result) {
-//				
+//
 //				System.out.println(v.getMake());
 //			}
 //			if (result.isEmpty()) System.out.println("why am I fucking empty?!");
-//			
+//
 //			if (selectnew == true)
 //				System.out.println("i want new");
 //			if (selectused == true)
@@ -188,27 +189,27 @@ class InventorySearchControl {
 	// List<Vehicle> result = new ArrayList<Vehicle>();
 
 	public Collection<Vehicle> filterMake(Collection<Vehicle> inventory, Collection<Vehicle> result, String make,
-			String model, String type, String price, boolean categorynew, boolean categoryused,
-			boolean categorycertified) {
+	                                      String model, String type, String price, boolean categorynew, boolean categoryused,
+	                                      boolean categorycertified) {
 
 		for (Vehicle v : inventory) {
 
 			if ((make.equals("All Makes") || v.getMake().equals(make))
-					&& (model.equals("All Models") || v.getModel().equals(model))
-					&& (type.equals("All Types") || v.getType().equals(type))
-					&& (price.equals("No Max Price") || v.getPrice() <= Double.parseDouble(price))) {
-				
-				if (categorynew == true && v.getCategory() == "new") {
+					    && (model.equals("All Models") || v.getModel().equals(model))
+					    && (type.equals("All Types") || v.getType().equals(type))
+					    && (price.equals("No Max Price") || v.getPrice() <= Double.parseDouble(price))) {
+
+				if (categorynew == true && v.getCategory().equals("new")) {
 					result.add(v);
-				} else if (categoryused == true && v.getCategory() == "used") {
+				} else if (categoryused == true && v.getCategory().equals("used")) {
 					result.add(v);
-				} else if (categorycertified == true && v.getCategory() == "certified") {
+				} else if (categorycertified == true && v.getCategory().equals("certified")) {
 					result.add(v);
 				} else if (categorynew == false && categoryused == false && categorycertified == false) {
 					result.add(v);
 				}
 			}
-			
+
 
 		}
 
@@ -363,7 +364,7 @@ class addSearchInformation {
 		@SuppressWarnings("resource")
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String line;
-		
+
 		while ((line = reader.readLine()) != null) {
 			String[] str = line.split("~");
 			setMakes.add(str[4]);
@@ -382,11 +383,3 @@ class addSearchInformation {
 	}
 
 }
-
-
-
-
-
-
-
-
