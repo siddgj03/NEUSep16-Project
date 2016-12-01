@@ -72,166 +72,167 @@ public class InventorySortControl {
 	/**
 	public List<Vehicle> sortByMake (Collection<Vehicle> vehicle, boolean isDesc) {
 	  List vehiclesByMake = new ArrayList(vehicle);
-	  if (isDesc) {
-		Collections.sort(vehiclesByMake, new Comparator<Vehicle>() {
-		  @Override
-		  public int compare(Vehicle v1, Vehicle v2) {
-			return v2.getMake().compareTo(v1.getMake());
-		  }
-		});
-	  } else {
-		Collections.sort(vehiclesByMake, new Comparator<Vehicle>() {
-		  @Override
-		  public int compare(Vehicle v1, Vehicle v2) {
-			return v1.getMake().compareTo(v2.getMake());
-		  }
-	    });  
+	  if(isDesc){
+	    Collections.sort(vehiclesByMake, new Comparator<Vehicle>() {
+	      @Override
+	      public int compare(Vehicle v1, Vehicle v2) {
+		return v2.getMake().compareTo(v1.getMake());
+               }
+             });
+	  }else {
+	    Collections.sort(vehiclesByMake, new Comparator<Vehicle>() {
+              @Override
+	      public int compare(Vehicle v1, Vehicle v2) {
+		return v1.getMake().compareTo(v2.getMake());
+	       }
+	     });  
 	  }
-	  return vehiclesByMake;
+	    return vehiclesByMake;
     }
 		     
 
 	public List<Vehicle> sortByType(Collection<Vehicle> vehicle, boolean isDesc) {
 	  List vehiclesByType = new ArrayList(vehicle);
 	  if(isDesc){
-		  Collections.sort(vehiclesByType, new Comparator<Vehicle>(){
-			@Override
-			public int compare(Vehicle v1, Vehicle v2){
-			  return v2.getType().compareTo(v1.getType());
-			}
-		  });		  
+	    Collections.sort(vehiclesByType, new Comparator<Vehicle>(){
+	      @Override
+	      public int compare(Vehicle v1, Vehicle v2){
+		return v2.getType().compareTo(v1.getType());
+	       }
+	     });		  
 	  }else{
-		  Collections.sort(vehiclesByType, new Comparator<Vehicle>(){
-			@Override
-			public int compare(Vehicle v1, Vehicle v2){
-				return v1.getType().compareTo(v2.getType());
-			}
-		  });
+	    Collections.sort(vehiclesByType, new Comparator<Vehicle>(){
+	      @Override
+	      public int compare(Vehicle v1, Vehicle v2){
+	        return v1.getType().compareTo(v2.getType());
+	      }
+	    });
 	  }
-	  return vehiclesByType;
+	    return vehiclesByType;
     }
 		 
 		    
 	public List<Vehicle> sortByCategory(Collection<Vehicle> vehicle, boolean isDesc) {
 	  List vehiclesByCategory = new ArrayList(vehicle);
 	  if(isDesc){
-		  Collections.sort(vehiclesByCategory, new Comparator<Vehicle>(){
-			  @Override
-			  public int compare(Vehicle v1, Vehicle v2){
-				  return v2.getCategory().compareTo(v1.getCategory());
-			  }
-		  });
+	    Collections.sort(vehiclesByCategory, new Comparator<Vehicle>(){
+	      @Override
+	      public int compare(Vehicle v1, Vehicle v2){
+		return v2.getCategory().compareTo(v1.getCategory());
+	       }
+	     });
 	  }else{
-		  Collections.sort(vehiclesByCategory, new Comparator<Vehicle>(){
-			  @Override
-			  public int compare(Vehicle v1, Vehicle v2){
-				  return v1.getCategory().compareTo(v2.getCategory());
-			  }
-		  });
+	    Collections.sort(vehiclesByCategory, new Comparator<Vehicle>(){
+	      @Override
+	      public int compare(Vehicle v1, Vehicle v2){
+		return v1.getCategory().compareTo(v2.getCategory());
+	       }
+	     });
 	  }
-		        return vehiclesByCategory;
-		     }
+           return vehiclesByCategory;
+     }
 		     
 		     
 	public List<Vehicle> sortByCarId(Collection<Vehicle> vehicle, boolean isDesc) {
 	  List vehiclesByCarId = new ArrayList(vehicle); 
 	  if(isDesc){
-		  Collections.sort(vehiclesByCarId, new Comparator<Vehicle>(){
-		  @Override
-		  public int compare(Vehicle v1, Vehicle v2){
-			  return v2.getId().compareTo(v1.getId());
-		    }
+	    Collections.sort(vehiclesByCarId, new Comparator<Vehicle>(){
+	      @Override
+	      public int compare(Vehicle v1, Vehicle v2){
+		return v2.getId().compareTo(v1.getId());
+	       }
 	    });
 	  }else{
-		  Collections.sort(vehiclesByCarId, new Comparator<Vehicle>(){
-			  @Override
-			  public int compare(Vehicle v1, Vehicle v2){
-				  return v1.getId().compareTo(v2.getId());
-			    }
-		    });		  
+	    Collections.sort(vehiclesByCarId, new Comparator<Vehicle>(){
+	      @Override
+	      public int compare(Vehicle v1, Vehicle v2){
+		return v1.getId().compareTo(v2.getId());
+	       }
+	     });		  
 	  }
-		        return vehiclesByCarId;
-		     }
+           return vehiclesByCarId;
+    }
 		     
 		     
 	public List<Vehicle> sortByYear(Collection<Vehicle> vehicle, boolean isDesc) {
 	  List vehiclesByYear = new ArrayList(vehicle);
 	  if(isDesc){
-		  Collections.sort(vehiclesByYear, new Comparator<Vehicle>(){
-			  public int compare(Vehicle v1, Vehicle v2){
-				  return v2.getYear().compareTo(v1.getYear());
-			  }
-		  });
+	    Collections.sort(vehiclesByYear, new Comparator<Vehicle>(){
+	      public int compare(Vehicle v1, Vehicle v2){
+		return v2.getYear().compareTo(v1.getYear());
+	       }
+	     });
 	  }else{
-		  Collections.sort(vehiclesByYear, new Comparator<Vehicle>(){
-			  public int compare(Vehicle v1, Vehicle v2){
-				  return v1.getYear().compareTo(v2.getYear());
-			  }
-		  });
+            Collections.sort(vehiclesByYear, new Comparator<Vehicle>(){
+	      public int compare(Vehicle v1, Vehicle v2){
+		return v1.getYear().compareTo(v2.getYear());
+	       }
+	     });
 	  }
-		         return vehiclesByYear;
-		     }
+            return vehiclesByYear;
+   }
 		     
 		     
 	public List<Vehicle> sortByModel(Collection<Vehicle> vehicle, boolean isDesc) {
 	  List vehiclesByModel = new ArrayList(vehicle);
 	  if(isDesc){
-		  Collections.sort(vehiclesByModel, new Comparator<Vehicle>(){
-		  @Override
-		  public int compare(Vehicle v1,Vehicle v2){
-			  return v2.getModel().compareTo(v1.getModel());
-		  }			  
-		  });
+            Collections.sort(vehiclesByModel, new Comparator<Vehicle>(){
+	      @Override
+	      public int compare(Vehicle v1,Vehicle v2){
+		return v2.getModel().compareTo(v1.getModel());
+	       }	  		  
+	     });
 	  }else{
-		  Collections.sort(vehiclesByModel, new Comparator<Vehicle>(){
-		  @Override
-		  public int compare(Vehicle v1,Vehicle v2){
-			  return v1.getModel().compareTo(v2.getModel());
-		  }			  
-		  });
+	    Collections.sort(vehiclesByModel, new Comparator<Vehicle>(){
+	      @Override
+	      public int compare(Vehicle v1,Vehicle v2){
+		return v1.getModel().compareTo(v2.getModel());
+	       }			  
+	     });
 	  }	  
-		       return vehiclesByModel;
-		   }
+	    return vehiclesByModel;
+    }
 	     
 		    
 	public List<Vehicle> sortByTrim(Collection<Vehicle> vehicle, boolean isDesc) {
 	  List vehiclesByTrim = new ArrayList(vehicle);
 	  if(isDesc){
-		  Collections.sort(vehiclesByTrim, new Comparator<Vehicle>(){
-			@Override
-			public int compare(Vehicle v1, Vehicle v2){
-				return v2.getTrim().compareTo(v1.getTrim());
-			}
-		  });
+	    Collections.sort(vehiclesByTrim, new Comparator<Vehicle>(){
+	      @Override
+	      public int compare(Vehicle v1, Vehicle v2){
+		return v2.getTrim().compareTo(v1.getTrim());
+	       }
+	     });
 	  }else{
-		  Collections.sort(vehiclesByTrim, new Comparator<Vehicle>(){
-			@Override
-			public int compare(Vehicle v1, Vehicle v2){
-				return v1.getTrim().compareTo(v2.getTrim());
-			}
-			});
+	    Collections.sort(vehiclesByTrim, new Comparator<Vehicle>(){
+	      @Override
+	      public int compare(Vehicle v1, Vehicle v2){
+		return v1.getTrim().compareTo(v2.getTrim());
+	       }
+	     });
 	  }
-		        return vehiclesByTrim;
-		   }
+	     return vehiclesByTrim;
+    }
 		     
 		     
 	public List<Vehicle> sortByPrice(Collection<Vehicle> vehicle, boolean isDesc) {
 	  List vehiclesByPrice = new ArrayList(vehicle);
 	  if(isDesc){
-		  Collections.sort(vehiclesByPrice, new Comparator<Vehicle>(){
-			  public int compare(Vehicle v1, Vehicle v2){
-				  return v2.getPrice().compareTo(v1.getPrice());
-			  }
-		  });
+	    Collections.sort(vehiclesByPrice, new Comparator<Vehicle>(){
+	      @Override
+	      public int compare(Vehicle v1, Vehicle v2){
+		return v2.getPrice().compareTo(v1.getPrice());
+	       }
+	     });
 	  }else{
-		  Collections.sort(vehiclesByPrice, new Comparator<Vehicle>(){
-			  public int compare(Vehicle v1, Vehicle v2){
-				  return v1.getPrice().compareTo(v2.getPrice());
-			  }
-		  });
+	    Collections.sort(vehiclesByPrice, new Comparator<Vehicle>(){
+	      public int compare(Vehicle v1, Vehicle v2){
+		return v1.getPrice().compareTo(v2.getPrice());
+	       }
+	     });
 	  }
-		         return vehiclesByPrice;
-		     }		 
+	     return vehiclesByPrice;
+     }		 
 *
 */
 	
