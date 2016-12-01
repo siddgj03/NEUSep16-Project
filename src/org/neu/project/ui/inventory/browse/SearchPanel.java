@@ -18,9 +18,11 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import org.neu.project.dto.Vehicle;
+import org.neu.project.service.InventorySearchControl;
 
 @SuppressWarnings("serial")
 class SearchPanel extends JPanel {
+
 
 	private JCheckBox New;
 	private JCheckBox Used;
@@ -46,16 +48,23 @@ class SearchPanel extends JPanel {
 		this.frame = frame;
 
 		New = new JCheckBox("New");
+		New.setActionCommand(InventorySearchControl.FILTER_BY_CATEGORY);
 		Used = new JCheckBox("Used");
+		Used.setActionCommand(InventorySearchControl.FILTER_BY_CATEGORY);
 		Certified = new JCheckBox("Certified");
+		Certified.setActionCommand(InventorySearchControl.FILTER_BY_CATEGORY);
 		//Font bigFont = new Font("", Font.BOLD, 18);
 		//New.setFont(bigFont);
 		//Used.setFont(bigFont);
 		//Certified.setFont(bigFont);
 		makes = new JComboBox<String>();
+		makes.setActionCommand(InventorySearchControl.FILTER_BY_MAKE);
 		models = new JComboBox<String>();
+		models.setActionCommand(InventorySearchControl.FILTER_BY_MODEL);
 		maxPrice = new JComboBox<String>();
+		maxPrice.setActionCommand(InventorySearchControl.FILTER_BY_PRICE);
 		types = new JComboBox<String>();
+		types.setActionCommand(InventorySearchControl.FILTER_BY_TYPE);
 		search = new JButton("SEARCH INVENTORY");
 
 
@@ -69,7 +78,7 @@ class SearchPanel extends JPanel {
 		add(search);
 
 
-		addSearchInformation asi = new addSearchInformation(makes, models, types, maxPrice);
+		AddSearchInformation asi = new AddSearchInformation(makes, models, types, maxPrice);
 
 		addListener();
 	}
@@ -142,7 +151,7 @@ class SearchPanel extends JPanel {
 			// TODO Auto-generated method stub
 
 			// First refresh the inventory
-			frame.loadVehicles();
+			// ToDo: No Year selection?
 			selectnew = New.isSelected();
 			selectused = Used.isSelected();
 			selectcertified = Certified.isSelected();
@@ -151,71 +160,58 @@ class SearchPanel extends JPanel {
 			selecttypes = (String) types.getSelectedItem();
 			selectmaxprice = (String)maxPrice.getSelectedItem();
 
+			ArrayList<SearchCommand> searchCommands = new ArrayList<>();
+			if (selectnew) {
+				searchCommands.add(new SearchCommand(New.getActionCommand(), "new"));
+			}
+			if (selectused) {
+				searchCommands.add(new SearchCommand(Used.getActionCommand(), "used"));
+			}
+			if (selectcertified) {
+				searchCommands.add(new SearchCommand(Certified.getActionCommand(), "certified"));
+			}
+			if (!selectmakes.equals("All Makes")) {
+				searchCommands.add(new SearchCommand(makes.getActionCommand(), makes.getSelectedItem().toString()));
+			}
+			if (!selectmodels.equals("All Models")) {
+				searchCommands.add(new SearchCommand(models.getActionCommand(), models.getSelectedItem().toString()));
+			}
+			if (!selecttypes.equals("All Types")) {
+				searchCommands.add(new SearchCommand(types.getActionCommand(), types.getSelectedItem().toString()));
+			}
+			if (!selectmaxprice.equals("No Max Price")) {
+				searchCommands.add(new SearchCommand(maxPrice.getActionCommand(), maxPrice.getSelectedItem().toString()));
+			}
+
+			frame.loadVehicles();
+			Collection<Vehicle> result = frame.getInventory();
 			InventorySearchControl isc = new InventorySearchControl();
-
-			Collection<Vehicle> result = new ArrayList<Vehicle>();
-			result = isc.filterMake(frame.getInventory(), result, selectmakes, selectmodels, selecttypes, selectmaxprice, selectnew, selectused, selectcertified);
+			for (SearchCommand cmd: searchCommands) {
+				result = isc.filter(result, cmd.getSearchKey(), cmd.getSearchValue());
+			}
 			frame.setInventory(result);
-
-//			for (Vehicle v : result) {
-//
-//				System.out.println(v.getMake());
-//			}
-//			if (result.isEmpty()) System.out.println("why am I fucking empty?!");
-//
-//			if (selectnew == true)
-//				System.out.println("i want new");
-//			if (selectused == true)
-//				System.out.println("i want used");
-//			if (selectcertified == true)
-//				System.out.println("i want certified");
-//			if (selectmakes != null)
-//				System.out.println(selectmakes);
-//			if (selectmodels != null)
-//				System.out.println(selectmodels);
-//			if (selecttypes != null)
-//				System.out.println(selecttypes);
-//			if (selectmaxprice != null)
-//				System.out.println(selectmaxprice);
 		}
 
 	}
 
 }
 
-
-class InventorySearchControl {
-
-	// List<Vehicle> result = new ArrayList<Vehicle>();
-
-	public Collection<Vehicle> filterMake(Collection<Vehicle> inventory, Collection<Vehicle> result, String make,
-	                                      String model, String type, String price, boolean categorynew, boolean categoryused,
-	                                      boolean categorycertified) {
-
-		for (Vehicle v : inventory) {
-
-			if ((make.equals("All Makes") || v.getMake().equals(make))
-					    && (model.equals("All Models") || v.getModel().equals(model))
-					    && (type.equals("All Types") || v.getType().equals(type))
-					    && (price.equals("No Max Price") || v.getPrice() <= Double.parseDouble(price))) {
-
-				if (categorynew == true && v.getCategory().equals("new")) {
-					result.add(v);
-				} else if (categoryused == true && v.getCategory().equals("used")) {
-					result.add(v);
-				} else if (categorycertified == true && v.getCategory().equals("certified")) {
-					result.add(v);
-				} else if (categorynew == false && categoryused == false && categorycertified == false) {
-					result.add(v);
-				}
-			}
-
-
-		}
-
-		return result;
+class SearchCommand {
+	public String getSearchKey() {
+		return searchKey;
 	}
 
+	public String getSearchValue() {
+		return searchValue;
+	}
+
+	private String searchKey;
+	private String searchValue;
+
+	public SearchCommand(String searchKey, String searchValue) {
+		this.searchKey = searchKey;
+		this.searchValue = searchValue;
+	}
 }
 
 class ConditionMatching {
@@ -323,9 +319,9 @@ class ConditionMatching {
 }
 
 
-class addSearchInformation {
+class AddSearchInformation {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public addSearchInformation(JComboBox makes, JComboBox models, JComboBox types, JComboBox maxPrice)
+	public AddSearchInformation(JComboBox makes, JComboBox models, JComboBox types, JComboBox maxPrice)
 			throws IOException {
 		HashSet<String> setMakes = new HashSet<String>();
 		HashSet<String> setModels = new HashSet<String>();
