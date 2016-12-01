@@ -5,7 +5,11 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collection;
+
+/**
+ * @author Sida Niu result of vehicle information in browse inventory page
+ *         GroupLayout to place labels
+ */
 
 public class ResultPanel extends JPanel {
 
@@ -15,7 +19,6 @@ public class ResultPanel extends JPanel {
 	private JPanel carResultCombo;
 
 	private JLabel id;
-	// private JLabel webId;
 	private JLabel category;
 	private JLabel year;
 	private JLabel make;
@@ -35,7 +38,7 @@ public class ResultPanel extends JPanel {
 
 			JPanel panel = showResultVehicle(object);
 			setJLabelSize(panel);
-			ClickMeListener cml = new ClickMeListener(object.getId(),frame);
+			ClickMeListener cml = new ClickMeListener(object.getId(), frame);
 			getRadioButton(panel).addActionListener(cml);
 			selects.add(getRadioButton(panel));
 			add(panel);
@@ -58,7 +61,6 @@ public class ResultPanel extends JPanel {
 		JRadioButton select = new JRadioButton("Select ");
 
 		id = new JLabel("ID:   " + vehicle.getId());
-		// webId = new JLabel("webId: " + vehicle.getWebId());
 		category = new JLabel("Category:   " + vehicle.getCategory());
 		year = new JLabel("Year:   " + vehicle.getYear());
 		make = new JLabel("Make:   " + vehicle.getMake());
@@ -111,16 +113,17 @@ public class ResultPanel extends JPanel {
 		return radioButton;
 
 	}
-	
-	private void setJLabelSize(JPanel jpanel){
+
+	private void setJLabelSize(JPanel jpanel) {
 		int count = jpanel.getComponentCount();
-		
+
 		for (int i = 0; i < count; i++) {
 			Component comp = jpanel.getComponent(i);
-			comp.setMaximumSize(new Dimension(130,20));
-			comp.setMinimumSize(new Dimension(130,20));
+			comp.setMaximumSize(new Dimension(130, 20));
+			comp.setMinimumSize(new Dimension(130, 20));
 		}
 	}
+
 }
 
 class ClickMeListener implements ActionListener {
