@@ -90,7 +90,7 @@ public class DetailView extends DetailViewBaseFrame {
 		Vehicle vehicle1 = new Vehicle();
 		vehicle1.setTitle("vehicle 1 NEW 2016 BUICK ENCORE FWD");
 		vehicle1.setImagePath("src/org/neu/project/data/image/vehicle_1/pathList.txt");
-		vehicle1.setPrice(24990);
+		vehicle1.setPrice("24990");
 //		vehicle1.setSale(19992);
 //		vehicle1.setSave(4998);
 //		vehicle1.setExpires("11/30/2016");
@@ -165,7 +165,7 @@ public class DetailView extends DetailViewBaseFrame {
 		Vehicle vehicle6 = new Vehicle();
 		vehicle6.setTitle("vehicle 6 NEW 2016 BUICK ENCORE FWD");
 		vehicle6.setImagePath("src/org/neu/project/data/image/vehicle_1/pathList.txt");
-		vehicle6.setPrice("24000);
+		vehicle6.setPrice("24000");
 //		vehicle6.setSale(19992);
 //		vehicle6.setSave(4998);
 //		vehicle6.setExpires("11/30/2016");
