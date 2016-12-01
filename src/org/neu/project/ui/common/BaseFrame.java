@@ -18,14 +18,14 @@ public abstract class BaseFrame extends JFrame {
 	/**
 	 * Separated the 4 base methods to allow constructor of child classes to setup variables first
 	 */
-	protected void display() {
+	public void display() {
 		create();
 		add();
 		addListener();
 		setup();
 	}
 
-	protected void setup() {
+	private void setup() {
 		setSize(width,height);
 		setVisible(true);
 		// Exits the running process on window close
