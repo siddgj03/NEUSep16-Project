@@ -74,6 +74,13 @@ public class Inventory {
         return ls;
     }
     
+    public HashSet<Integer> getAllYear() {
+        HashSet<Integer> ls = new HashSet<Integer>();
+        for (Vehicle ve: pool.values()) ls.add(ve.getYear());
+        
+        return ls;
+    }
+    
     public void removeVehicle(String vehicleID) {
         if (pool.containsKey(vehicleID)) {
             pool.remove(vehicleID);
