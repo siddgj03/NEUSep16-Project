@@ -1,4 +1,4 @@
-package org.neu.project.ui.speical;
+package org.neu.project.ui.special;
 
 
 import javax.swing.*;
