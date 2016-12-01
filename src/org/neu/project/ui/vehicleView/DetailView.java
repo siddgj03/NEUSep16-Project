@@ -64,7 +64,7 @@ public class DetailView extends DetailViewBaseFrame {
 		Vehicle vehicle = new Vehicle();
 		vehicle.setTitle("NEW 2016 BUICK ENCORE FWD");
 		vehicle.setImagePath("src/data/image/vehicle/pathList.txt");
-		vehicle.setPrice(24990);
+		vehicle.setPrice("24990");
 //		vehicle.setSale(19992);
 //		vehicle.setSave(4998);
 //		vehicle.setExpires("11/30/2016");
@@ -135,7 +135,7 @@ public class DetailView extends DetailViewBaseFrame {
 		Vehicle vehicle4 = new Vehicle();
 		vehicle4.setTitle("vehicle 4 NEW 2016 BUICK ENCORE FWD");
 		vehicle4.setImagePath("src/data/image/vehicle/pathList.txt");
-		vehicle4.setPrice(24000);
+		vehicle4.setPrice("24000");
 //		vehicle4.setSale(19992);
 //		vehicle4.setSave(4998);
 //		vehicle4.setExpires("11/30/2016");
@@ -150,7 +150,7 @@ public class DetailView extends DetailViewBaseFrame {
 		Vehicle vehicle5 = new Vehicle();
 		vehicle5.setTitle("vehicle 5 NEW 2016 BUICK ENCORE FWD");
 		vehicle5.setImagePath("src/data/image/vehicle/pathList.txt");
-		vehicle5.setPrice(24000);
+		vehicle5.setPrice("24000");
 //		vehicle5.setSale(19992);
 //		vehicle5.setSave(4998);
 //		vehicle5.setExpires("11/30/2016");
@@ -165,7 +165,7 @@ public class DetailView extends DetailViewBaseFrame {
 		Vehicle vehicle6 = new Vehicle();
 		vehicle6.setTitle("vehicle 6 NEW 2016 BUICK ENCORE FWD");
 		vehicle6.setImagePath("src/data/image/vehicle/pathList.txt");
-		vehicle6.setPrice(24000);
+		vehicle6.setPrice("24000);
 //		vehicle6.setSale(19992);
 //		vehicle6.setSave(4998);
 //		vehicle6.setExpires("11/30/2016");
