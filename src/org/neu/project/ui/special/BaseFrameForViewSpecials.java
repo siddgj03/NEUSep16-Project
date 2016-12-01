@@ -1,9 +1,15 @@
-package org.neu.project.ui.special;
+package org.neu.project.ui.speical;
 
+ 
+ 
 import javax.swing.*;
 
+/*
+ * add line 10.
+ */
 public abstract class BaseFrameForViewSpecials extends JFrame{
 	String dealerid;
+	protected String defaultPath=System.getProperty("user.dir")+"/SpecialData/";
 	public abstract void create();
 	public void setup(){
 		setSize(1100,800);
