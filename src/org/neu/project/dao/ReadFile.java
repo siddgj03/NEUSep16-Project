@@ -3,13 +3,13 @@ package org.neu.project.dao;
 import java.io.*;
 
 /**
-@author Neha
-**/
+ @author Neha
+ **/
 
 public abstract class ReadFile {
 
-	public void ReadFileHelper(String fileName) {
-		
+	public void readFileHelper(String fileName) {
+
 		try {
 			FileReader fr;
 			fr = new FileReader(fileName);
@@ -18,15 +18,15 @@ public abstract class ReadFile {
 			String line;
 
 			while ((line = br.readLine()) != null){
-				ReadFileLine(line);
+				readFileLine(line);
 			}
 			br.close();
 			fr.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	public abstract void ReadFileLine(String line);
+	public abstract void readFileLine(String line);
 }
