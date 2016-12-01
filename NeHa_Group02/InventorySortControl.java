@@ -26,24 +26,31 @@ public class InventorySortControl {
 				case InventorySortControl.SORT_BY_YEAR:
 				   y1 = Integer.toString(v1.getYear());
 				   y2 = Integer.toString(v2.getYear());
+				   break;
 				case InventorySortControl.SORT_BY_MAKE:
 				   y1 = v1.getMake();
 				   y2 = v2.getMake();
+				   break;
 				case InventorySortControl.SORT_BY_MODEL:
 				   y1 = v1.getModel();
 				   y2 = v2.getModel();
+			           break;
 				case InventorySortControl.SORT_BY_TYPE:
 				   y1 = v1.getType();
 				   y2 = v2.getType();
+				   break;
 				case InventorySortControl.SORT_BY_CATEGORY:
 				   y1 = v1.getCategory();
 				   y2 = v2.getCategory();
+				   break;
 				case InventorySortControl.SORT_BY_CARID:
 				   y1 = v1.getId();
-			       y2 = v2.getId();
+			           y2 = v2.getId();
+				   break;
 				case InventorySortControl.SORT_BY_TRIM:
 				   y1 = v1.getTrim();
-			       y2 = v2.getTrim();
+			           y2 = v2.getTrim();
+				   break;
 				case InventorySortControl.SORT_BY_PRICE:
 				   y1 = Double.toString(v1.getPrice());
 				   y2 = Double.toString(v2.getPrice());
