@@ -1,5 +1,7 @@
 package org.neu.project.ui.common;
 
+import org.neu.project.ui.DealerUI;
+
 import javax.swing.*;
 
 /**
@@ -28,8 +30,10 @@ public abstract class BaseFrame extends JFrame {
 	private void setup() {
 		setSize(width,height);
 		setVisible(true);
-		// Exits the running process on window close
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// Exits the running process on window close (only for the entry point)
+//		if (this instanceof DealerUI) {
+//			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		}
 		// Centers the window on screen
 		setLocationRelativeTo(null);
 	}
