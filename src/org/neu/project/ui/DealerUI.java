@@ -23,7 +23,7 @@ public class DealerUI extends JFrame{
 	private JLabel label;
 
 	DealerManager dealerMap = new DealerManagerImpl();
-	PropertyReader rp = new PropertyReader();
+	private PropertyReader rp = new PropertyReader();
 
 
 	public DealerUI() {
@@ -113,7 +113,7 @@ public class DealerUI extends JFrame{
 	}
 
 
-	
+
 	private void addListener() {
 		// TODO Auto-generated method stub
 		ComboBoxListener cbl = new ComboBoxListener();
@@ -153,12 +153,12 @@ public class DealerUI extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String dealerid = dealerMap.getDealerIDbyName(dealerList.getSelectedItem().toString());
-			new BrowseInventoryCustomer(dealerid);
-
+			BrowseInventory browseCustomerInventory = new BrowseInventoryCustomer(dealerid);
+			browseCustomerInventory.display();
 		}   
 	}
 
-	
+
 	/*Button to open selected dealer UI frame*/
 	class DealerListener implements ActionListener {
 
