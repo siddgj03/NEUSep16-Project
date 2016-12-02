@@ -8,5 +8,5 @@ interface ApplySpecialInterface {
     //Special getSpecial(ArrayList<Special> specialList);
     //void setSplTree()throws ParseException;
     double getLowestPrice();
-    getAppliedSpecialList();
+    TreeSet<Special> getAppliedSpecialList();
 }
