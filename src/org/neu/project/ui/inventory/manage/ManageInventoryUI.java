@@ -262,14 +262,14 @@ public class ManageInventoryUI extends BaseFrame{
 		
 	}
 	
-    public static void main(String[] args) {
-    	InventoryManagerImp browseImp = new InventoryManagerImp();
-    	Inventory inventory = browseImp.getInventory("gmps-bertogden-cch");
-    	Vehicle vehicle = (Vehicle)inventory.getVehicles().toArray()[0];
-    	Vehicle vehicle2 = new Vehicle("gmps-bertogden-cch");
-    	new ManageInventoryUI(vehicle, false);
-    	
-    }
+//    public static void main(String[] args) {
+//    	InventoryManagerImp browseImp = new InventoryManagerImp();
+//    	Inventory inventory = browseImp.getInventory("gmps-bertogden-cch");
+//    	Vehicle vehicle = (Vehicle)inventory.getVehicles().toArray()[0];
+//    	Vehicle vehicle2 = new Vehicle("gmps-bertogden-cch");
+//    	new ManageInventoryUI(vehicle, false);
+//    	
+//    }
 
 }
 
