@@ -37,6 +37,10 @@ public class Inventory {
         }
     }
     
+    public Vehicle getVehicleById(String vehicleId){
+    	return pool.get(vehicleId);
+    }
+    
     public Collection<Vehicle> getVehicles() {
         return pool.values();
     }
