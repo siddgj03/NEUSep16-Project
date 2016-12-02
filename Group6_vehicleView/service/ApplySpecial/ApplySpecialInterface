@@ -1,12 +1,8 @@
 package org.neu.project.service;
 import java.text.ParseException;
-import java.util.ArrayList;
-
-import org.neu.project.dto.Special;
+import java.util.TreeSet;
 
 interface ApplySpecialInterface {
-    //Special getSpecial(ArrayList<Special> specialList);
-    //void setSplTree()throws ParseException;
-    double getLowestPrice();
-    TreeSet<Special> getAppliedSpecialList();
+	double getLowestPrice() throws ParseException;
+	TreeSet<CarSpecificSpecialList> getSplTree();
 }

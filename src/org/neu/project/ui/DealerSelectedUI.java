@@ -7,10 +7,11 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import org.neu.project.dao.PropertyReader;
+import org.neu.project.ui.DealerUI.ButtonListener;
 import org.neu.project.ui.inventory.browse.*;
 import org.neu.project.ui.special.ViewSpecialsUI;
 
-
+@SuppressWarnings("serial")
 public class DealerSelectedUI extends JFrame {
 
 	private String curDealerName;
@@ -36,8 +37,6 @@ public class DealerSelectedUI extends JFrame {
 	}
 
 	private void create() {
-
-
 		welcome = new JLabel("WELCOME:");
 		labelofDealerName = new JLabel(curDealerName);
 		labelofDealerName.setFont(rp.getFont("DealerSelectedUI.dealerNameLabel.Font"));
@@ -46,7 +45,6 @@ public class DealerSelectedUI extends JFrame {
 		image.setImage(image.getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT));
 		pic = new JLabel(image);
 		pic.setPreferredSize(rp.getDimension("DealerSelectedUI.Image.Size"));
-
 
 		inventory = new JButton("Inventory");
 		inventory.setPreferredSize(rp.getDimension("DealerSelectedUI.Buttons.Size"));
@@ -64,8 +62,6 @@ public class DealerSelectedUI extends JFrame {
 		JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		left.add(pic);
 		left.setBackground(rp.getColor("White.Color"));
-
-
 
 		JPanel right = new JPanel();
 		right.setLayout(new BoxLayout(right, BoxLayout.Y_AXIS));
@@ -92,38 +88,27 @@ public class DealerSelectedUI extends JFrame {
 		con.add(right);
 	}
 
-
 	private void addListener() {
-
-		InventoryListener il = new InventoryListener();
-		inventory.addActionListener(il);
-
-		SpecialsListener sl = new SpecialsListener();
-		specials.addActionListener(sl);
-
+		/*Listener for Inventory and Specials Buttons */
+		ButtonListener buttonClicked = new ButtonListener();
+		inventory.addActionListener(buttonClicked);
+		specials.addActionListener(buttonClicked);
 	}
 
-
-	private class InventoryListener implements ActionListener {
-
+	/* Inventory and Specials Buttons implementation */
+	class ButtonListener implements ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			BrowseInventory browseDealerInventory = new BrowseInventoryDealer(curDealerID);
-			browseDealerInventory.display();
+		public void actionPerformed(ActionEvent click) {
+
+			Object source = click.getSource();
+
+			if (source == inventory ){
+				BrowseInventory browseDealerInventory = new BrowseInventoryDealer(curDealerID);
+				browseDealerInventory.display();  
+			}
+			if (source == specials){
+				new ViewSpecialsUI(curDealerID);
+			}
 		}
-
 	}
-
-	private class SpecialsListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			new ViewSpecialsUI(curDealerID);
-
-		}
-
-	}
-
 }
