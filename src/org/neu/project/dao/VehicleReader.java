@@ -27,15 +27,25 @@ public class VehicleReader extends ReadFile{
 		
 		for(String s: fileNames){
 			if(!s.contains("dealer")){
-				current = addNewInventory(s);
-				ReadFileHelper(defaultPath + s);
 				//System.out.println(defaultPath + s);
+				current = addNewInventory(s);
+				readFileHelper(defaultPath + s);
 			}
 		}
 	}
 	
+	public Inventory addNewInventory(String dealerId){
+		Inventory inventory = new Inventory();
+		inventory.setDealerId(dealerId);
+		inventories.add(inventory);
+		return inventory;
+	}
+	
+	public ArrayList<Inventory> getAllInventories(){
+		return inventories;
+	}
 	@Override
-	public void ReadFileLine(String line) {
+	public void readFileLine(String line) {
 		String[] attributes = line.split("~");
 		
 		String id = attributes[VehicleInfo.Id.ordinal()];
@@ -50,17 +60,6 @@ public class VehicleReader extends ReadFile{
 		
 		Vehicle vehicle = new Vehicle(id, webId, category, year, make, model, trim, type, price);
 		current.addVehicle(vehicle);
-	}
-	
-	public Inventory addNewInventory(String dealerId){
-		Inventory inventory = new Inventory();
-		inventory.setDealerId(dealerId);
-		inventories.add(inventory);
-		return inventory;
-	}
-	
-	public ArrayList<Inventory> getAllInventories(){
-		return inventories;
 	}
 
 }
