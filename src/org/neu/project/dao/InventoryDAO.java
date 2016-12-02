@@ -13,6 +13,7 @@ public class InventoryDAO {
 	private HashMap<String, Inventory> dealerInventory;
 	private VehicleReader reader;
 	private VehicleWriter writer;
+	private String defaultPath = System.getProperty("user.dir") + "/data/";
     
 	public InventoryDAO(){
 		dealerInventory = new HashMap<String, Inventory>();
@@ -28,17 +29,37 @@ public class InventoryDAO {
 	
 	public void addVehicleToInventory(String dealerId, Vehicle vehicle){ 
 		getInventoryByDealerId(dealerId).addVehicle(vehicle);
-		writeToFile(dealerId);
+		try{
+			writer.add(vehicle, defaultPath + dealerId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		//writeToFile(dealerId);
 	}
 	
 	public void removeVehicleFromInventory(String dealerId, String vehicleId){
 		getInventoryByDealerId(dealerId).removeVehicle(vehicleId);
-		writeToFile(dealerId);
+		try{
+			Collection<Vehicle> vehicles = getInventoryByDealerId(dealerId).getVehicles();
+			writer.delete(vehicles, defaultPath + dealerId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		//writeToFile(dealerId);
 	}
 	
 	public void updateInventoryInfo(String dealerId, Vehicle vehicle){
 		getInventoryByDealerId(dealerId).updateVehicle(vehicle);
-		writeToFile(dealerId);
+		try{
+			Collection<Vehicle> vehicles = getInventoryByDealerId(dealerId).getVehicles();
+			writer.update(vehicles, defaultPath + dealerId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		//writeToFile(dealerId);
 	}
 	
 	public ArrayList<Inventory> getInventoriesFromReader(){
@@ -78,16 +99,16 @@ public class InventoryDAO {
 		return cVehicles;
 	}
     
-	public void writeToFile(String dealerId){
-		System.out.println("Save ======= " + dealerId);
-		Inventory inventory = getInventoryByDealerId(dealerId);
-		writer.setInventory(inventory);
-		try{
-			writer.writeIntoFile(dealerId);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public void writeToFile(String dealerId){
+//		System.out.println("Save ======= " + dealerId);
+//		Inventory inventory = getInventoryByDealerId(dealerId);
+//		writer.setInventory(inventory);
+//		try{
+//			writer.writeIntoFile(dealerId);
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 }

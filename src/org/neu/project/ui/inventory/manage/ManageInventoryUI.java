@@ -1,7 +1,6 @@
 package org.neu.project.ui.inventory.manage;
 
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -9,38 +8,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import org.neu.project.dto.Inventory;
 import org.neu.project.dto.Vehicle;
-import org.neu.project.dto.Vehicle.VehicleInfo;
 import org.neu.project.service.InventoryManagerImp;
 import org.neu.project.ui.common.BaseFrame;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 
 
 public class ManageInventoryUI extends BaseFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected JButton saveButton;
 	protected JButton cancelButton;
 	protected JButton clearButton;
 	
 	protected JLabel dealerIdLabel;
 	protected JLabel vehicleIdInfo;
-	protected JComboBox carYearInfo;
-	protected JComboBox categoryInfo;
+	protected JComboBox<Integer> carYearInfo;
+	protected JComboBox<String> categoryInfo;
 	protected JTextField carModelInfo;
 	protected JTextField carMakeInfo;
 	protected JTextField trimInfo;
@@ -119,14 +114,14 @@ public class ManageInventoryUI extends BaseFrame{
 	    ComponetInitialize(carMakeInfo, 3, 2, 1, 0, true);
 	    
 	    ComponetInitialize(new JLabel("Category : "), 0, 3, 1, 1, false);
-	    categoryInfo = new JComboBox();
+	    categoryInfo = new JComboBox<String>();
 	    categoryInfo.addItem("new");
 	    categoryInfo.addItem("used");
 	    categoryInfo.addItem("certified");
 	    ComponetInitialize(categoryInfo, 1, 3, 1, 0, true);
 	    
 	    ComponetInitialize(new JLabel("Year : "), 2, 3, 1, 1, false);
-	    carYearInfo = new JComboBox();
+	    carYearInfo = new JComboBox<Integer>();
 	    for(int i = 1970; i <= 2016; i++){
 	    	carYearInfo.addItem(i);
 	    }
@@ -182,7 +177,8 @@ public class ManageInventoryUI extends BaseFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(carMakeInfo.getText().equals("") || trimInfo.getText().equals("") || typeInfo.getText().equals("")
-					|| carPriceInfo.getText().equals("") || carModelInfo.getText().equals("")){
+					|| carPriceInfo.getText().equals("") || carModelInfo.getText().equals("") 
+					|| categoryInfo.getSelectedItem() == null){
 				JOptionPane.showMessageDialog(rootPane, "Some slots are empty.");
 				return;
 			}
@@ -273,10 +269,9 @@ public class ManageInventoryUI extends BaseFrame{
  
 // Scenario one : Add a new Vehicle
 //    public static void main(String[] args) {
-//	    InventoryManagerImp browseImp = new InventoryManagerImp();
 //	  	Vehicle vehicle2 = new Vehicle("gmps-bertogden-cch");
 //	
-//	    new ManageInventoryUI(vehicle, true);
+//	    new ManageInventoryUI(vehicle2, true);
 //    }
 }
 

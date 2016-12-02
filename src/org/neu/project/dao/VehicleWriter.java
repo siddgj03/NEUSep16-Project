@@ -3,73 +3,47 @@ package org.neu.project.dao;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 
-import org.neu.project.dto.Inventory;
 import org.neu.project.dto.Vehicle;
 
-import com.sun.jmx.snmp.defaults.DefaultPaths;
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 
 /* Writing into a File and Deleting */
+/** Created by Rashmitha **/
+
 public class VehicleWriter {
-	
-	private Inventory inventory;
-	private String defaultPath = System.getProperty("user.dir") + "/data/";
-
-	public void setInventory(Inventory inventory){
-		this.inventory = inventory;
-	}
-	
-	public void writeIntoFile(String fileName) throws Exception
+	public void writeIntoFile(String fileName, Collection<Vehicle> vehicles, boolean append) throws Exception
     {
-      File file = new File(defaultPath + fileName);
-      FileWriter writer = new FileWriter(file);
-      BufferedWriter bufferedWriter = new BufferedWriter(writer);
-      
-      StringBuilder sb = new StringBuilder();
-      
-  	  sb.append("id~webId~category~year~make~model~trim~type~price\n"); // title
-  	  for(Vehicle vehicle : inventory.getVehicles()){
-      	  sb.append(vehicle.toString() + "\n");
-      }
-  	
-      bufferedWriter.write(sb.toString());
-      bufferedWriter.flush();
-      bufferedWriter.close();
+        File file = new File(fileName);
+        FileWriter writer = new FileWriter(file, append);
+        BufferedWriter bufferedWriter = new BufferedWriter(writer);
+        
+        if(!append)
+        	bufferedWriter.write("id~webId~category~year~make~model~trim~type~price\n"); // Title
+        
+        for (Vehicle vehicle : vehicles)
+        {
+            bufferedWriter.write(vehicle.toString() + "\n");
+        }
+        bufferedWriter.flush();
+        bufferedWriter.close();
     }
-    
+
+    public void delete(Collection<Vehicle> vehicles, String fileName) throws Exception
+    {
+        writeIntoFile(fileName, vehicles, false);
+    }
+
+    public void add(Vehicle vehicle, String fileName) throws Exception
+    {
+        ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+        vehicles.add(vehicle);
+        writeIntoFile(fileName, vehicles, true);
+    }
+
+    public void update(Collection<Vehicle> vehicles, String fileName) throws Exception
+    {
+        writeIntoFile(fileName, vehicles, false);
+    }
 }
-
-
-//public class VehicleWriter {
-//	
-//	private Inventory inventory;
-//	private String defaultPath = System.getProperty("user.dir") + "/data/";
-//	
-//	public VehicleWriter(){
-//		
-//	}
-//	
-//	public void setInventory(Inventory inventory){
-//		this.inventory = inventory;
-//	}
-//	
-//	public void writeIntoFile(String fileName) throws Exception
-//    {
-//        File file = new File(defaultPath + fileName);
-//        FileWriter writer = new FileWriter(file);
-//        BufferedWriter bufferedWriter = new BufferedWriter(writer);
-//        
-//        StringBuilder sb = new StringBuilder();
-//        
-//    	sb.append("id~webId~category~year~make~model~trim~type~price\n"); // title
-//    	for(Vehicle vehicle : inventory.getVehicles()){
-//        	sb.append(vehicle.toString() + "\n");
-//        }
-//    	
-//        bufferedWriter.write(sb.toString());
-//        bufferedWriter.flush();
-//        bufferedWriter.close();
-//    }
-//}
