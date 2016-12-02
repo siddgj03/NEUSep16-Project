@@ -33,6 +33,7 @@ public class SimilarPanel extends DetailViewBasePanel {
 
 	public SimilarPanel(Vehicle selectedVehicle) {
 		this.selectedVehicle = selectedVehicle;
+		//vehicleList = InventoryManagerImp.getAllVehicles();
 		vehicleList = Utility.getVehicleList();
 		if (vSimilarList == null) {
 			vSimilarList = new ArrayList<Vehicle>();
