@@ -1,10 +1,11 @@
 package org.neu.project.service;
 import org.neu.project.dao.*;
+
 import org.neu.project.dto.*;
 import java.text.*;
 import java.util.*;
 import org.neu.project.service.SpecialManagement;
-class ApplySpecial implements ApplySpecialInterface
+public class ApplySpecial implements ApplySpecialInterface
 {
 private double specialledPrice;
 private int i;
@@ -12,13 +13,14 @@ private int f;
 private Special spl;
 private Vehicle car;
 SpecialManagement spm=new SpecialManagement();
-ApplySpecial(Vehicle c) throws ParseException
+public ApplySpecial(Vehicle c) throws ParseException
 {   car=c;
 	car.splTree= new TreeSet<CarSpecificSpecialList>(new CompareByPrice());
+	car.splTreeByExpiry =new TreeSet<CarSpecificSpecialList>(new CompareByExpiry());
 	initProcess();
 }
 
-ApplySpecial()
+public ApplySpecial()
 {
 	throw new IllegalArgumentException("Pass the vehicle object as parameter");
 }
@@ -89,6 +91,7 @@ else
 	specialledPrice=car.getPrice()-((spl.getDicountPercentage()/100.00)*car.getPrice());
 System.out.println(specialledPrice);
 car.splTree.add(new CarSpecificSpecialList(spl,specialledPrice,spl.getSpecialEndDate()));
+car.splTreeByExpiry.add(new CarSpecificSpecialList(spl,specialledPrice,spl.getSpecialEndDate()));
 }
 }
 }
