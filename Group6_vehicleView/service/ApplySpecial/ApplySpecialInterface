@@ -6,7 +6,6 @@ import org.neu.project.dto.Special;
 
 interface ApplySpecialInterface {
     //Special getSpecial(ArrayList<Special> specialList);
-    double getLowestPrice();
     void setSplTree()throws ParseException;
 
 }
