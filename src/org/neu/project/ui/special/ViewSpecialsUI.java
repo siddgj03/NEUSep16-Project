@@ -1,5 +1,4 @@
 package org.neu.project.ui.special;
-
  
 import javax.swing.*;
 import javax.swing.event.TableModelListener;
@@ -37,12 +36,9 @@ public class ViewSpecialsUI extends BaseFrameForViewSpecials {
 		private JButton btnSearch;
 		private JButton btnAdd;	
 		public void create(){
-			//System.out.println(dealerid);
 			String filename=defaultPath +dealerid+".txt";
 			SpecialManagement specials = new SpecialManagement(filename, dealerid);
 			this.list=specials.getList();
-//			for(Special s : list)
-//				System.out.println(s.getSpecialID());
 			setTitle("Specials");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			getContentPane().setBackground(new Color(51, 153, 204));
@@ -55,11 +51,6 @@ public class ViewSpecialsUI extends BaseFrameForViewSpecials {
 			btnAdd.setFont(new Font("Klee", Font.BOLD, 13));
 			btnAdd.addActionListener(new buttonListener1());
 			getContentPane().add(btnAdd);
-				
-//				btnAdd = new JButton("Delete");
-//				btnAdd.setBounds(124, 6, 84, 29);
-//				btnAdd.addActionListener(new buttonListener3());
-//				getContentPane().add(btnAdd);
 				
 				btnAdd = new JButton("Edit");
 				btnAdd.setBounds(55, 6, 75, 29);
@@ -84,7 +75,6 @@ public class ViewSpecialsUI extends BaseFrameForViewSpecials {
 				List<String> columnNames = Arrays.asList(" ","Title","Make","Trim","Car Year","Max Price","Min Price","Model","Start Date","End Date","Discount","Discount Percentage");
 				SpecialTableModel specialTable = new SpecialTableModel(columnNames, data);
 			    table = new JTable(specialTable); 
-//				table = new JTable(new SpecialTableModel(list));
 			    table.setPreferredScrollableViewportSize(new Dimension(900, 400));
 			    table.getColumnModel().getColumn(0).setPreferredWidth(40);
 			    table.getColumnModel().getColumn(1).setPreferredWidth(80);
@@ -174,10 +164,7 @@ public class ViewSpecialsUI extends BaseFrameForViewSpecials {
 				e.printStackTrace();
 			}
         	 
-    		new ViewSpecialsUI("gmps-xyz");
-    		
-    		
-    		
+    		new ViewSpecialsUI("gmps-curry"); 		
     	}
 
         class buttonListener1 implements ActionListener {//add
@@ -230,19 +217,10 @@ class SpecialTableModel extends AbstractTableModel {
 		this.columnNames = columnNames;
 		this.data = data;
 	}
-//class SpecialTableModel implements TableModel {
-//	 
-// ArrayList<Special> list; 
-//   
-//   public SpecialTableModel(ArrayList<Special> list){
-//    this.list=list;
-//  }
- 
 
 @Override
   public int getRowCount() {
     return data.length;
-//    return list.size();
         }
   @Override
   public int getColumnCount() {
@@ -251,47 +229,7 @@ class SpecialTableModel extends AbstractTableModel {
   @Override
   public String getColumnName(int columnIndex) {
 	  return columnNames.get(columnIndex);
-//    if (columnIndex == 0) {
-//      return " ";
-//    }
-//    if (columnIndex == 1) {
-//      return "Title";
-//    }
-//    if (columnIndex == 2){
-//        return "Make";
-//    }
-//    if (columnIndex == 3){
-//      return "Trim";
-//    }
-//    if (columnIndex == 4){
-//      return "CarYear";
-//    }
-//    if (columnIndex == 5){
-//      return "MaxPrice";
-//    }
-//    if (columnIndex == 6){
-//        return "MinPrice";
-//      }
-//    if (columnIndex == 7){
-//      return "Model";
-//    }
-//    if (columnIndex == 8){
-//      return "Start Date";
-//    }
-//    if (columnIndex == 9){
-//      return "End Date";
-//    }
-//    if (columnIndex == 10){
-//      return "Discount";
-//    }
-//    if (columnIndex == 11){
-//      return "Discount Percentage";
-//    }
-//    return null;
-  }
-
- 
-  
+  }  
   @Override
   public Class<?> getColumnClass(int columnIndex) {
     return String.class;
@@ -301,53 +239,10 @@ class SpecialTableModel extends AbstractTableModel {
     // TODO Auto-generated method stub
     return false;
   }
-
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
 	  return data[rowIndex][columnIndex];
-//    System.out.println(rowIndex + "->" + columnIndex);
-//    Special s = (Special)list.get(rowIndex);
-    
-//    if(s.getSpecialID()==0) return null;
-    
-//    if (columnIndex == 0) {
-//      return s.getSpecialID();
-//    }
-//    if (columnIndex == 1) {
-//      return s.getSpecialTitle();
-//    }
-//    if (columnIndex == 2) {
-//      return s.getCarMake();
-//    }
-//    if (columnIndex == 3) {
-//      return s.getTrim();
-//    }
-//    if (columnIndex == 4) {
-//      return s.getCarYear();
-//    }
-//    if (columnIndex == 5) {
-//      return s.getCarMaxPrice();
-//    }
-//    if (columnIndex == 6) {
-//      return s.getCarMinPrice();
-//    }
-//    if (columnIndex == 7) {
-//        return s.getCarModel();
-//      }
-//    if (columnIndex == 8) {
-//      return DateToString.dateToString(s.getSpecialStartDate());
-//    }
-//    if (columnIndex == 9) {
-//      return DateToString.dateToString(s.getSpecialEndDate());
-//    }if (columnIndex == 10) {
-//        return s.getDiscountValue();
-//      }if (columnIndex == 11) {
-//          return s.getDicountPercentage();
-//      }
-//    return null;
   }
- 
-  
   @Override
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
     // TODO Auto-generated method stub
@@ -360,8 +255,5 @@ class SpecialTableModel extends AbstractTableModel {
   public void removeTableModelListener(TableModelListener l) {
     // TODO Auto-generated method stub
   }
-  
-
-  
+   
 }
-
