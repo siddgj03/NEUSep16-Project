@@ -12,19 +12,19 @@ private Special spl;
 private Vehicle car;
 
 public ApplySpecial(Vehicle c) throws ParseException
-{   car=c;
-	car.splTree= new TreeSet<CarSpecificSpecialList>(new CompareByPrice());
-	car.splTreeByExpiry =new TreeSet<CarSpecificSpecialList>(new CompareByExpiry());
-	initProcess();
+{   
+	car=c;	
 }
 
 public ApplySpecial()
 {
-	throw new IllegalArgumentException("Pass the vehicle object as parameter");
+	throw new IllegalArgumentException("Pass the Vehicle object as parameter");
 }
 
- void initProcess() throws ParseException
-{   SpecialManagement spm=new SpecialManagement(car.getWebId()+".txt",car.getWebId());
+ void applySpecial() throws ParseException
+{   car.splTree= new TreeSet<CarSpecificSpecialList>(new CompareByPrice());
+    car.splTreeByExpiry =new TreeSet<CarSpecificSpecialList>(new CompareByExpiry());
+	 SpecialManagement spm=new SpecialManagement(car.getWebId()+".txt",car.getWebId());
 	for(i=0;i< (spm.getList()).size();i++)
 	{   
 		f=1;
@@ -87,7 +87,7 @@ if(spl.getDiscountValue()!=0)
 	specialledPrice=car.getPrice()-spl.getDiscountValue();
 else
 	specialledPrice=car.getPrice()-((spl.getDicountPercentage()/100.00)*car.getPrice());
-
+	
 car.splTree.add(new CarSpecificSpecialList(spl,specialledPrice,spl.getSpecialEndDate()));
 car.splTreeByExpiry.add(new CarSpecificSpecialList(spl,specialledPrice,spl.getSpecialEndDate()));
 }
@@ -118,8 +118,8 @@ public double getLowestPrice() throws ParseException {
                	           
 	            }else
 	            {
-	            new ApplySpecial(car);
-	            getLowestPrice();
+	            (new ApplySpecial(car)).applySpecial();
+	            (new ApplySpecial(car)).getLowestPrice();
 	            }
      return lowest;	   
 }

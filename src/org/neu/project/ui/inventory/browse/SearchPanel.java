@@ -187,15 +187,18 @@ class SearchPanel extends JPanel {
 			selectmaxprice = (String)maxPrice.getSelectedItem();
 
 			ArrayList<SearchCommand> searchCommands = new ArrayList<>();
+			ArrayList<String> filterCategory = new ArrayList<>();
+			// Add Category filters
 			if (selectnew) {
-				searchCommands.add(new SearchCommand(New.getActionCommand(), "new"));
+				filterCategory.add("new");
 			}
 			if (selectused) {
-				searchCommands.add(new SearchCommand(Used.getActionCommand(), "used"));
+				filterCategory.add("used");
 			}
 			if (selectcertified) {
-				searchCommands.add(new SearchCommand(Certified.getActionCommand(), "certified"));
+				filterCategory.add("certified");
 			}
+			// Add Other search filters
 			if (!selectmakes.equals("All Makes")) {
 				searchCommands.add(new SearchCommand(makes.getActionCommand(), makes.getSelectedItem().toString()));
 			}
@@ -211,21 +214,22 @@ class SearchPanel extends JPanel {
 			if (!selectmaxprice.equals("No Max Price")) {
 				searchCommands.add(new SearchCommand(maxPrice.getActionCommand(), maxPrice.getSelectedItem().toString()));
 			}
-
+			// Filter the vehicles
 			frame.loadVehicles();
 			Collection<Vehicle> result = frame.getInventory();
 			InventorySearchControl isc = new InventorySearchControl();
 			for (SearchCommand cmd: searchCommands) {
-//				System.out.println("key is "+cmd.getSearchKey().toString());
-//				System.out.println("value is "+cmd.getSearchValue().toString());
 				result = isc.filter(result, cmd.getSearchKey(), cmd.getSearchValue());
+			}
+			// If not empty, filter by category
+			if (filterCategory.size() > 0) {
+				result = isc.filter(result, InventorySearchControl.FILTER_BY_CATEGORY
+						, filterCategory.toArray(new String[0]));
 			}
 			frame.setInventory(result);
 		}
 
 	}
-
-}
 
 class SearchCommand {
 	public String getSearchKey() {
