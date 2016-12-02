@@ -224,7 +224,7 @@ class SearchPanel extends JPanel {
 				result = isc.filter(result, InventorySearchControl.FILTER_BY_CATEGORY
 						, filterCategory.toArray(new String[0]));
 			}
-			frame.setInventory(result);
+			frame.setInventory(frame.reSort(result));
 		}
 
 	}
