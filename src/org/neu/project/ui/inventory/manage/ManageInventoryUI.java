@@ -66,8 +66,8 @@ public class ManageInventoryUI extends BaseFrame{
 	}
 	/**
 	 * Open ManageInventoryUI
-	 * @param vehicle : Pass a current selected vehicle, if adding new vehicle, please pass a new Vehicle(dealerId).
-	 * @param bAddVehicle : If add new vehicle : true, else : false.
+	 * @param vehicle : Pass a current selected vehicle, if adding a new vehicle, please pass a new Vehicle(dealerId).
+	 * @param bAddVehicle : If add a new vehicle : true, else : false.
 	 */
 	public ManageInventoryUI(Vehicle vehicle, boolean bAddVehicle) {
 		super(scrWidth, scrHeight);
