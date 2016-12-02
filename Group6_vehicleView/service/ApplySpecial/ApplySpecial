@@ -32,9 +32,11 @@ public ApplySpecial()
 }
 public double getLowestPrice(){
     double lowestPrice;//doing logic here
+    car.setLowestPrice(lowestPrice);
     return lowestPrice;
 }
 public TreeSet getAppliedSpecialList(){
+     setSplTree();
      return splTree;
 }
  void initProcess() throws ParseException
