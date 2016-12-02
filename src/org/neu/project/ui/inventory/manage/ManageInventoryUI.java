@@ -269,7 +269,7 @@ public class ManageInventoryUI extends BaseFrame{
 //    	Vehicle vehicle = (Vehicle)inventory.getVehicles().toArray()[0];
 //    	
 //    	new ManageInventoryUI(vehicle, false);
-//    }
+//    } 
 
 // Scenario one : Add a new Vehicle
 //    public static void main(String[] args) {
