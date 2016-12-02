@@ -71,7 +71,7 @@ public class ManageInventoryUI extends BaseFrame{
 	 */
 	public ManageInventoryUI(Vehicle vehicle, boolean bAddVehicle) {
 		super(scrWidth, scrHeight);
-		display(); 
+		display();
 		currentVehicle = vehicle;
 		this.dealerId = currentVehicle.getWebId();
 		setupContent();
