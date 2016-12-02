@@ -3,24 +3,24 @@ package org.neu.project.ui.inventory.browse;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.TreeSet;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import org.neu.project.dao.InventoryDAO;
 import org.neu.project.dto.Vehicle;
 
 @SuppressWarnings("serial")
 class SearchPanel extends JPanel {
+
 
 	private JCheckBox New;
 	private JCheckBox Used;
@@ -29,10 +29,12 @@ class SearchPanel extends JPanel {
 	private JComboBox<String> models;
 	private JComboBox<String> maxPrice;
 	private JComboBox<String> types;
+	private JComboBox<String> years;
 	private JButton search;
 	String selectmakes;
 	String selectmodels;
 	String selecttypes;
+	String selectyears;
 	String selectmaxprice;
 	boolean selectnew;
 	boolean selectused;
@@ -46,16 +48,23 @@ class SearchPanel extends JPanel {
 		this.frame = frame;
 
 		New = new JCheckBox("New");
+		New.setActionCommand(InventorySearchControl.FILTER_BY_CATEGORY);
 		Used = new JCheckBox("Used");
+		Used.setActionCommand(InventorySearchControl.FILTER_BY_CATEGORY);
 		Certified = new JCheckBox("Certified");
-		//Font bigFont = new Font("", Font.BOLD, 18);
-		//New.setFont(bigFont);
-		//Used.setFont(bigFont);
-		//Certified.setFont(bigFont);
+		Certified.setActionCommand(InventorySearchControl.FILTER_BY_CATEGORY);
+		
 		makes = new JComboBox<String>();
+		makes.setActionCommand(InventorySearchControl.FILTER_BY_MAKE);
 		models = new JComboBox<String>();
+		models.setActionCommand(InventorySearchControl.FILTER_BY_MODEL);
 		maxPrice = new JComboBox<String>();
+		maxPrice.setActionCommand(InventorySearchControl.FILTER_BY_PRICE);
 		types = new JComboBox<String>();
+		types.setActionCommand(InventorySearchControl.FILTER_BY_TYPE);
+		years = new JComboBox<String>();
+		years.setActionCommand(InventorySearchControl.FILTER_BY_YEAR);
+		
 		search = new JButton("SEARCH INVENTORY");
 
 
@@ -65,25 +74,29 @@ class SearchPanel extends JPanel {
 		add(makes);
 		add(models);
 		add(types);
+		add(years);
 		add(maxPrice);
 		add(search);
 
 
-		addSearchInformation asi = new addSearchInformation(makes, models, types, maxPrice);
+		new AddSearchInformation(makes, models, types, maxPrice, years);
 
 		addListener();
+		
 	}
+	
 
 	public void addListener() {
 
-		makes.addActionListener(new MatchMakesAndModelsListener());
-		models.addActionListener(new MatchModelsAndTypesListener());
+		makes.addActionListener(new MatchMakesAndModels());
+		models.addActionListener(new MatchModelsAndTypes());
+		models.addActionListener(new MatchModelsAndYears());
 
 		search.addActionListener(new ClickMeSearch(frame));
 	}
 
 
-	class MatchMakesAndModelsListener implements ActionListener {
+	class MatchMakesAndModels implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -104,7 +117,7 @@ class SearchPanel extends JPanel {
 
 	}
 
-	class MatchModelsAndTypesListener implements ActionListener {
+	class MatchModelsAndTypes implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -115,6 +128,26 @@ class SearchPanel extends JPanel {
 				ConditionMatching cm = new ConditionMatching();
 				try {
 					cm.matchModelsAndTypes(types, selectmodels);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		}
+
+	}
+	
+	class MatchModelsAndYears implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+
+			selectmodels = (String) models.getSelectedItem();
+			if (selectmakes != null && !selectmodels.equals("All Models")) {
+				ConditionMatching cm = new ConditionMatching();
+				try {
+					cm.matchModelsAndYears(years, selectmodels);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -142,197 +175,233 @@ class SearchPanel extends JPanel {
 			// TODO Auto-generated method stub
 
 			// First refresh the inventory
-			frame.loadVehicles();
+			// ToDo: No Year selection?
 			selectnew = New.isSelected();
 			selectused = Used.isSelected();
 			selectcertified = Certified.isSelected();
 			selectmakes = (String) makes.getSelectedItem();
 			selectmodels = (String) models.getSelectedItem();
 			selecttypes = (String) types.getSelectedItem();
+			selectyears = (String) years.getSelectedItem();
 			selectmaxprice = (String)maxPrice.getSelectedItem();
 
+			ArrayList<SearchCommand> searchCommands = new ArrayList<>();
+			if (selectnew) {
+				searchCommands.add(new SearchCommand(New.getActionCommand(), "new"));
+			}
+			if (selectused) {
+				searchCommands.add(new SearchCommand(Used.getActionCommand(), "used"));
+			}
+			if (selectcertified) {
+				searchCommands.add(new SearchCommand(Certified.getActionCommand(), "certified"));
+			}
+			if (!selectmakes.equals("All Makes")) {
+				searchCommands.add(new SearchCommand(makes.getActionCommand(), makes.getSelectedItem().toString()));
+			}
+			if (!selectmodels.equals("All Models")) {
+				searchCommands.add(new SearchCommand(models.getActionCommand(), models.getSelectedItem().toString()));
+			}
+			if (!selecttypes.equals("All Types")) {
+				searchCommands.add(new SearchCommand(types.getActionCommand(), types.getSelectedItem().toString()));
+			}
+			if (!selectyears.equals("All Years")) {
+				searchCommands.add(new SearchCommand(years.getActionCommand(), years.getSelectedItem().toString()));
+			}
+			if (!selectmaxprice.equals("No Max Price")) {
+				searchCommands.add(new SearchCommand(maxPrice.getActionCommand(), maxPrice.getSelectedItem().toString()));
+			}
+
+			frame.loadVehicles();
+			Collection<Vehicle> result = frame.getInventory();
 			InventorySearchControl isc = new InventorySearchControl();
-
-			Collection<Vehicle> result = new ArrayList<Vehicle>();
-			result = isc.filterMake(frame.getInventory(), result, selectmakes, selectmodels, selecttypes, selectmaxprice, selectnew, selectused, selectcertified);
+			for (SearchCommand cmd: searchCommands) {
+//				System.out.println("key is "+cmd.getSearchKey().toString());
+//				System.out.println("value is "+cmd.getSearchValue().toString());
+				result = isc.filter(result, cmd.getSearchKey(), cmd.getSearchValue());
+			}
 			frame.setInventory(result);
-
-//			for (Vehicle v : result) {
-//
-//				System.out.println(v.getMake());
-//			}
-//			if (result.isEmpty()) System.out.println("why am I fucking empty?!");
-//
-//			if (selectnew == true)
-//				System.out.println("i want new");
-//			if (selectused == true)
-//				System.out.println("i want used");
-//			if (selectcertified == true)
-//				System.out.println("i want certified");
-//			if (selectmakes != null)
-//				System.out.println(selectmakes);
-//			if (selectmodels != null)
-//				System.out.println(selectmodels);
-//			if (selecttypes != null)
-//				System.out.println(selecttypes);
-//			if (selectmaxprice != null)
-//				System.out.println(selectmaxprice);
 		}
 
 	}
 
 }
 
-
-class InventorySearchControl {
-
-	// List<Vehicle> result = new ArrayList<Vehicle>();
-
-	public Collection<Vehicle> filterMake(Collection<Vehicle> inventory, Collection<Vehicle> result, String make,
-	                                      String model, String type, String price, boolean categorynew, boolean categoryused,
-	                                      boolean categorycertified) {
-
-		for (Vehicle v : inventory) {
-
-			if ((make.equals("All Makes") || v.getMake().equals(make))
-					    && (model.equals("All Models") || v.getModel().equals(model))
-					    && (type.equals("All Types") || v.getType().equals(type))
-					    && (price.equals("No Max Price") || v.getPrice() <= Double.parseDouble(price))) {
-
-				if (categorynew == true && v.getCategory().equals("new")) {
-					result.add(v);
-				} else if (categoryused == true && v.getCategory().equals("used")) {
-					result.add(v);
-				} else if (categorycertified == true && v.getCategory().equals("certified")) {
-					result.add(v);
-				} else if (categorynew == false && categoryused == false && categorycertified == false) {
-					result.add(v);
-				}
-			}
-
-
-		}
-
-		return result;
+class SearchCommand {
+	public String getSearchKey() {
+		return searchKey;
 	}
 
+	public String getSearchValue() {
+		return searchValue;
+	}
+
+	private String searchKey;
+	private String searchValue;
+
+	public SearchCommand(String searchKey, String searchValue) {
+		this.searchKey = searchKey;
+		this.searchValue = searchValue;
+	}
 }
 
 class ConditionMatching {
 
-	HashMap<String, HashSet<String>> vehicleMakes = new HashMap<String, HashSet<String>>();
-	HashMap<String, HashSet<String>> vehicleModels = new HashMap<String, HashSet<String>>();
+	InventoryDAO idao = new InventoryDAO();
+	Collection<Vehicle>allv = new ArrayList<Vehicle>();
+	
+	HashMap<String, HashSet<String>> vehicleMakesAndModels = new HashMap<String, HashSet<String>>();
+	HashMap<String, HashSet<String>> vehicleModelsAndTypes = new HashMap<String, HashSet<String>>();
+	HashMap<String, HashSet<Integer>> vehicleModelsAndYears = new HashMap<String, HashSet<Integer>>();
 
 	HashSet<String> setMakes = new HashSet<String>();
 	HashSet<String> setModels = new HashSet<String>();
 	HashSet<String> setTypes = new HashSet<String>();
+	HashSet<Integer> setYears = new HashSet<Integer>();
+	
 
+	public void getAllSet(HashSet<String>setMakes, HashSet<String>setModels, HashSet<String>setTypes, HashSet<Integer>setYears) {
+		
+		allv = idao.getAllVehicles();
+		for (Vehicle v : allv) {
+			setMakes.add(v.getMake());
+		}
+		for (Vehicle v : allv) {
+			setModels.add(v.getModel());
+		}
+		for (Vehicle v : allv) {
+			setTypes.add(v.getType());
+		}
+		for (Vehicle v : allv) {
+			setYears.add(v.getYear());
+		}
+	}
+	
 	public void matchMakesAndModels(JComboBox<String> models, String certainMake) throws IOException {
-
-		readFile(setMakes, setModels, setTypes);
-		inputMakesAndModels(vehicleMakes);
-
+        
+		getAllSet(setMakes, setModels, setTypes, setYears);
+		inputMakesAndModels(vehicleMakesAndModels);
+		
 		for (String s : setModels) {
 			models.removeItem(s);
 		}
-		for (String s : vehicleMakes.get(certainMake)) {
+		for (String s : vehicleMakesAndModels.get(certainMake)) {
 			models.addItem(s);
 		}
 	}
 
 	public void matchModelsAndTypes(JComboBox<String> types, String certainModel) throws IOException {
 
-		readFile(setMakes, setModels, setTypes);
-		inputModelsAndTypes(vehicleModels);
+		getAllSet(setMakes, setModels, setTypes, setYears);
+		inputModelsAndTypes(vehicleModelsAndTypes);
 
 		for (String s : setTypes) {
 			types.removeItem(s);
 		}
-		for (String s : vehicleModels.get(certainModel)) {
+		for (String s : vehicleModelsAndTypes.get(certainModel)) {
 			types.addItem(s);
 		}
 
 	}
+	
+	public void matchModelsAndYears(JComboBox<String> years, String certainModel) throws IOException {
 
-	private void inputMakesAndModels(HashMap<String, HashSet<String>> vehicleMakes2) throws IOException {
+		getAllSet(setMakes, setModels, setTypes, setYears);
+		inputModelsAndYears(vehicleModelsAndYears);
 
-		File filefolder = new File("data/");
-		String file = findFile(filefolder);
-		@SuppressWarnings("resource")
-		BufferedReader reader = new BufferedReader(new FileReader(file));
-		String line;
+		for (int i : setYears) {
+			years.removeItem(String.valueOf(i));
+		}
+		for (Integer i : vehicleModelsAndYears.get(certainModel)) {
+			years.addItem(String.valueOf(i));
+		}
 
-		while ((line = reader.readLine()) != null) {
-			String[] str = line.split("~");
-			if (!vehicleMakes2.containsKey(str[4])) {
-				vehicleMakes2.put(str[4], new HashSet<String>());
-				vehicleMakes2.get(str[4]).add(str[5]);
-			} else {
-				vehicleMakes2.get(str[4]).add(str[5]);
+	}
+
+	private void inputMakesAndModels(HashMap<String, HashSet<String>> vehicleMakesAndModels) throws IOException {
+
+		allv = idao.getAllVehicles();
+		
+		for (Vehicle v : allv) {
+			if (!vehicleMakesAndModels.containsKey(v.getMake())) {
+				vehicleMakesAndModels.put(v.getMake(), new HashSet<String>());
+			}
+			
+			vehicleMakesAndModels.get(v.getMake()).add(v.getModel());
+
+		}
+
+	}
+
+	private void inputModelsAndTypes(HashMap<String, HashSet<String>> vehicleModelsAndTypes) throws IOException {
+
+		allv = idao.getAllVehicles();
+		
+		for (Vehicle v : allv) {
+			if (!vehicleModelsAndTypes.containsKey(v.getModel())) {
+				vehicleModelsAndTypes.put(v.getModel(), new HashSet<String>());
+			}
+			
+			vehicleModelsAndTypes.get(v.getModel()).add(v.getType());
+
+		}
+	}
+	
+	private void inputModelsAndYears(HashMap<String, HashSet<Integer>> vehicleModelsAndYears) throws IOException {
+
+		allv = idao.getAllVehicles();
+
+		for (Vehicle v : allv) {
+			if (!vehicleModelsAndYears.containsKey(v.getModel())) {
+				vehicleModelsAndYears.put(v.getModel(), new HashSet<Integer>());
 			}
 
-		}
-	}
-
-	private void inputModelsAndTypes(HashMap<String, HashSet<String>> vehicleModels2) throws IOException {
-
-		File filefolder = new File("data/");
-		String file = findFile(filefolder);
-		@SuppressWarnings("resource")
-		BufferedReader reader = new BufferedReader(new FileReader(file));
-		String line;
-
-		while ((line = reader.readLine()) != null) {
-			String[] str = line.split("~");
-			if (!vehicleModels2.containsKey(str[5])) {
-				vehicleModels2.put(str[5], new HashSet<String>());
-				vehicleModels2.get(str[5]).add(str[7]);
-			} else {
-				vehicleModels2.get(str[5]).add(str[7]);
-			}
+			vehicleModelsAndYears.get(v.getModel()).add(v.getYear());
 
 		}
 	}
 
-	private void readFile(HashSet<String> setMakes, HashSet<String> setModels, HashSet<String> setTypes)
-			throws IOException {
-
-		File filefolder = new File("data/");
-		String file = findFile(filefolder);
-		@SuppressWarnings("resource")
-		BufferedReader reader = new BufferedReader(new FileReader(file));
-		String line;
-
-		while ((line = reader.readLine()) != null) {
-			String[] str = line.split("~");
-			setMakes.add(str[4]);
-			setModels.add(str[5]);
-			setTypes.add(str[7]);
-		}
-	}
-
-	private String findFile(File filefolder) {
-		// TODO Auto-generated method stub
-		String filepath = null;
-		for (File file : filefolder.listFiles()) {
-			filepath = file.getAbsolutePath();
-		}
-		return filepath;
-	}
 
 }
 
 
-class addSearchInformation {
+class AddSearchInformation {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public addSearchInformation(JComboBox makes, JComboBox models, JComboBox types, JComboBox maxPrice)
+	public AddSearchInformation(JComboBox makes, JComboBox models, JComboBox types, JComboBox maxPrice, JComboBox years)
 			throws IOException {
+
 		HashSet<String> setMakes = new HashSet<String>();
 		HashSet<String> setModels = new HashSet<String>();
 		HashSet<String> setTypes = new HashSet<String>();
+		TreeSet<Integer> setYears = new TreeSet<Integer>();
+		
+		getAllAttributes(setMakes, setModels, setTypes, setYears);
+
+
+//		HashSet<String> setDealers = new HashSet<String>();
+//		getAllDealers(setDealers);
+//
+//		InventoryManagerImp imp = new InventoryManagerImp();
+//		Inventory DealerInventory = new Inventory();
+//
+//		for (String dealerID : setDealers) {    																		
+//
+//			DealerInventory = imp.getInventory(dealerID);
+//
+//			for (String make : DealerInventory.getAllMaker()) {
+//				setMakes.add(make);
+//			}
+//			for (String model : DealerInventory.getAllModel()) {
+//				setModels.add(model);
+//			}
+//			for (String type : DealerInventory.getAllType()) {
+//				setTypes.add(type);
+//			}
+//			for (int year : DealerInventory.getAllYear()) {
+//				setYears.add(year);
+//			}
+//		}
 
 		makes.addItem("All Makes");
-		readFile(setMakes, setModels, setTypes);
 		for (String s : setMakes) {
 			if (!s.isEmpty() && !s.endsWith("make"))
 				makes.addItem(s);
@@ -349,37 +418,57 @@ class addSearchInformation {
 			if (!s.isEmpty() && !s.endsWith("type"))
 				types.addItem(s);
 		}
+		years.addItem("All Years");
+		for (int i : setYears) {
+			String year = String.valueOf(i);
+			years.addItem(year);
+		}
 
 		maxPrice.addItem("No Max Price");
-		String[] prices = { "10000", "20000", "30000", "40000", "50000", "60000", "70000", "80000", "90000", "100000" };
+		String[] prices = { "10000", "20000", "30000", "40000", "50000", "60000", "70000", "80000", "90000", "100000",
+				"200000", "500000", "1000000" };
 		for (String s : prices)
 			maxPrice.addItem(s);
+
 	}
-
-	private static void readFile(HashSet<String> setMakes, HashSet<String> setModels, HashSet<String> setTypes)
-			throws IOException {
-
-		File filefolder = new File("data/");
-		String file = findFile(filefolder);
-		@SuppressWarnings("resource")
-		BufferedReader reader = new BufferedReader(new FileReader(file));
-		String line;
-
-		while ((line = reader.readLine()) != null) {
-			String[] str = line.split("~");
-			setMakes.add(str[4]);
-			setModels.add(str[5]);
-			setTypes.add(str[7]);
+	
+	public void getAllAttributes(HashSet<String>setMakes, HashSet<String>setModels, HashSet<String>setTypes, TreeSet<Integer>setYears) {
+		
+		InventoryDAO idao = new InventoryDAO();
+		Collection<Vehicle>allv = new ArrayList<Vehicle>();
+		allv = idao.getAllVehicles();
+		
+		for (Vehicle v : allv) {
+			setMakes.add(v.getMake());
+		}
+		for (Vehicle v : allv) {
+			setModels.add(v.getModel());
+		}
+		for (Vehicle v : allv) {
+			setTypes.add(v.getType());
+		}
+		for (Vehicle v : allv) {
+			setYears.add(v.getYear());
 		}
 	}
 
-	private static String findFile(File filefolder) {
-		// TODO Auto-generated method stub
-		String filepath = null;
-		for (File file : filefolder.listFiles()) {
-			filepath = file.getAbsolutePath();
-		}
-		return filepath;
-	}
+//	private static void getAllDealers(HashSet<String> setDealers) throws IOException {
+//
+//		// File filefolder = new File(System.getProperty("user.dir") +
+//		// "/data/car-dealers");
+//		// String file = findFile(filefolder);
+//
+//		File file = new File(System.getProperty("user.dir") + "/data/car-dealers");
+//		@SuppressWarnings("resource")
+//		BufferedReader reader = new BufferedReader(new FileReader(file));
+//
+//		String line;
+//		while ((line = reader.readLine()) != null) {
+//			String[] str = line.split("\\|");
+//			setDealers.add(str[0]);
+//			setDealers.remove("id");
+//
+//		}
+//	}
 
 }
