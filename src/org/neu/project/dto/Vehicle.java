@@ -1,5 +1,7 @@
 package org.neu.project.dto;
 
+import java.util.UUID;
+
 public class Vehicle {
     
     private String id;
@@ -17,7 +19,12 @@ public class Vehicle {
     }
     
     public Vehicle() {
-        
+        this.id = UUID.randomUUID().toString();
+    }
+    
+    public Vehicle(String dealerId) {
+        this.id = UUID.randomUUID().toString();
+        this.webId = dealerId;
     }
     
     public Vehicle(String id, String webId, String category, String year, String make, String model, String trim, String type, String price) 
@@ -97,6 +104,6 @@ public class Vehicle {
     public String toString() {    
         return id + "~" + webId + "~" + category + "~" + year + "~" + make + "~" +model + "~" + trim + "~" + type + "~" + price;
     }
-   
+    
 }
 	 

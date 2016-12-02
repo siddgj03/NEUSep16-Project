@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import org.neu.project.dto.Vehicle.VehicleInfo;
+
 
 public class Inventory {
     
@@ -35,6 +37,10 @@ public class Inventory {
         if (!pool.containsKey(vec.getId())) {
             pool.put(vec.getId(), vec);
         }
+    }
+    
+    public Vehicle getVehicleById(String vehicleId){
+    	return pool.get(vehicleId);
     }
     
     public Collection<Vehicle> getVehicles() {
@@ -80,52 +86,81 @@ public class Inventory {
         }
     }
     
-    public void modifyCategory(String vehicleID, String category) {
-        if (pool.containsKey(vehicleID)) {
-            Vehicle ve = pool.get(vehicleID);
-            ve.setCategory(category);
-        }
-    }
+//    public void modifyCategory(String vehicleID, String category) {
+//        if (pool.containsKey(vehicleID)) {
+//            Vehicle ve = pool.get(vehicleID);
+//            ve.setCategory(category);
+//        }
+//    }
+//    
+//    public void modifyYear(String vehicleID, String year) {
+//        if (pool.containsKey(vehicleID)) {
+//            Vehicle ve = pool.get(vehicleID);
+//            ve.setYear(year);
+//        }
+//    }
+//    
+//    public void modifyMaker(String vehicleID, String make) {
+//        if (pool.containsKey(vehicleID)) {
+//            Vehicle ve = pool.get(vehicleID);
+//            ve.setMake(make);
+//        }
+//    }
+//    
+//    public void modifyModel(String vehicleID, String model) {
+//        if (pool.containsKey(vehicleID)) {
+//            Vehicle ve = pool.get(vehicleID);
+//            ve.setModel(model);
+//        }
+//    }
+//    
+//    public void modfiyTrime(String vehicleID, String trim) {
+//        if (pool.containsKey(vehicleID)) {
+//            Vehicle ve = pool.get(vehicleID);
+//            ve.setTrim(trim);
+//        }
+//    }
+//    
+//    public void modfiyType(String vehicleID, String type) {
+//        if (pool.containsKey(vehicleID)) {
+//            Vehicle ve = pool.get(vehicleID);
+//            ve.setType(type);
+//        }
+//    }
+//    
+//    public void modifyPrice(String vehicleID, String price) {
+//        if (pool.containsKey(vehicleID)) {
+//            Vehicle ve = pool.get(vehicleID);
+//            ve.setPrice(price);
+//        }
+//    }
     
-    public void modifyYear(String vehicleID, String year) {
-        if (pool.containsKey(vehicleID)) {
+    public void modifyAttribute(String vehicleID, VehicleInfo attribute, String value){
+    	if (pool.containsKey(vehicleID)) {
             Vehicle ve = pool.get(vehicleID);
-            ve.setYear(year);
-        }
-    }
-    
-    public void modifyMaker(String vehicleID, String make) {
-        if (pool.containsKey(vehicleID)) {
-            Vehicle ve = pool.get(vehicleID);
-            ve.setMake(make);
-        }
-    }
-    
-    public void modifyModel(String vehicleID, String model) {
-        if (pool.containsKey(vehicleID)) {
-            Vehicle ve = pool.get(vehicleID);
-            ve.setModel(model);
-        }
-    }
-    
-    public void modfiyTrime(String vehicleID, String trim) {
-        if (pool.containsKey(vehicleID)) {
-            Vehicle ve = pool.get(vehicleID);
-            ve.setTrim(trim);
-        }
-    }
-    
-    public void modfiyType(String vehicleID, String type) {
-        if (pool.containsKey(vehicleID)) {
-            Vehicle ve = pool.get(vehicleID);
-            ve.setType(type);
-        }
-    }
-    
-    public void modifyPrice(String vehicleID, String price) {
-        if (pool.containsKey(vehicleID)) {
-            Vehicle ve = pool.get(vehicleID);
-            ve.setPrice(price);
+            
+            switch (attribute) {
+			case Category:
+				ve.setCategory(value);
+				break;
+			case Year:
+				ve.setYear(value);
+				break;
+			case Make:
+				ve.setMake(value);
+				break;
+			case Trim:
+				ve.setTrim(value);
+				break;
+			case Model:
+				ve.setModel(value);
+				break;
+			case Price:
+				ve.setPrice(value);
+				break;
+			default:
+				break;
+			}
         }
     }
 
