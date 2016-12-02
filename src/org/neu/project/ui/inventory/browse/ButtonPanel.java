@@ -79,7 +79,10 @@ class BrowseActionListener implements ActionListener {
 				new ManageInventoryUI(selectedVehicle, false);
 				break;
 			case BrowseInventory.COMMAND_ADD:
-				new ManageInventoryUI(new Vehicle(), true);
+				// Create new Vehicle for the next UI with Dealer ID attached
+				Vehicle newVehicle = new Vehicle();
+				newVehicle.setWebId(frame.getDealerId());
+				new ManageInventoryUI(newVehicle, true);
 				break;
 			case BrowseInventory.COMMAND_DELETE:
 				int dialogResult = JOptionPane.showConfirmDialog(
