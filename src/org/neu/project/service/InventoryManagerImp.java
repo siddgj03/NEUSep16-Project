@@ -36,14 +36,18 @@ public class InventoryManagerImp implements InventoryManager{
 		inventoryDao.addVehicleToInventory(dealerId, vehicle);
 	}
 	
-	public void updateInventory(String dealerId) {
-		inventoryDao.updateInventoryInfo(dealerId);
+	public void updateInventory(String dealerId, Vehicle vehicle) {
+		inventoryDao.updateInventoryInfo(dealerId, vehicle);
 	}
 	
 	public void deleteVehicle(String dealerId, String vehicleId) {
 		inventoryDao.removeVehicleFromInventory(dealerId, vehicleId);
 	}
-
+	
+//	public Inventory reloadInventory(String dealerId) {
+//		return inventoryDao.reloadInventory();
+//	}
+	
 	@Override
 	public InventorySearchControl getInventorySearchControlForMakeSelection(String make, String dealerId) {
 		// TODO Auto-generated method stub

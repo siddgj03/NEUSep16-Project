@@ -36,7 +36,8 @@ public class InventoryDAO {
 		writeToFile(dealerId);
 	}
 	
-	public void updateInventoryInfo(String dealerId){
+	public void updateInventoryInfo(String dealerId, Vehicle vehicle){
+		getInventoryByDealerId(dealerId).updateVehicle(vehicle);
 		writeToFile(dealerId);
 	}
 	
@@ -56,10 +57,6 @@ public class InventoryDAO {
 		return dealerInventory.get(dealerId);
 	}
 	
-//	public Collection<Vehicle> getVehiclesByDealerId(String dealerId){
-//		return dealerInventory.get(dealerId).getVehicles();
-//	}
-	
 	/**
 	 * Invoke this function to get "All" Inventories in the system
 	 */
@@ -75,7 +72,6 @@ public class InventoryDAO {
 		Collection<Vehicle> cVehicles = new ArrayList<Vehicle>();
 		
 		for(Inventory i : cInventories){
-			//System.out.println(i.getDealerId() + "\t" + i.getAllVehicles().size());
 			cVehicles.addAll(i.getVehicles());
 		}
 		
@@ -83,7 +79,7 @@ public class InventoryDAO {
 	}
     
 	public void writeToFile(String dealerId){
-		System.out.println("Save ==========");
+		System.out.println("Save ======= " + dealerId);
 		Inventory inventory = getInventoryByDealerId(dealerId);
 		writer.setInventory(inventory);
 		try{

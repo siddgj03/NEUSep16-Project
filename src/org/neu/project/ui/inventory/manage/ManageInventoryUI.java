@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import org.neu.project.dto.Inventory;
 import org.neu.project.dto.Vehicle;
 import org.neu.project.dto.Vehicle.VehicleInfo;
 import org.neu.project.service.InventoryManagerImp;
@@ -87,6 +88,8 @@ public class ManageInventoryUI extends BaseFrame{
 		carModelInfo.setText(currentVehicle.getModel() == null ? "" : currentVehicle.getModel());
 		typeInfo.setText(currentVehicle.getType() == null ? "" : currentVehicle.getType());
 		carPriceInfo.setText(String.valueOf(currentVehicle.getPrice()));
+		categoryInfo.setSelectedItem(currentVehicle.getCategory());
+		carYearInfo.setSelectedItem(currentVehicle.getYear());
 	}
 	
 	@Override
@@ -194,11 +197,15 @@ public class ManageInventoryUI extends BaseFrame{
 			if(bAddVehicle){
 				setupVehicleAttributes();
 				imp.addVehicleToInventory(currentVehicle.getWebId(), currentVehicle);
+				System.out.println(currentVehicle.getId() + " is Added !");
 			}
 			else{
 				setupVehicleAttributes();
-				imp.updateInventory(currentVehicle.getWebId());
+				imp.updateInventory(currentVehicle.getWebId(), currentVehicle);
+				System.out.println(currentVehicle.getId() + " is Updated !");
 			}
+			
+			dispose();
 		}
 	}
 	
@@ -255,10 +262,14 @@ public class ManageInventoryUI extends BaseFrame{
 		
 	}
 	
-//    public static void main(String[] args) {
-//    	Vehicle vehicle2 = new Vehicle("gmps-bertogden-cch");
-//    	new ManageInventoryUI(vehicle2, true);
-//    }
+    public static void main(String[] args) {
+    	InventoryManagerImp browseImp = new InventoryManagerImp();
+    	Inventory inventory = browseImp.getInventory("gmps-bertogden-cch");
+    	Vehicle vehicle = (Vehicle)inventory.getVehicles().toArray()[0];
+    	Vehicle vehicle2 = new Vehicle("gmps-bertogden-cch");
+    	new ManageInventoryUI(vehicle, false);
+    	
+    }
 
 }
 

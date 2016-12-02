@@ -37,6 +37,12 @@ public class Inventory {
         }
     }
     
+    public void updateVehicle(Vehicle vec) {
+        if (pool.containsKey(vec.getId())) {
+            pool.replace(vec.getId(), vec);
+        }
+    }
+    
     public Vehicle getVehicleById(String vehicleId){
     	return pool.get(vehicleId);
     }
