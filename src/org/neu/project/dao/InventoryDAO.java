@@ -12,25 +12,32 @@ public class InventoryDAO {
 	// key : dealerId, value : Inventory of specific dealer
 	private HashMap<String, Inventory> dealerInventory;
 	private VehicleReader reader;
-	//private VehicleWriter writer;
+	private VehicleWriter writer;
     
 	public InventoryDAO(){
 		dealerInventory = new HashMap<String, Inventory>();
 		reader = new VehicleReader();
 		reader.readAllVehicleFiles();
 		setUpInventory();
+		writer = new VehicleWriter();
 	}
 	
 	public void addInventory(String dealerId, Inventory inventory){
 		dealerInventory.put(dealerId, inventory);
 	}
 	
-	public void deleteInventory(String dealerId){
-		
+	public void addVehicleToInventory(String dealerId, Vehicle vehicle){ 
+		getInventoryByDealerId(dealerId).addVehicle(vehicle);
+		writeToFile(dealerId);
 	}
 	
-	public void updateInventory(String dealerId){
-		
+	public void removeVehicleFromInventory(String dealerId, String vehicleId){
+		getInventoryByDealerId(dealerId).removeVehicle(vehicleId);
+		writeToFile(dealerId);
+	}
+	
+	public void updateInventoryInfo(String dealerId){
+		writeToFile(dealerId);
 	}
 	
 	public ArrayList<Inventory> getInventoriesFromReader(){
@@ -75,8 +82,16 @@ public class InventoryDAO {
 		return cVehicles;
 	}
     
-//	public void writeFile(InventoryResults inventoryResults){
-//		
-//	}
+	public void writeToFile(String dealerId){
+		System.out.println("Save ==========");
+		Inventory inventory = getInventoryByDealerId(dealerId);
+		writer.setInventory(inventory);
+		try{
+			writer.writeIntoFile(dealerId);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

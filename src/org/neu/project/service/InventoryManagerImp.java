@@ -31,6 +31,18 @@ public class InventoryManagerImp implements InventoryManager{
 	public Inventory getInventory(String dealerId) {
 		return inventoryDao.getInventoryByDealerId(dealerId);
 	}
+	
+	public void addVehicleToInventory(String dealerId, Vehicle vehicle) {
+		inventoryDao.addVehicleToInventory(dealerId, vehicle);
+	}
+	
+	public void updateInventory(String dealerId) {
+		inventoryDao.updateInventoryInfo(dealerId);
+	}
+	
+	public void deleteVehicle(String dealerId, String vehicleId) {
+		inventoryDao.removeVehicleFromInventory(dealerId, vehicleId);
+	}
 
 	@Override
 	public InventorySearchControl getInventorySearchControlForMakeSelection(String make, String dealerId) {
@@ -50,9 +62,15 @@ public class InventoryManagerImp implements InventoryManager{
 //		Inventory i = im.getInventory("gmps-bertogden-cch");
 //		Collection<Vehicle> vehicles = i.getVehicles(); // return vehicles belonging to gmps-bertogden-cch
 //		System.out.println(vehicles.size());
-//	
+//		
+//		for(Vehicle v : vehicles){
+//			if(v.getMake().equals("Ford")){
+//				System.out.println(v.getModel());
+//			}
+//		}
+//		
 //		Collection<Vehicle> allVehicles = im.getAllVehicles(); // return "All" vehicles in the system.
 //		System.out.println(allVehicles.size());
 //	}
-
+	
 }
