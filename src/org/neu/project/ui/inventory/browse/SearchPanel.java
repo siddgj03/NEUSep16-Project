@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import org.neu.project.dao.InventoryDAO;
 import org.neu.project.dto.Vehicle;
+import org.neu.project.service.InventorySearchControl;
 
 @SuppressWarnings("serial")
 class SearchPanel extends JPanel {
@@ -472,3 +473,4 @@ class AddSearchInformation {
 //	}
 
 }
+
