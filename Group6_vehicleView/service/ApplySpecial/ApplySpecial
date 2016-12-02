@@ -45,6 +45,9 @@ public ApplySpecial()
 		setSplTree();
     }	 	
 }
+public double getLowestPrice(){
+      
+}
 public Special getSpecial() {
 	 
 	 spl=(specialList.get(i));
