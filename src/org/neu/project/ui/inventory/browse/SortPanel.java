@@ -20,6 +20,8 @@ class SortPanel extends JPanel
     // Components for sort UI
     private JComboBox<SortItems> sortList;
     private JLabel sortLabel;
+    private SortItems currentItem;
+
 
     // Constructor with the consolidated frame for getting/setting inventory purpose
     public SortPanel(BrowseInventory frame)
@@ -37,7 +39,7 @@ class SortPanel extends JPanel
         sortLabel = new JLabel("Sort By:");
         add(sortLabel);
         add(sortList);
-        sortList.addItemListener(new ItemChangeListener(frame));
+        sortList.addItemListener(new ItemChangeListener(frame, this));
 
 //		 Can not implement due to data limitation
 //		 sortList.addItem(new SortItems("Mileage: High To Low"));
@@ -50,6 +52,20 @@ class SortPanel extends JPanel
 
     }
 
+    public Collection<Vehicle> sort(Collection<Vehicle> unsorted)
+    {
+        if(this.currentItem != null && this.currentItem.isSortable())
+        {
+            return this.currentItem.doSort(unsorted);
+        }
+
+        return unsorted;
+    }
+
+    public void setSortItem(SortItems sortItem)
+    {
+        this.currentItem = sortItem;
+    }
 }
 
 //SortItems class to specify all the sort criterion
@@ -107,10 +123,12 @@ class SortItems
 class ItemChangeListener implements ItemListener
 {
     private BrowseInventory frame;
+    private SortPanel panel;
 
-    public ItemChangeListener(BrowseInventory frame)
+    public ItemChangeListener(BrowseInventory frame, SortPanel panel)
     {
         this.frame = frame;
+        this.panel = panel;
     }
 
     @Override
@@ -118,12 +136,8 @@ class ItemChangeListener implements ItemListener
     {
         if (event.getStateChange() == ItemEvent.SELECTED)
         {
-            SortItems item = (SortItems) event.getItem();
-            if (item.isSortable())
-            {
-                frame.setInventory(item.doSort(frame.getInventory()));
-                System.out.println(frame.getInventory());
-            }
+            this.panel.setSortItem((SortItems)event.getItem());
+            frame.setInventory(this.panel.sort(frame.getInventory());
         }
     }
 }
