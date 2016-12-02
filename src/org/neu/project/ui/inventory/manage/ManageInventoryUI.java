@@ -270,7 +270,7 @@ public class ManageInventoryUI extends BaseFrame{
 //    	
 //    	new ManageInventoryUI(vehicle, false);
 //    } 
-
+ 
 // Scenario one : Add a new Vehicle
 //    public static void main(String[] args) {
 //	    InventoryManagerImp browseImp = new InventoryManagerImp();
