@@ -1,10 +1,11 @@
 package org.neu.project.dto;
 
-import org.neu.project.utils.DateToString;
+import org.neu.project.utils.*;
 
 import java.util.Date;
 
-import static org.neu.project.utils.dateToString;
+import static org.neu.project.utils.DateToString.dateToString;
+
 
 /**
  * Created by qiqi on 2016/11/15.

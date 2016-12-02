@@ -1,4 +1,4 @@
-package src.org.neu.project.utils;
+package org.neu.project.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

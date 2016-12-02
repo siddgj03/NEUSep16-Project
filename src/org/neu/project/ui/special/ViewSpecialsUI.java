@@ -1,4 +1,4 @@
-package org.neu.project.ui.speical;
+package org.neu.project.ui.special;
 
  
 import javax.swing.*;
@@ -103,10 +103,9 @@ public class ViewSpecialsUI extends BaseFrameForViewSpecials {
 			    getContentPane().add(new JScrollPane(table));
 			    
 			    table.setAutoCreateRowSorter(true);
-			    RowSorter<TableModel> sorter = new TableRowSorter<>(specialTable);
+			    RowSorter<SpecialTableModel> sorter = new TableRowSorter<>(specialTable);
 			    table.setRowSorter(sorter);
 			    table.updateUI();
-		
 		}
 	
 		private Object[][] getTableData(ArrayList<Special> input) {
@@ -214,6 +213,9 @@ public class ViewSpecialsUI extends BaseFrameForViewSpecials {
         class buttonListener2 implements ActionListener {//search
         	public void actionPerformed(ActionEvent e){
         		String search=textField.getText();
+        		TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(table.getModel());
+        		table.setRowSorter(rowSorter);
+        		rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + search));
         	}
         }
 }

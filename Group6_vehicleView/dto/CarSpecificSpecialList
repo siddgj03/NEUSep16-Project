@@ -1,0 +1,28 @@
+package org.neu.project.dto;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
+//dto
+
+public class CarSpecificSpecialList {
+	String splID;
+	public Double specialledPrice;
+    public String expiry;
+  public CarSpecificSpecialList(Special spl,double specialledPrice,Date expiry)
+  {   this.splID=spl.toString();
+      this.specialledPrice=Double.valueOf(specialledPrice);
+      this.expiry=expiry;
+  	ArrayList<Object> al=new ArrayList<Object>();
+  	al.add(this.specialledPrice);
+  	al.add(this.expiry);
+  	HashMap<String, ArrayList<Object>> hm =new HashMap<String, ArrayList<Object>>();
+  	hm.put(this.splID, al);	
+  }
+	CarSpecificSpecialList()
+	{
+		
+	}
+}
+
