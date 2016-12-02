@@ -38,6 +38,7 @@ public class BrowseInventory extends BaseFrame {
 	private String selectedVehicleId;
 
 	// Components
+	private SortPanel sortPanel;
 	private Container container;
 	private JScrollPane resultsContainer;
 
@@ -103,6 +104,10 @@ public class BrowseInventory extends BaseFrame {
 		}
 	}
 
+	Collection<Vehicle> reSort(Collection<Vehicle> inventory) {
+		return sortPanel.sort(inventory);
+	}
+
 	@Override
 	protected void add() {
 		container = this.getContentPane();
@@ -112,7 +117,8 @@ public class BrowseInventory extends BaseFrame {
 
 		// SearchPanel/Filter panel
 		JPanel filterPanel = new JPanel();
-		filterPanel.add(new SortPanel(this));
+		sortPanel = new SortPanel(this);
+		filterPanel.add(sortPanel);
 		try {
 			SearchPanel searchPane = new SearchPanel(this);
 			filterPanel.add(searchPane);
@@ -163,9 +169,9 @@ public class BrowseInventory extends BaseFrame {
 		this.selectedVehicleId = selectedVehicleId;
 	}
 
-//	public static void main(String args[]) {
-//		BrowseInventory bi = new BrowseInventory("gmps-priority", true);
-//		bi.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//		bi.display();
-//	}
+	public static void main(String args[]) {
+		BrowseInventory bi = new BrowseInventory("gmps-priority", true);
+		bi.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		bi.display();
+	}
 }
