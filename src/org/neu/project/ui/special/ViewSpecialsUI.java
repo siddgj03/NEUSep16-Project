@@ -103,7 +103,7 @@ public class ViewSpecialsUI extends BaseFrameForViewSpecials {
         getContentPane().add(new JScrollPane(table));
         
         table.setAutoCreateRowSorter(true);
-        RowSorter<TableModel> sorter = new TableRowSorter<>(specialTable);
+        RowSorter<SpecialTableModel> sorter = new TableRowSorter<>(specialTable);
         table.setRowSorter(sorter);
         table.updateUI();
         
