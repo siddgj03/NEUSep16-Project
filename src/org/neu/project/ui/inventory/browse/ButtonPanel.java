@@ -67,7 +67,6 @@ class BrowseActionListener implements ActionListener {
 		}
 
 		// Create Vehicle instance of selected vehicle
-		ManageInventoryUI manageUI;
 		InventoryManagerImp imp = new InventoryManagerImp();
 		Inventory iv = imp.getInventory(frame.getDealerId());
 		Vehicle selectedVehicle = iv.getVehicleById(frame.getSelectedVehicleId());
@@ -77,12 +76,10 @@ class BrowseActionListener implements ActionListener {
 				System.out.println("Viewing Vehicle ID: " + selectedVehicle.getId());
 				break;
 			case BrowseInventory.COMMAND_EDIT:
-				manageUI = new ManageInventoryUI(selectedVehicle, false);
-				manageUI.display();
+				new ManageInventoryUI(selectedVehicle, false);
 				break;
 			case BrowseInventory.COMMAND_ADD:
-				manageUI = new ManageInventoryUI(new Vehicle(), true);
-				manageUI.display();
+				new ManageInventoryUI(new Vehicle(), true);
 				break;
 			case BrowseInventory.COMMAND_DELETE:
 				int dialogResult = JOptionPane.showConfirmDialog(
