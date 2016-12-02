@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.neu.project.dao.ImageAccess;
+import org.neu.project.dao.ImageAccessMgt;
 import org.neu.project.dto.Vehicle;
 /**
  * @author Rachel
@@ -21,7 +22,7 @@ public class ImageFetchingRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		ImageAccess imgAccess = new ImageAccess(this.selectedVehicle.getImagePath());
+		ImageAccessMgt imgAccess = new ImageAccess(this.selectedVehicle.getImagePath());
 		List<ImageIcon> imageList = imgAccess.getImageList(selectedVehicle);
 		selectedVehicle.setImageList(imageList);
 		JLabel photoLabel = new JLabel(imageList.get(0));
