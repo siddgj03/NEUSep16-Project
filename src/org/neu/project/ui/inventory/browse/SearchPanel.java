@@ -44,7 +44,7 @@ class SearchPanel extends JPanel {
 
 	public SearchPanel(BrowseInventory frame) throws IOException {
 
-		super(new GridLayout(0,1,0,6));
+		super(new GridLayout(0, 1, 0, 6));
 
 		this.frame = frame;
 
@@ -54,7 +54,7 @@ class SearchPanel extends JPanel {
 		Used.setActionCommand(InventorySearchControl.FILTER_BY_CATEGORY);
 		Certified = new JCheckBox("Certified");
 		Certified.setActionCommand(InventorySearchControl.FILTER_BY_CATEGORY);
-		
+
 		makes = new JComboBox<String>();
 		makes.setActionCommand(InventorySearchControl.FILTER_BY_MAKE);
 		models = new JComboBox<String>();
@@ -65,7 +65,7 @@ class SearchPanel extends JPanel {
 		types.setActionCommand(InventorySearchControl.FILTER_BY_TYPE);
 		years = new JComboBox<String>();
 		years.setActionCommand(InventorySearchControl.FILTER_BY_YEAR);
-		
+
 		search = new JButton("SEARCH INVENTORY");
 
 
@@ -83,9 +83,9 @@ class SearchPanel extends JPanel {
 		new AddSearchInformation(makes, models, types, maxPrice, years);
 
 		addListener();
-		
+
 	}
-	
+
 
 	public void addListener() {
 
@@ -137,7 +137,7 @@ class SearchPanel extends JPanel {
 		}
 
 	}
-	
+
 	class MatchModelsAndYears implements ActionListener {
 
 		@Override
@@ -163,12 +163,10 @@ class SearchPanel extends JPanel {
 
 		private BrowseInventory frame;
 
-		public ClickMeSearch(BrowseInventory frame)
-		{
+		public ClickMeSearch(BrowseInventory frame) {
 
 			this.frame = frame;
 		}
-
 
 
 		@Override
@@ -184,7 +182,7 @@ class SearchPanel extends JPanel {
 			selectmodels = (String) models.getSelectedItem();
 			selecttypes = (String) types.getSelectedItem();
 			selectyears = (String) years.getSelectedItem();
-			selectmaxprice = (String)maxPrice.getSelectedItem();
+			selectmaxprice = (String) maxPrice.getSelectedItem();
 
 			ArrayList<SearchCommand> searchCommands = new ArrayList<>();
 			ArrayList<String> filterCategory = new ArrayList<>();
@@ -218,7 +216,7 @@ class SearchPanel extends JPanel {
 			frame.loadVehicles();
 			Collection<Vehicle> result = frame.getInventory();
 			InventorySearchControl isc = new InventorySearchControl();
-			for (SearchCommand cmd: searchCommands) {
+			for (SearchCommand cmd : searchCommands) {
 				result = isc.filter(result, cmd.getSearchKey(), cmd.getSearchValue());
 			}
 			// If not empty, filter by category
@@ -230,6 +228,7 @@ class SearchPanel extends JPanel {
 		}
 
 	}
+}
 
 class SearchCommand {
 	public String getSearchKey() {
@@ -252,8 +251,8 @@ class SearchCommand {
 class ConditionMatching {
 
 	InventoryDAO idao = new InventoryDAO();
-	Collection<Vehicle>allv = new ArrayList<Vehicle>();
-	
+	Collection<Vehicle> allv = new ArrayList<Vehicle>();
+
 	HashMap<String, HashSet<String>> vehicleMakesAndModels = new HashMap<String, HashSet<String>>();
 	HashMap<String, HashSet<String>> vehicleModelsAndTypes = new HashMap<String, HashSet<String>>();
 	HashMap<String, HashSet<Integer>> vehicleModelsAndYears = new HashMap<String, HashSet<Integer>>();
@@ -262,10 +261,10 @@ class ConditionMatching {
 	HashSet<String> setModels = new HashSet<String>();
 	HashSet<String> setTypes = new HashSet<String>();
 	HashSet<Integer> setYears = new HashSet<Integer>();
-	
 
-	public void getAllSet(HashSet<String>setMakes, HashSet<String>setModels, HashSet<String>setTypes, HashSet<Integer>setYears) {
-		
+
+	public void getAllSet(HashSet<String> setMakes, HashSet<String> setModels, HashSet<String> setTypes, HashSet<Integer> setYears) {
+
 		allv = idao.getAllVehicles();
 		for (Vehicle v : allv) {
 			setMakes.add(v.getMake());
@@ -280,12 +279,12 @@ class ConditionMatching {
 			setYears.add(v.getYear());
 		}
 	}
-	
+
 	public void matchMakesAndModels(JComboBox<String> models, String certainMake) throws IOException {
-        
+
 		getAllSet(setMakes, setModels, setTypes, setYears);
 		inputMakesAndModels(vehicleMakesAndModels);
-		
+
 		for (String s : setModels) {
 			models.removeItem(s);
 		}
@@ -307,7 +306,7 @@ class ConditionMatching {
 		}
 
 	}
-	
+
 	public void matchModelsAndYears(JComboBox<String> years, String certainModel) throws IOException {
 
 		getAllSet(setMakes, setModels, setTypes, setYears);
@@ -325,12 +324,12 @@ class ConditionMatching {
 	private void inputMakesAndModels(HashMap<String, HashSet<String>> vehicleMakesAndModels) throws IOException {
 
 		allv = idao.getAllVehicles();
-		
+
 		for (Vehicle v : allv) {
 			if (!vehicleMakesAndModels.containsKey(v.getMake())) {
 				vehicleMakesAndModels.put(v.getMake(), new HashSet<String>());
 			}
-			
+
 			vehicleMakesAndModels.get(v.getMake()).add(v.getModel());
 
 		}
@@ -340,17 +339,17 @@ class ConditionMatching {
 	private void inputModelsAndTypes(HashMap<String, HashSet<String>> vehicleModelsAndTypes) throws IOException {
 
 		allv = idao.getAllVehicles();
-		
+
 		for (Vehicle v : allv) {
 			if (!vehicleModelsAndTypes.containsKey(v.getModel())) {
 				vehicleModelsAndTypes.put(v.getModel(), new HashSet<String>());
 			}
-			
+
 			vehicleModelsAndTypes.get(v.getModel()).add(v.getType());
 
 		}
 	}
-	
+
 	private void inputModelsAndYears(HashMap<String, HashSet<Integer>> vehicleModelsAndYears) throws IOException {
 
 		allv = idao.getAllVehicles();
@@ -364,10 +363,7 @@ class ConditionMatching {
 
 		}
 	}
-
-
 }
-
 
 class AddSearchInformation {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
