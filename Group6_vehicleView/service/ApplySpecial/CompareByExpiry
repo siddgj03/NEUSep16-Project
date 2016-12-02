@@ -1,6 +1,5 @@
 package org.neu.project.service;
-//only for internal use
-import org.neu.project.dto.*;
+//ONLY FOR INTERNAL USE
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
