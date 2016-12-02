@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import org.neu.project.dto.Vehicle;
+import org.neu.project.service.InventorySortControl;
 
 
 /**
@@ -137,7 +138,7 @@ class ItemChangeListener implements ItemListener
         if (event.getStateChange() == ItemEvent.SELECTED)
         {
             this.panel.setSortItem((SortItems)event.getItem());
-            frame.setInventory(this.panel.sort(frame.getInventory());
+            frame.setInventory(this.panel.sort(frame.getInventory()));
         }
     }
 }
