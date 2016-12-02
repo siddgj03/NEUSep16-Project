@@ -14,7 +14,7 @@ public class VehicleReader extends ReadFile{
 	private Inventory current;
 	
 	public VehicleReader() {
-		super();
+		super(); 
 		defaultPath = System.getProperty("user.dir") + "/data/";
 		inventories = new ArrayList<Inventory>();
 	}
