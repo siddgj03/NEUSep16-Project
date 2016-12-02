@@ -1,6 +1,5 @@
 package org.neu.project.ui.inventory.browse;
 
-import org.neu.project.dto.Dealer;
 import org.neu.project.dto.Inventory;
 import org.neu.project.dto.Vehicle;
 import org.neu.project.service.InventoryManagerImp;
@@ -60,7 +59,6 @@ public class BrowseInventory extends BaseFrame {
 	 */
 	void loadVehicles() {
 		InventoryManagerImp invManager = new InventoryManagerImp();
-		System.out.println(dealerId);
 		Inventory inv = invManager.getInventory(dealerId);
 		inventory = inv.getVehicles();
 	}
@@ -70,16 +68,38 @@ public class BrowseInventory extends BaseFrame {
 	}
 
 	/**
+	 * Refreshes the ResultPanel with whatever is in inventory
+	 */
+	private void refreshResults() {
+		container.remove(resultsContainer);
+		addResultsPanel();
+		container.validate();
+		container.repaint();
+	}
+
+	/**
+	 * Removes vehicle from the ui's collection, then refreshes Results UI
+	 * @param v - Vehicle to remove
+	 */
+	void removeVehicle(Vehicle v) {
+		// Create temporary Inventory, delete then use as current inventory
+		Inventory temp = new Inventory();
+		for (Vehicle vehicle: inventory) {
+			temp.addVehicle(vehicle);
+		}
+		temp.removeVehicle(v.getId());
+		this.inventory = temp.getVehicles();
+		refreshResults();
+	}
+
+	/**
 	 * Sets the inventory. Automatically refreshes the UI
 	 * @param inventory - The collection of Vehicle
 	 */
 	void setInventory(Collection<Vehicle> inventory) {
 		if (!this.inventory.equals(inventory)) {
 			this.inventory = inventory;
-			container.remove(resultsContainer);
-			addResultsPanel();
-			container.validate();
-			container.repaint();
+			refreshResults();
 		}
 	}
 
@@ -117,7 +137,7 @@ public class BrowseInventory extends BaseFrame {
 	private void addResultsPanel() {
 		ResultPanel results = new ResultPanel(this);
 		resultsContainer = new JScrollPane(results);
-		resultsContainer.setPreferredSize(new Dimension(500,600));
+		resultsContainer.setPreferredSize(new Dimension(600,600));
 		container.add(resultsContainer, 1);
 	}
 
@@ -131,6 +151,10 @@ public class BrowseInventory extends BaseFrame {
 
 	}
 
+	public String getDealerId() {
+		return dealerId;
+	}
+
 	String getSelectedVehicleId() {
 		return selectedVehicleId;
 	}
@@ -139,8 +163,9 @@ public class BrowseInventory extends BaseFrame {
 		this.selectedVehicleId = selectedVehicleId;
 	}
 
-	public static void main(String args[]) {
-		BrowseInventory bi = new BrowseInventory("gmps-priority", false);
-		bi.display();
-	}
+//	public static void main(String args[]) {
+//		BrowseInventory bi = new BrowseInventory("gmps-priority", true);
+//		bi.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//		bi.display();
+//	}
 }
