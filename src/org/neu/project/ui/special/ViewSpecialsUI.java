@@ -213,6 +213,9 @@ public class ViewSpecialsUI extends BaseFrameForViewSpecials {
         class buttonListener2 implements ActionListener {//search
         	public void actionPerformed(ActionEvent e){
         		String search=textField.getText();
+        		TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(table.getModel());
+        		table.setRowSorter(rowSorter);
+        		rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + search));
         	}
         }
 }

@@ -1,0 +1,11 @@
+package org.neu.project.service;
+import java.text.ParseException;
+import java.util.ArrayList;
+
+import org.neu.project.dto.Special;
+
+interface ApplySpecialInterface {
+	Special getSpecial(ArrayList<Special> specialList);
+    void setSplTree()throws ParseException;
+
+}
