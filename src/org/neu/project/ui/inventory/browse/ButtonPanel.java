@@ -95,6 +95,7 @@ class BrowseActionListener implements ActionListener {
 					// Delete from UI, then delete from Source
 					frame.removeVehicle(selectedVehicle);
 					imp.deleteVehicle(frame.getDealerId(), frame.getSelectedVehicleId());
+					frame.setSelectedVehicleId(null);
 				}
 				break;
 		}
