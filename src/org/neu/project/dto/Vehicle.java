@@ -100,7 +100,6 @@ public class Vehicle {
         this.price = Double.parseDouble(price);
     }
     
-    
     public String toString() {    
         return id + "~" + webId + "~" + category + "~" + year + "~" + make + "~" +model + "~" + trim + "~" + type + "~" + price;
     }

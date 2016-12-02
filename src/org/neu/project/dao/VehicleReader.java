@@ -47,7 +47,7 @@ public class VehicleReader extends ReadFile{
 	@Override
 	public void readFileLine(String line) {
 		String[] attributes = line.split("~");
-		
+		 
 		String id = attributes[VehicleInfo.Id.ordinal()];
 		String webId = attributes[VehicleInfo.WebId.ordinal()];
 		String category = attributes[VehicleInfo.Category.ordinal()];
