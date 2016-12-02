@@ -1,4 +1,4 @@
-package org.neu.project.ui.special;
+package org.neu.project.ui.speical;
 
  
  

@@ -1,6 +1,7 @@
 package org.neu.project.dto;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.swing.ImageIcon;
 
@@ -28,7 +29,12 @@ public class Vehicle {
 	}
 
 	public Vehicle() {
-
+		this.id = UUID.randomUUID().toString();
+	}
+	
+	public Vehicle(String dealerId) {
+		this();
+		this.webId = dealerId;
 	}
 
 	public Vehicle(String id, String webId, String category, String year, String make, String model, String trim,

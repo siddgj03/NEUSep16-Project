@@ -1,4 +1,4 @@
-package org.neu.project.dao;
+package src.org.neu.project.dao;
 
 import org.neu.project.dto.*;
 

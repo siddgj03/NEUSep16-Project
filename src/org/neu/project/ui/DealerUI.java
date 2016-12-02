@@ -11,14 +11,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 
 public class DealerUI extends JFrame{
 
-	private JButton customer, dealer; //Button names
-	private JComboBox dealerList; // ComboBox name
-	private JLabel label; // ComboBox Label
+	private JButton customer, dealer;
+	private JComboBox dealerList;
+	private JLabel label;
 
 	DealerManager dealerMap = new DealerManagerImpl();
 	private PropertyReader rp = new PropertyReader();
@@ -39,10 +41,10 @@ public class DealerUI extends JFrame{
 
 
 	private void create() {
-		
+		// TODO Auto-generated method stub
 		label = new JLabel(rp.getString("DealerUI.selectDealerLabel"));
 		label.setFont(rp.getFont("DealerUI.comboBoxMessage.Font"));
-		label.setSize(rp.getDimension("DealerUI.ComboBoxLabel.Size"));
+		label.setSize(200, 50);
 
 		customer = new JButton(rp.getString("DealerUI.customerLabel"));
 		customer.setEnabled(false);
@@ -55,15 +57,18 @@ public class DealerUI extends JFrame{
 		dealer.setPreferredSize(rp.getDimension("DealerUI.Buttons.Size"));
 
 		dealerList = new JComboBox();
-		dealerList.setPreferredSize(rp.getDimension("DealerUI.ComboBox.Size"));
-		dealerList.setFont(rp.getFont("DealerUI.comboBoxList.Font"));
+		dealerList.setPreferredSize(new Dimension(250, 40));
 
-		//Adding dealernames to the comboBox for display
+
+		Set<String> dealerNames = dealerMap.getDealersName();
+		System.out.println(dealerNames);
+
 		addDataToComboBoxList(dealerList,dealerMap);
 
 	}
-	
-	/*Function to read dealer names and display in comboBox */
+
+
+
 	private void addDataToComboBoxList(JComboBox list, DealerManager dealerManager) {
 		Set<String> dealerNames = dealerManager.getDealersName();
 		list.addItem(null);
@@ -75,6 +80,7 @@ public class DealerUI extends JFrame{
 	}
 
 	private void add() {
+		// TODO Auto-generated method stub
 		Container con = this.getContentPane();
 		JPanel base = new JPanel();
 		con.add(base);
@@ -84,48 +90,50 @@ public class DealerUI extends JFrame{
 		ImageIcon image = new ImageIcon(System.getProperty("user.dir")+rp.getString("dealerUIImage"));
 		JLabel pic = new JLabel(image);
 		topPanel.add(pic);
-		topPanel.setBackground(rp.getColor("White.Color"));
-		topPanel.setPreferredSize(rp.getDimension("DealerUI.TopPanel.Size"));
+		topPanel.setBackground(rp.getColor("DealerUI.White.Color"));
+		topPanel.setPreferredSize(new Dimension(200, 250));
 		base.add(topPanel);
 
 		JPanel midPanel = new JPanel();
 		midPanel.add(label);
 		midPanel.add(dealerList);
-		midPanel.setBackground(rp.getColor("White.Color"));
-		midPanel.setPreferredSize(rp.getDimension("DealerUI.MidPanel.Size"));
+		midPanel.setBackground(rp.getColor("DealerUI.White.Color"));
+		midPanel.setPreferredSize(new Dimension(200, 20));
 		base.add(midPanel);
 
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.add(customer);
 		bottomPanel.add(Box.createHorizontalStrut(20));
 		bottomPanel.add(dealer);
-		bottomPanel.setBackground(rp.getColor("Gray.Color"));
+		bottomPanel.setBackground(rp.getColor("DealerUI.Gray.Color"));
 		base.add(bottomPanel);
 
-		con.setBackground(rp.getColor("White.Color"));
+		con.setBackground(rp.getColor("DealerUI.White.Color"));
 
 	}
 
 
 
 	private void addListener() {
-		/*Listener for ComboBox */
+		// TODO Auto-generated method stub
 		ComboBoxListener cbl = new ComboBoxListener();
 		dealerList.addItemListener(cbl);
-		
-		/*Listener for Customer and Dealer Buttons */
-		ButtonListener buttonClicked = new ButtonListener();
-		dealer.addActionListener(buttonClicked);
-		customer.addActionListener(buttonClicked);
+
+		CustomerListener cl = new CustomerListener();
+		customer.addActionListener(cl);
+
+		DealerListener dl = new DealerListener();
+		dealer.addActionListener(dl);
+
 	}
 
 
-	/*ComboBox action for selecting a dealer */
+	/*ComboBox for selecting a dealer */
 	class ComboBoxListener implements ItemListener {
 
 		@Override
 		public void itemStateChanged(ItemEvent e) {
-			
+			// TODO Auto-generated method stub
 			if (dealerList.getSelectedItem() == null) {
 				customer.setEnabled(false);
 				dealer.setEnabled(false);
@@ -135,27 +143,33 @@ public class DealerUI extends JFrame{
 				dealer.setEnabled(true);
 			}
 		}
+
+
 	}
-	
-	/*Dealer and Customer Buttons action implementation */
-	class ButtonListener implements ActionListener {
+
+	/*Button to browse customer inventory */
+	class CustomerListener implements ActionListener {
 
 		@Override
-		public void actionPerformed(ActionEvent click) {
-
-			Object source = click.getSource();
+		public void actionPerformed(ActionEvent e) {
 			String dealerid = dealerMap.getDealerIDbyName(dealerList.getSelectedItem().toString());
+			BrowseInventory browseCustomerInventory = new BrowseInventoryCustomer(dealerid);
+			browseCustomerInventory.display();
+		}   
+	}
 
-			if (source == dealer ){
-				String dealerName = dealerList.getSelectedItem().toString();
-				new DealerSelectedUI(dealerName, dealerid);      
-			}
-			if (source == customer){
-				BrowseInventory browseCustomerInventory = new BrowseInventoryCustomer(dealerid);
-				browseCustomerInventory.display();
-			}
-			
+
+	/*Button to open selected dealer UI frame*/
+	class DealerListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			String dealerName = dealerList.getSelectedItem().toString();
+			String dealerid = dealerMap.getDealerIDbyName(dealerList.getSelectedItem().toString());
+			new DealerSelectedUI(dealerName, dealerid);      
 		}
+
 	}
 
 	public static void main(String[] args) {

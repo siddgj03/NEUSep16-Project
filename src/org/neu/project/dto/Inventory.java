@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import org.neu.project.dto.Vehicle.VehicleInfo;
+
 
 public class Inventory {
     
@@ -35,6 +37,10 @@ public class Inventory {
         if (!pool.containsKey(vec.getId())) {
             pool.put(vec.getId(), vec);
         }
+    }
+    
+    public Vehicle getVehicleById(String vehicleId){
+    	return pool.get(vehicleId);
     }
     
     public Collection<Vehicle> getVehicles() {
@@ -70,13 +76,6 @@ public class Inventory {
     public HashSet<String> getAllMaker() {
         HashSet<String> ls = new HashSet<String>();
         for (Vehicle ve: pool.values()) ls.add(ve.getMake());
-        
-        return ls;
-    }
-    
-    public HashSet<Integer> getAllYear() {
-        HashSet<Integer> ls = new HashSet<Integer>();
-        for (Vehicle ve: pool.values()) ls.add(ve.getYear());
         
         return ls;
     }

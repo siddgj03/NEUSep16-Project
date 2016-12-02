@@ -24,7 +24,7 @@ public class DealerSelectedUI extends JFrame {
 	public DealerSelectedUI(String dealerName, String dealerID) {
 		curDealerName = dealerName;
 		curDealerID = dealerID;
-		this.setSize(rp.getDimension("DealerSelectedUI.Screen.Size"));
+		this.setSize(650, 250);
 		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation((int)(screenDimension.getWidth() - this.getWidth()) / 2, (int)(screenDimension.getHeight() - this.getHeight()) / 2);
 
@@ -40,21 +40,21 @@ public class DealerSelectedUI extends JFrame {
 
 		welcome = new JLabel("WELCOME:");
 		labelofDealerName = new JLabel(curDealerName);
-		labelofDealerName.setFont(rp.getFont("DealerSelectedUI.dealerNameLabel.Font"));
+		labelofDealerName.setFont(new Font("Tohama", Font.BOLD, 14));
 
 		ImageIcon image = new ImageIcon(System.getProperty("user.dir")+rp.getString("selectedDealerUIImage"));
 		image.setImage(image.getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT));
 		pic = new JLabel(image);
-		pic.setPreferredSize(rp.getDimension("DealerSelectedUI.Image.Size"));
+		pic.setPreferredSize(new Dimension(350, 250));
 
 
 		inventory = new JButton("Inventory");
-		inventory.setPreferredSize(rp.getDimension("DealerSelectedUI.Buttons.Size"));
-		inventory.setFont(rp.getFont("DealerSelectedUI.Buttons.Font"));
+		inventory.setPreferredSize(rp.getDimension("SelectedDealerUI.Buttons.Size"));
+		inventory.setFont(rp.getFont("DealerUI.Buttons.Font"));
 
 		specials = new JButton("Specials");
-		specials.setPreferredSize(rp.getDimension("DealerSelectedUI.Buttons.Size"));
-		specials.setFont(rp.getFont("DealerSelectedUI.Buttons.Font"));
+		specials.setPreferredSize(rp.getDimension("SelectedDealerUI.Buttons.Size"));
+		specials.setFont(rp.getFont("DealerUI.Buttons.Font"));
 	}
 
 	private void add() {
@@ -63,7 +63,7 @@ public class DealerSelectedUI extends JFrame {
 
 		JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		left.add(pic);
-		left.setBackground(rp.getColor("White.Color"));
+		left.setBackground(rp.getColor("DealerUI.White.Color"));
 
 
 
@@ -83,10 +83,10 @@ public class DealerSelectedUI extends JFrame {
 		buttonPanel.add(specials);
 		right.add(buttonPanel);
 
-		welPanel.setBackground(rp.getColor("White.Color"));
-		dealPanel.setBackground(rp.getColor("White.Color"));
-		buttonPanel.setBackground(rp.getColor("White.Color"));
-		right.setBackground(rp.getColor("White.Color"));
+		welPanel.setBackground(rp.getColor("DealerUI.White.Color"));
+		dealPanel.setBackground(rp.getColor("DealerUI.White.Color"));
+		buttonPanel.setBackground(rp.getColor("DealerUI.White.Color"));
+		right.setBackground(rp.getColor("DealerUI.White.Color"));
 
 		con.add(left);
 		con.add(right);

@@ -33,9 +33,6 @@ public class SimilarPanel  extends BasePanel{
     public SimilarPanel(Vehicle selectedVehicle) {
 		this.selectedVehicle = selectedVehicle;
 		vehicleList = Utility.getVehicleList();
-		if(vSimilarList==null){
-			vSimilarList = new ArrayList<Vehicle>();
-		}
 		vSimilarList = getSimilarVehicleList();
 		add();
 		
@@ -131,7 +128,7 @@ public class SimilarPanel  extends BasePanel{
 				replaceSimilar();
 				if (!goPre.isEnabled())
 					goPre.setEnabled(true);
-				if (vehicleIndex == (vSimilarList.size() - 1)) {
+				if (vehicleIndex == (getSimilarVehicleList().size() - 1)) {
 					goNext.setEnabled(false);
 				}
 			}
@@ -149,9 +146,7 @@ public class SimilarPanel  extends BasePanel{
 			 if(vehicleList.get(index).getSale()-1000 < selectedVehicle.getSale() 
 				  && vehicleList.get(index).getSale()+1000 > selectedVehicle.getSale()
 				  && vehicleList.get(index) != selectedVehicle){
-				 
 				 vSimilarList.add(vehicleList.get(index));
-				 
 				 index++;
 		
 			 }
@@ -167,12 +162,8 @@ public class SimilarPanel  extends BasePanel{
 		similarShowPanel.removeAll();
 		similarShowPanel.add(getSimilarPanel());
 		
-		
 		similarShowPanel.updateUI();
+		vehicleIndex++;
 
 	}
 	}
-      
-		
-	
-	
