@@ -2,7 +2,7 @@ package org.neu.project.ui.special;
 
 import org.neu.project.dao.WriteSpecialToFile;
 import org.neu.project.dto.Special;
-import org.neu.project.dto.SpecialManagement;
+import org.neu.project.service.SpecialManagement;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import static NEU_Project.DAO.DateToString.dateToString;
+import static org.neu.project.utils.DateToString.dateToString;
+
+//import static org.neu.project.utils.StringToDate;
 
 /*
  * edit  22 29 87 156
