@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import org.neu.project.dto.Vehicle.VehicleInfo;
-
 
 public class Inventory {
     

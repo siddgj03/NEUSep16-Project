@@ -12,9 +12,15 @@ private int i;
 private int f;
 private Special spl;
 private Vehicle car;
+private List<Special> specialList;
 SpecialManagement spm=new SpecialManagement();
 public ApplySpecial(Vehicle c) throws ParseException
-{   car=c;
+{       car=c;
+        //should get special list from this method, but current it does not work
+	//SpecialManagement specialMag = new SpecialManagement("src/org/neu/project/data/special/special1.txr","dealerID");
+	//specialList = specialMag.getList();
+	//so we mock it as
+	specialList = Utility.setSpecialListArray();
 	car.splTree= new TreeSet<CarSpecificSpecialList>(new CompareByPrice());
 	car.splTreeByExpiry =new TreeSet<CarSpecificSpecialList>(new CompareByExpiry());
 	initProcess();
@@ -39,7 +45,10 @@ public ApplySpecial()
 		setSplTree();
     }	 	
 }
-public Special getSpecial(ArrayList<Special> specialList) {
+public double getLowestPrice(){
+      
+}
+public Special getSpecial() {
 	 
 	 spl=(specialList.get(i));
 	 return spl;
