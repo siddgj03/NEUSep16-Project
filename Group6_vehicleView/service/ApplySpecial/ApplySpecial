@@ -35,7 +35,7 @@ public double getLowestPrice(){
     car.setLowestPrice(lowestPrice);
     return lowestPrice;
 }
-public TreeSet getAppliedSpecialList(){
+public TreeSet<Special> getAppliedSpecialList(){
      setSplTree();
      return splTree;
 }
