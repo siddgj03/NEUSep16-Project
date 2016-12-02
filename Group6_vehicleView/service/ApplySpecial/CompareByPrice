@@ -1,6 +1,5 @@
 package org.neu.project.service;
 
-import org.neu.project.dto.CarSpecificSpecialList;
 import java.util.Comparator;
 public class CompareByPrice implements Comparator<CarSpecificSpecialList>{
 	@Override

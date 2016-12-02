@@ -1,6 +1,4 @@
 package org.neu.project.service;
-import org.neu.project.dao.*;
-
 import org.neu.project.dto.*;
 import java.text.*;
 import java.util.*;
@@ -12,7 +10,7 @@ private int i;
 private int f;
 private Special spl;
 private Vehicle car;
-SpecialManagement spm=new SpecialManagement();
+
 public ApplySpecial(Vehicle c) throws ParseException
 {   car=c;
 	car.splTree= new TreeSet<CarSpecificSpecialList>(new CompareByPrice());
@@ -26,7 +24,7 @@ public ApplySpecial()
 }
 
  void initProcess() throws ParseException
-{   new SpecialManagement(car.getWebId()+".txt",car.getWebId());
+{   SpecialManagement spm=new SpecialManagement(car.getWebId()+".txt",car.getWebId());
 	for(i=0;i< (spm.getList()).size();i++)
 	{   
 		f=1;
@@ -89,9 +87,46 @@ if(spl.getDiscountValue()!=0)
 	specialledPrice=car.getPrice()-spl.getDiscountValue();
 else
 	specialledPrice=car.getPrice()-((spl.getDicountPercentage()/100.00)*car.getPrice());
-System.out.println(specialledPrice);
+
 car.splTree.add(new CarSpecificSpecialList(spl,specialledPrice,spl.getSpecialEndDate()));
 car.splTreeByExpiry.add(new CarSpecificSpecialList(spl,specialledPrice,spl.getSpecialEndDate()));
 }
+}
+ boolean checkForSpecialsUpdates() throws ParseException
+ {    boolean updated=false;
+	 for(CarSpecificSpecialList csse:car.splTreeByExpiry)
+     {  
+         DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+         Date today;
+         today=(df.parse(df.format((new Date()))));
+         if(df.parse(df.format((csse.expiry))).after(today))
+             updated=true;
+     }
+	 return updated;
+ }
+
+@Override
+public double getLowestPrice() throws ParseException {
+	        double lowest=car.getPrice();
+                   if(checkForSpecialsUpdates())
+                   {
+	                for(CarSpecificSpecialList css:car.splTree)
+	                {
+	                    lowest=css.specialledPrice;
+	                    break;
+	                }
+               	           
+	            }else
+	            {
+	            new ApplySpecial(car);
+	            getLowestPrice();
+	            }
+     return lowest;	   
+}
+
+@Override
+public TreeSet<CarSpecificSpecialList> getSplTree() {
+	
+	return car.splTree;
 }
 }
