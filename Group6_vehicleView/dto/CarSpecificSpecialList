@@ -13,7 +13,7 @@ public class CarSpecificSpecialList {
   public CarSpecificSpecialList(Special spl,double specialledPrice,Date expiry)
   {   this.splID=spl.toString();
       this.specialledPrice=Double.valueOf(specialledPrice);
-      this.expiry=expiry.toString();
+      this.expiry=expiry;
   	ArrayList<Object> al=new ArrayList<Object>();
   	al.add(this.specialledPrice);
   	al.add(this.expiry);
