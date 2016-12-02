@@ -3,6 +3,7 @@ package org.neu.project.ui.special;
 import org.neu.project.dao.WriteSpecialToFile;
 import org.neu.project.dto.Special;
 import org.neu.project.service.SpecialManagement;
+import org.neu.project.utils.StringToDate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +27,6 @@ public class EditSpecialPanel extends BasePanelForManageSpecial {
   
   public EditSpecialPanel(Special special, String dealerId) throws Exception {
     setDealerId(dealerId);
-    
     specials = new SpecialManagement(defaultPath + dealerId + ".txt", dealerId);
     infoButton = new JButton("Save");
     infoButton.addActionListener(new SaveSpecialActionListener());
@@ -125,6 +125,10 @@ public class EditSpecialPanel extends BasePanelForManageSpecial {
         newSpecial.setSpecialStartDate(specialStartDateInfo.getText().trim());
 
         if (specialEndDateInfo.getText() != null && specialEndDateInfo.getText().length() != 0) {
+        	if (StringToDate.stringToDate(specialEndDateInfo.getText()).before(StringToDate.stringToDate(specialStartDateInfo.getText()))) {
+        		JOptionPane.showMessageDialog(null, "End date could not be late than start date", "Date error", JOptionPane.ERROR_MESSAGE);
+        		return;
+        	} 
           newSpecial.setSpecialEndDate(specialEndDateInfo.getText().trim());
         } else {
           newSpecial.setSpecialEndDate("2099/12/31");
