@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * @author ken prayogo
@@ -82,13 +83,12 @@ public class BrowseInventory extends BaseFrame {
 	 * @param v - Vehicle to remove
 	 */
 	void removeVehicle(Vehicle v) {
-		// Create temporary Inventory, delete then use as current inventory
-		Inventory temp = new Inventory();
-		for (Vehicle vehicle: inventory) {
-			temp.addVehicle(vehicle);
+		Iterator<Vehicle> iter = this.inventory.iterator();
+		while (iter.hasNext()) {
+			if (iter.next().getId().equals(v.getId())) {
+				iter.remove();
+			}
 		}
-		temp.removeVehicle(v.getId());
-		this.inventory = temp.getVehicles();
 		refreshResults();
 	}
 
