@@ -23,7 +23,29 @@ public class Vehicle {
 	private Rating rating;
 	private String color;
 	private String bodyType;
+	
+	//Group 6
+	private TreeSet<CarSpecificSpecialList> splTree;
+	private TreeSet<CarSpecificSpecialList> splTreeByExpiry;
 
+	public TreeSet<CarSpecificSpecialList> getSplTreeByExpiry() {
+		return splTreeByExpiry;
+	}
+
+	public void setSplTreeByExpiry(TreeSet<CarSpecificSpecialList> splTreeByExpiry) {
+		this.splTreeByExpiry = splTreeByExpiry;
+	}
+
+	public TreeSet<CarSpecificSpecialList> getSplTree() {
+		return splTree;
+	}
+
+	public void setSplTree(TreeSet<CarSpecificSpecialList> splTree) {
+		this.splTree = splTree;
+	}
+
+	//
+	
 	public enum VehicleInfo {
 		Id, WebId, Category, Year, Make, Model, Trim, Type, Price;
 	}
