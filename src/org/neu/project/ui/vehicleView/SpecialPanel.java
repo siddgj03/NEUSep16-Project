@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.ParseException;
 import java.util.Iterator;
 import java.util.TreeSet;
 
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
 
 import org.neu.project.dto.Special;
 import org.neu.project.dto.Vehicle;
+import org.neu.project.service.ApplySpecial;
 import org.neu.project.dto.CarSpecificSpecialList;
 import org.neu.project.ui.vehicleView.common.DetailViewBasePanel;
 import org.neu.project.utils.DateToString;
@@ -36,7 +38,10 @@ public class SpecialPanel extends DetailViewBasePanel {
 
 	protected void add() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		JPanel selectionPanel = (JPanel) getSelectionPanel();
+		JPanel selectionPanel;
+		try {
+			selectionPanel = (JPanel) getSelectionPanel();
+
 		add(Box.createVerticalStrut(80));
 		add(getBriefDescPanel());
 		add(Box.createVerticalStrut(60));
@@ -44,7 +49,10 @@ public class SpecialPanel extends DetailViewBasePanel {
 		add(Box.createVerticalStrut(60));
 		add(getSpecialDetailPanel(selectionPanel));
 		add(Box.createVerticalStrut(230));
-
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private Component getSpecialDetailPanel(JPanel selectionPanel) {
@@ -107,7 +115,7 @@ public class SpecialPanel extends DetailViewBasePanel {
 	}
 
 	//component for choosing the selected special 
-	private Component getSelectionPanel() {
+	private Component getSelectionPanel() throws ParseException {
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
 
@@ -116,7 +124,9 @@ public class SpecialPanel extends DetailViewBasePanel {
 		specialSelection.addItem(DEFAULT);
 
 		// get special list
-		TreeSet<CarSpecificSpecialList> splTree = selectedVehicle.getSplTree();	
+		ApplySpecial appl = new ApplySpecial(selectedVehicle);
+		appl.applySpecial();
+		TreeSet<CarSpecificSpecialList> splTree = appl.getSplTree();	
 		
 		Iterator<CarSpecificSpecialList> i = splTree.iterator();
 		while(i.hasNext()) {
