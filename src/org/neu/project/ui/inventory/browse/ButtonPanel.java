@@ -5,8 +5,10 @@ import org.neu.project.dto.Vehicle;
 import org.neu.project.service.InventoryManagerImp;
 import org.neu.project.ui.inventory.browse.components.BrowseButton;
 import org.neu.project.ui.inventory.manage.ManageInventoryUI;
+import org.neu.project.ui.vehicleView.DetailView;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,10 +21,13 @@ public class ButtonPanel extends JPanel {
 
 	public ButtonPanel(BrowseInventory currentFrame) {
 		// Arrange in vertical order, with spacing of 10
-		super(new GridLayout(4,1,0,5));
+		super(new GridLayout(5,1,0,10));
 
 		BrowseActionListener commonListener = new BrowseActionListener();
 		commonListener.setFrame(currentFrame);
+
+		BrowseButton btnRefresh = new BrowseButton("Refresh", BrowseInventory.COMMAND_REFRESH, commonListener);
+		add(btnRefresh);
 
 		BrowseButton btnView = new BrowseButton("View Vehicle", BrowseInventory.COMMAND_VIEW, commonListener);
 		add(btnView);
@@ -61,7 +66,9 @@ class BrowseActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		// Warn user if no vehicle is selected (unless command is Add)
-		if (!e.getActionCommand().equals(BrowseInventory.COMMAND_ADD) && frame.getSelectedVehicleId() == null) {
+		if (!e.getActionCommand().equals(BrowseInventory.COMMAND_ADD)
+				    && !e.getActionCommand().equals(BrowseInventory.COMMAND_REFRESH)
+				    && frame.getSelectedVehicleId() == null) {
 			JOptionPane.showMessageDialog(frame, "Please select a Vehicle.");
 			return;
 		}
@@ -73,7 +80,7 @@ class BrowseActionListener implements ActionListener {
 
 		switch(e.getActionCommand()) {
 			case BrowseInventory.COMMAND_VIEW:
-				System.out.println("Viewing Vehicle ID: " + selectedVehicle.getId());
+				new DetailView(selectedVehicle);
 				break;
 			case BrowseInventory.COMMAND_EDIT:
 				new ManageInventoryUI(selectedVehicle, false);
@@ -97,6 +104,11 @@ class BrowseActionListener implements ActionListener {
 					imp.deleteVehicle(frame.getDealerId(), frame.getSelectedVehicleId());
 					frame.setSelectedVehicleId(null);
 				}
+				break;
+			case BrowseInventory.COMMAND_REFRESH:
+				frame.dispose();
+				BrowseInventory newScreen = new BrowseInventory(frame.getDealerId(), frame.isDealer);
+				newScreen.display();
 				break;
 		}
 	}
