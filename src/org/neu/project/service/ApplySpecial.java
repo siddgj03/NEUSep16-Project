@@ -20,7 +20,7 @@ public class ApplySpecial implements ApplySpecialInterface {
 		throw new IllegalArgumentException("Pass the Vehicle object as parameter");
 	}
 
-	void applySpecial() throws ParseException {
+	public void applySpecial() throws ParseException {
 		car.setSplTree(new TreeSet<CarSpecificSpecialList>(new CompareByPrice())); 
 		car.setSplTreeByExpiry(new TreeSet<CarSpecificSpecialList>(new CompareByExpiry()));
 		SpecialManagement spm = new SpecialManagement(car.getWebId() + ".txt", car.getWebId());
