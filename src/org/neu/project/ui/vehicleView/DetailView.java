@@ -19,9 +19,7 @@ public class DetailView extends DetailViewBaseFrame {
 	public static final int scrWidth = 1020;
 	public static final int scrHeight = 720;
 	Vehicle selectedVehicle = null;
-	// using hashMap to store specials instead of ArrayList because finding a
-	// element in a hashMap is constant time
-
+	
 	public DetailView(Vehicle selectedVehicle) {
 		super(scrWidth, scrHeight);
 		this.selectedVehicle = selectedVehicle;
