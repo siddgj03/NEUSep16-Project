@@ -24,6 +24,7 @@ public class BrowseInventory extends BaseFrame {
 	static final String COMMAND_EDIT = "edit";
 	static final String COMMAND_DELETE = "delete";
 	static final String COMMAND_ADD = "add";
+	static final String COMMAND_REFRESH = "refresh";
 
 	// Dealer
 	private String dealerId;
@@ -169,9 +170,9 @@ public class BrowseInventory extends BaseFrame {
 		this.selectedVehicleId = selectedVehicleId;
 	}
 
-	public static void main(String args[]) {
-		BrowseInventory bi = new BrowseInventory("gmps-priority", true);
-		bi.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		bi.display();
-	}
+//	public static void main(String args[]) {
+//		BrowseInventory bi = new BrowseInventory("gmps-priority", true);
+//		bi.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//		bi.display();
+//	}
 }

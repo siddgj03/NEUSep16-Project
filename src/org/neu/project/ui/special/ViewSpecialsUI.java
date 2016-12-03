@@ -72,22 +72,22 @@ public class ViewSpecialsUI extends BaseFrameForViewSpecials {
 				getContentPane().add(btnSearch);
 				
 				Object[][] data = getTableData(list);
-				List<String> columnNames = Arrays.asList(" ","Title","Make","Trim","Car Year","Max Price","Min Price","Model","Start Date","End Date","Discount","Discount Percentage");
+				List<String> columnNames = Arrays.asList("Title","Make","Trim","Car Year","Max Price","Min Price","Model","Start Date","End Date","Discount","Discount Percentage");
 				SpecialTableModel specialTable = new SpecialTableModel(columnNames, data);
 			    table = new JTable(specialTable); 
 			    table.setPreferredScrollableViewportSize(new Dimension(900, 400));
-			    table.getColumnModel().getColumn(0).setPreferredWidth(40);
+//			    table.getColumnModel().getColumn(0).setPreferredWidth(40);
+			    table.getColumnModel().getColumn(0).setPreferredWidth(80);
 			    table.getColumnModel().getColumn(1).setPreferredWidth(80);
-			    table.getColumnModel().getColumn(2).setPreferredWidth(80);
+			    table.getColumnModel().getColumn(2).setPreferredWidth(70);
 			    table.getColumnModel().getColumn(3).setPreferredWidth(70);
-			    table.getColumnModel().getColumn(4).setPreferredWidth(70);
-			    table.getColumnModel().getColumn(5).setPreferredWidth(80);
-			    table.getColumnModel().getColumn(6).setPreferredWidth(70);
-			    table.getColumnModel().getColumn(7).setPreferredWidth(80);
+			    table.getColumnModel().getColumn(4).setPreferredWidth(80);
+			    table.getColumnModel().getColumn(5).setPreferredWidth(70);
+			    table.getColumnModel().getColumn(6).setPreferredWidth(80);
+			    table.getColumnModel().getColumn(7).setPreferredWidth(90);
 			    table.getColumnModel().getColumn(8).setPreferredWidth(90);
-			    table.getColumnModel().getColumn(9).setPreferredWidth(90);
-			    table.getColumnModel().getColumn(10).setPreferredWidth(70);
-			    table.getColumnModel().getColumn(11).setPreferredWidth(150);
+			    table.getColumnModel().getColumn(9).setPreferredWidth(70);
+			    table.getColumnModel().getColumn(10).setPreferredWidth(150);
 			    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			    table.setGridColor(Color.black);
 			    getContentPane().add(new JScrollPane(table));
@@ -99,46 +99,46 @@ public class ViewSpecialsUI extends BaseFrameForViewSpecials {
 		}
 	
 		private Object[][] getTableData(ArrayList<Special> input) {
-			Object[][] result = new Object[input.size()][12];
+			Object[][] result = new Object[input.size()][11];
 			for(int i = 0; i < input.size(); i++) {
-				for(int j = 0; j < 12; j++) {
+				for(int j = 0; j < 11; j++) {
 					switch (j) {
+//					case 0:
+//						result[i][0] = input.get(i).getSpecialID();
+//						
+//						break;
 					case 0:
-						result[i][0] = input.get(i).getSpecialID();
-						
+						result[i][0] = input.get(i).getSpecialTitle();
 						break;
 					case 1:
-						result[i][1] = input.get(i).getSpecialTitle();
+						result[i][1] = input.get(i).getCarMake();
 						break;
 					case 2:
-						result[i][2] = input.get(i).getCarMake();
+						result[i][2] = input.get(i).getTrim();
 						break;
 					case 3:
-						result[i][3] = input.get(i).getTrim();
+						result[i][3] = String.valueOf(input.get(i).getCarYear());
 						break;
 					case 4:
-						result[i][4] = String.valueOf(input.get(i).getCarYear());
+						result[i][4] = String.valueOf(input.get(i).getCarMaxPrice());
 						break;
 					case 5:
-						result[i][5] = String.valueOf(input.get(i).getCarMaxPrice());
+						result[i][5] = String.valueOf(input.get(i).getCarMinPrice());
 						break;
 					case 6:
-						result[i][6] = String.valueOf(input.get(i).getCarMinPrice());
+						result[i][6] = input.get(i).getCarModel();
 						break;
 					case 7:
-						result[i][7] = input.get(i).getCarModel();
+						result[i][7] = DateToString.dateToString(input.get(i).getSpecialStartDate());
 						break;
 					case 8:
-						result[i][8] = DateToString.dateToString(input.get(i).getSpecialStartDate());
+						result[i][8] = DateToString.dateToString(input.get(i).getSpecialEndDate());
 						break;
 					case 9:
-						result[i][9] = DateToString.dateToString(input.get(i).getSpecialEndDate());
+						result[i][9] = String.valueOf(input.get(i).getDiscountValue());
 						break;
 					case 10:
-						result[i][10] = String.valueOf(input.get(i).getDiscountValue());
-						break;
-					case 11:
-						result[i][11] = String.valueOf(input.get(i).getDicountPercentage());
+						result[i][10] = String.valueOf(input.get(i).getDicountPercentage());
 						break;
 					}
 				}
@@ -170,7 +170,7 @@ public class ViewSpecialsUI extends BaseFrameForViewSpecials {
         class buttonListener1 implements ActionListener {//add
         	public void actionPerformed(ActionEvent e){
         		System.out.println("add");
-        		JFrame frame = new JFrame();
+        		JFrame frame = new JFrame("Add special");
         		frame.add(new AddSpecialPanel(dealerid));
         		frame.setSize(700, 300);
         		frame.setVisible(true);
@@ -184,7 +184,7 @@ public class ViewSpecialsUI extends BaseFrameForViewSpecials {
                 if(selectedRow!=-1)
                 {
                     try {
-						JFrame frame = new JFrame();
+						JFrame frame = new JFrame("Edit/Delete special");
 		        		frame.add(new EditSpecialPanel(list.get(selectedRow), dealerid));
 		        		frame.setSize(700, 300);
 		        		frame.setVisible(true);
@@ -224,7 +224,7 @@ class SpecialTableModel extends AbstractTableModel {
         }
   @Override
   public int getColumnCount() {
-    return 12;
+    return 11;
   }
   @Override
   public String getColumnName(int columnIndex) {

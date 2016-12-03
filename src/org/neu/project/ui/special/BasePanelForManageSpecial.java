@@ -72,7 +72,7 @@ public class BasePanelForManageSpecial extends JPanel {
       carMakeInfo.addItem(carMakeList.getCarMakeList().get(i));
     }
 
-    ComponetInitialize(new JLabel("Model£º"), 0, 4, 1, 1, false);
+    ComponetInitialize(new JLabel("Type£º"), 0, 4, 1, 1, false);
     carModelInfo = new JComboBox();
     ComponetInitialize(carModelInfo, 1, 4, 1, 0, true);
 
@@ -81,7 +81,7 @@ public class BasePanelForManageSpecial extends JPanel {
       carModelInfo.addItem(carTypeList.getCarTypeList().get(i));
     }
 
-    ComponetInitialize(new JLabel("Trim£º"), 2, 4, 1, 1, false);
+    ComponetInitialize(new JLabel("Model£º"), 2, 4, 1, 1, false);
     trimInfo = new JTextField();
     ComponetInitialize(trimInfo, 3, 4, 1, 0, true);
 
