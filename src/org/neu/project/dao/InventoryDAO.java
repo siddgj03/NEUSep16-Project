@@ -55,7 +55,7 @@ public class InventoryDAO {
 		try{
 			Collection<Vehicle> vehicles = getInventoryByDealerId(dealerId).getVehicles();
 			writer.update(vehicles, defaultPath + dealerId);
-		} 
+		}  
 		catch (Exception e) {
 			e.printStackTrace();
 		}
