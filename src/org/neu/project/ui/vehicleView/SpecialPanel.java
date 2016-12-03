@@ -58,12 +58,6 @@ public class SpecialPanel extends DetailViewBasePanel {
 		JLabel cateria = new JLabel(CATERIA);
 		JLabel specialPrice = new JLabel(SPLPRICE);
 		JLabel expires = new JLabel(EXPIRES);
-		//hardcode default special
-//		Special special = Utility.getSpecialListMap().get(selectionComb.getSelectedItem());
-//		JLabel desContent = new JLabel(special.getDescription());
-//		JLabel cateriaContent = new JLabel(special.getCriteria().get("make"));
-//		JLabel disclosureContent = new JLabel(special.getDisclosure());
-//		JLabel expiresDate = new JLabel(special.getExpires());
 		JLabel desContent = new JLabel("");
 		JLabel cateriaContent = new JLabel("");
 		JLabel price = new JLabel("");
@@ -92,7 +86,7 @@ public class SpecialPanel extends DetailViewBasePanel {
 						
 						price.setText(carspl.getSpecialledPrice()+"");					
 						
-						expiresDate.setText(carspl.getExpiry());
+						expiresDate.setText(DateToString.dateToString(carspl.getExpiry()));
 						break;
 					}
 				}
@@ -122,9 +116,7 @@ public class SpecialPanel extends DetailViewBasePanel {
 		specialSelection.addItem(DEFAULT);
 
 		// get special list
-		//from vehiel's special 
 		TreeSet<CarSpecificSpecialList> splTree = selectedVehicle.getSplTree();	
-		//HashMap<String, Special> specialList = Utility.getSpecialList();
 		
 		Iterator<CarSpecificSpecialList> i = splTree.iterator();
 		while(i.hasNext()) {
