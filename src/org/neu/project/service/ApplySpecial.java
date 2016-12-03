@@ -35,7 +35,7 @@ public ApplySpecial()
 		checkCarMinMaxPrice();
 		checkValidity();
 		setSplTree();
-    }	 	
+    } 	
 }
 public Special getSpecial(ArrayList<Special> specialList) {
 	 
