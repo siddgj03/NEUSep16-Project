@@ -33,6 +33,15 @@ public class SpecialPanel extends DetailViewBasePanel {
  
 	public SpecialPanel(Vehicle selectedVehicle) {
 		this.selectedVehicle = selectedVehicle;
+
+		ApplySpecial sppl;
+		try {
+			sppl = new ApplySpecial(selectedVehicle);
+			sppl.applySpecial();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		add();
 	}
 
@@ -84,6 +93,8 @@ public class SpecialPanel extends DetailViewBasePanel {
 					expiresDate.setText("");	
 					return;
 				}
+				
+
 				Iterator<CarSpecificSpecialList> i = selectedVehicle.getSplTree().iterator();
 				while(i.hasNext()) {
 					CarSpecificSpecialList carspl=i.next();
