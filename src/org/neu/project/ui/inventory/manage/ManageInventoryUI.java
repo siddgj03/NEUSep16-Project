@@ -267,7 +267,7 @@ public class ManageInventoryUI extends BaseFrame{
 //    	new ManageInventoryUI(vehicle, false);
 //    } 
 
-// Scenario one : Add a new Vehicle
+// Scenario two : Add a new Vehicle
 //    public static void main(String[] args) {
 //	  	Vehicle vehicle2 = new Vehicle("gmps-bertogden-cch");
 //	

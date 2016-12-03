@@ -38,7 +38,7 @@ public class InventoryDAO {
 		//writeToFile(dealerId);
 	}
 	
-	public void removeVehicleFromInventory(String dealerId, String vehicleId){
+	public void deleteVehicleFromInventory(String dealerId, String vehicleId){
 		getInventoryByDealerId(dealerId).removeVehicle(vehicleId);
 		try{
 			Collection<Vehicle> vehicles = getInventoryByDealerId(dealerId).getVehicles();

@@ -41,7 +41,7 @@ public class InventoryManagerImp implements InventoryManager{
 	}
 	
 	public void deleteVehicle(String dealerId, String vehicleId) {
-		inventoryDao.removeVehicleFromInventory(dealerId, vehicleId);
+		inventoryDao.deleteVehicleFromInventory(dealerId, vehicleId);
 	}
 	
 //	public Inventory reloadInventory(String dealerId) {
